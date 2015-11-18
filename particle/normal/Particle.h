@@ -164,7 +164,7 @@ private:
 	* what type this particle is - (collapsor/normal particle/placemark/spacecraft)
 	*/
 	int identity;
-	int id;
+
 	/**
 	*  what size this particle will have when displayed in a visualisation
 	*/
@@ -848,7 +848,7 @@ ParticleStruct exportContentAsParticleStruct() {
         mi.red =this->red;
         mi.green =this->green;
         mi.blue =this->blue;
-        mi.id =this->id;
+        mi.id =this->identity;
         mi.visualRepresentation =this->visualRepresentation;
         mi.x =this->x;
         mi.y =this->y;
