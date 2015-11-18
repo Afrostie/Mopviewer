@@ -6,12 +6,12 @@
 #include "MemoryEntry.h"
 
 struct MemoryContent {
-    /**
-    * the current size of memory
-    */
-    int memorySize;
-    /**
-    * the memory block itself
-    */
-    MemoryEntry *content;
+	/**
+	* the current size of memory
+	*/
+	int memorySize;
+	/**
+	* the memory block itself
+	*/
+	MemoryEntry *content;
 };

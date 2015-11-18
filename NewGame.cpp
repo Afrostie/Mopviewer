@@ -6,7 +6,6 @@ newGame::newGame(){
 newGame::~newGame(){
 
 }
-
 void newGame::autoPong(){
 	nCurses nCurse;
 	int x = 0, y = 0, max_y = 0, max_x = 0, next_x = 0, direction = 1, speed;
@@ -234,8 +233,7 @@ void newGame::calculator(){
 
 
 void newGame::showStats(){
-	MopHandling::shared_instance().createMopFile("../10000_days.mop");
-	std::cout << "Opened mopfile" << std::endl;
+
 	int x, y, x2,y2,x3,y3;
 	nCurses nCurse;
 	//nCurse.start(true,true,true,false);
@@ -265,25 +263,6 @@ void newGame::showStats(){
 	getmaxyx(window2, x3,y3);
 
 int rowcounter = 0;
-	MopHandling::shared_instance().loadNextState();
-	for(int i = 0; i < MopHandling::shared_instance().getNumParticles(); i++){
-		if(i > x){
-			rowcounter = 0;
-		mvwprintw(window2, rowcounter, (y3/2), "Object Name is:  %s", MopHandling::shared_instance().getLoadedState()->getMopItem(i).name);
-		rowcounter++;
-
-		}
-
-		else{
-			mvwprintw(window1, rowcounter, (y2/2), "Object Name is:  %s", MopHandling::shared_instance().getLoadedState()->getMopItem(i).name);
-			rowcounter++;
-		}
-
-	}
-
-
-
-
 
 	refresh();
 	wrefresh(window1);

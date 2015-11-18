@@ -5,7 +5,15 @@
 */
 class Advisor {
 public:
-
+    /**
+     * choice for type of Mopfile to write
+     */
+    static const int standardMop = 0;
+    
+    /**
+     * choice for type of Mopfile to writ
+     */
+    static const int smallerMop = 1;
 	/**
 	* Particle interaction setting - Setting for all normal particles (planets and such) - interact with all particles, including special ones, except for placemarks
 	*/
@@ -14,7 +22,7 @@ public:
 	/**
 	* Particle interaction setting - Only interact with ordinary particles and collapsors (would be used for spacecraft)
 	*/
-	static const int interactEnvironmentOnly = 2;
+	static const int interactParticlesOnly = 2;
 
 	/**
 	* Particle interaction setting - Setting to be used if the particle is not to interact with any other particles (acting as a fixed placemark)
@@ -22,7 +30,7 @@ public:
 	static const int interactNONE = 3;
 
 	/**
-	* Particle interaction setting - Setting to be used if the particle is not to interact with other particles of the same type (asteroids, spacecraft, things like that)
+	* Particle interaction setting - Setting to be used if the particle is not to interact with other particles of the same type (asteroids, things like that)
 	*/
 	static const int interactDifferentOnly = 4;
 
@@ -70,23 +78,7 @@ public:
 	*/
 	static const int OMIT_VECTOR = 402;
 
-	/**
-	* tournament selection - lowest score required
-	*/
-	static const int LOWEST = 701;
-	/**
-	* tournament selection - highest score required
-	*/
-	static const int HIGHEST = 702;
 
-	/**
-	* sequence selected is first sequence (used during sequence mutation bounds checking)
-	*/
-	static const int Before_First_Sequence = -801;
-	/**
-	* sequence selected is last sequence (used during sequence mutation bounds checking)
-	*/
-	static const int After_Last_Sequence = -802;
 	// these are used to control what gets read into and retreived from a particles memory
 
 	static const int Spheres = 600;

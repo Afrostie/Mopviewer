@@ -6,8 +6,10 @@
 #include <string>
 #include <cstring>
 #include "window.h"
-#include "mopfile/mophandling.h"
-#include "mopfile/MopFile.h"
+#include "mopfile/MopFileLight/MopFile.h"
+
+
+
 
 class newGame {
 	public:
@@ -19,4 +21,5 @@ class newGame {
 	void calculator();
 	void showStats();
 	void selectGame();
+
 };
