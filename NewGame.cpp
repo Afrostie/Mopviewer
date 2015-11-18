@@ -232,7 +232,24 @@ void newGame::calculator(){
 }
 
 
+
+
+
+
 void newGame::showStats(){
+
+	mopfile = new MopFile();
+	mopfile->setFilename("10000_days.mop");
+	mopfile->openMopfileReader();
+	mopstate = new MopState();
+	mopstate = mopfile->readCyclingState();
+
+	std::cout << mopstate->getMopItem(1).x << std::endl;
+	std::cout << "Item Count: " << mopstate->getItemCount() << std::endl;
+	mopstate = mopfile->readCyclingState();
+	std::cout << mopstate->getMopItem(1).x << std::endl;
+	std::cout << "Item Count: " << mopstate->getItemCount() << std::endl;
+
 
 	int x, y, x2,y2,x3,y3;
 	nCurses nCurse;
@@ -281,16 +298,8 @@ int rowcounter = 0;
 
 
 
-
-
-
-
-
-
-
-
-
 void newGame::selectGame(){
+
 	int mx = 0, my = 0, mx2 = 0, my2 = 0;
 	char welcome[] = "Enter 1 to Watch, 2 to Draw, 3 for Text Input, 4 for Calculator, 5 to open MopViewer: ";
 	char exitMessage[] = "Enter anything else to exit";

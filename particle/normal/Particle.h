@@ -20,6 +20,8 @@
 #ifdef MOPFILE
 #include "../../mopfile/MopFile/MopItem.h"
 #endif
+
+
 #ifdef MOPFILELIGHT
 #include "../../mopfile/MopFileLight/MopItem.h"
 #endif
@@ -82,7 +84,7 @@ private:
 	* The force acting on this particle along the Y axis
 	*/
 	double yf;
-int id;
+
 	/**
 	* The force acting on this particle along the Z axis
 	*/
@@ -162,7 +164,7 @@ int id;
 	* what type this particle is - (collapsor/normal particle/placemark/spacecraft)
 	*/
 	int identity;
-
+	int id;
 	/**
 	*  what size this particle will have when displayed in a visualisation
 	*/
@@ -812,21 +814,50 @@ ParticleStruct exportContentAsParticleStruct() {
 	return tmp;
 }
 
-	/**
-	* place the current private state of this particle into a MopItem, ready to be recorded in a mop file
-	*/
-	MopItem exportAsMopItem() {
-		MopItem mi;
-		mi.red =this->red;
-		mi.green =this->green;
-		mi.blue =this->blue;
-		mi.id = this->id;
-		mi.visualRepresentation =this->visualRepresentation;
-		mi.x =this->x;
-		mi.y =this->y;
-		mi.z =this->z;
-		return mi;
-	}
+#ifdef MOPFILE
+    /**
+     * place the current private state of this particle into a MopItem, ready to be recorded in a mop file
+     */
+    MopItem exportAsMopItem() {
+        MopItem mi;
+        mi.red =this->red;
+        mi.green =this->green;
+        mi.blue =this->blue;
+        mi.interactionPermission =this->interactionPermission;
+        mi.identity =this->identity;
+        mi.mass =this->mass;
+        mi.visualRepresentation =this->visualRepresentation;
+        strcpy(mi.name,this->name.c_str());
+        mi.radius =this->radius;
+        mi.x =this->x;
+        mi.xd =this->xd;
+        mi.y =this->y;
+        mi.yd =this->yd;
+        mi.z =this->z;
+        mi.zd =this->zd;
+        return mi;
+    }
+#endif
+
+#ifdef MOPFILELIGHT
+    /**
+     * place the current private state of this particle into a MopItem, ready to be recorded in a mop file
+     */
+    MopItem exportAsMopItem() {
+        MopItem mi;
+        mi.red =this->red;
+        mi.green =this->green;
+        mi.blue =this->blue;
+        mi.id =this->id;
+        mi.visualRepresentation =this->visualRepresentation;
+        mi.x =this->x;
+        mi.y =this->y;
+        mi.z =this->z;
+        return mi;
+    }
+#endif
+
+
 
 	/**
 	*  find the distance between this particle and another

@@ -9,38 +9,33 @@
 #include "MopState.h"
 #include "MopItem.h"
 #include "../../etc/Fragment.h"
-#ifdef SERIALCLASSIC
-#include "../../particle/serialclassic/Particle.h"
-#else
 #include "../../particle/normal/Particle.h"
-#endif
-
 #include <zlib.h>
 class MopFile {
 private:
-    
+
     /**
      * the output file stream
      */
     std::ofstream outFileStream;
-    
+
     /**
      * the input file steam
      */
     std::ifstream inFileStream;
-    
+
     /**
      * the mop file name to be used
      */
     std::string filename;
-    
+
     /**
      * Unspecified error flag
      *
      */
-    
+
     int error;
-    
+
     /**
      * get a single character from the input file stream
      */
@@ -52,7 +47,7 @@ private:
             return false;
         }
     }
-    
+
     /**
      * read a MopState from the mop file and store it in a fragment
      * uses a std::string as an intermediate structure.
@@ -74,7 +69,7 @@ private:
         input.fill(tmp, tmp.length());
         return true;
     }
-    
+
     /**
      * build a MopState from a fragment
      *
@@ -118,7 +113,7 @@ private:
         return ms;
         return NULL;
     }
-    
+
     /**
      * if the filename given has no *.mop extension, add one.
      */
@@ -129,14 +124,14 @@ private:
         }
         return temp;
     }
-    
+
     /**
      * close the mopfile reader
      */
     void closeMopfileReader() {
         this->inFileStream.close();
     }
-    
+
 public:
     MopFile() {
         this->error = 0;
@@ -144,14 +139,14 @@ public:
     ~MopFile() {
     }
     // no copy constructor for this class, there's no need to copy it anyway.
-    
+
     /**
      * retrieve the filename
      */
     std::string getFilename() {
         return this->filename;
     }
-    
+
     /**
      * read a single state from a mopfile (mopfile must already be open)
      */
@@ -166,7 +161,7 @@ public:
             if (!worked) {
                 return NULL;
             }
-            
+
             // now convert that to a MopState object
             //std::cerr <<" > starting string to mopstate conversion" << std::endl;
             result = this->buildMopStateFromFragment(initial);
@@ -197,16 +192,16 @@ public:
         }
         return incoming;
     }
-    
+
     /**
      * This method sets the filename Mopfile will use. This varient prepends the path
      */
     void setFilename (std::string path,std::string fn){
         this->filename = path.append(this->setMopFileExtension(fn));
     };
-    
-	
-	
+
+
+
     /**
      * This writes the current set of particles to the mopfile.
      * and sends it to be written to the specified file.
@@ -241,8 +236,8 @@ public:
 		this->outFileStream << "$";
         this->outFileStream.close();
     }
-	*/ 
-	 
+	*/
+
     void writeState(Particle *localSet, int environmentSetSize) {
         std::stringstream tmp;
         MopItem mi;
@@ -259,14 +254,14 @@ public:
             tmp << mi.y << ",";
             tmp << mi.z << ",";;
         }
-        
+
         tmp << "$";
         std::string str = tmp.str();
         this->outFileStream.open(this->filename.c_str(),std::ios::app);
         this->outFileStream << str;
         this->outFileStream.close();
     }
-    
+
     /**
      * close the mopfile writer
      */
@@ -282,7 +277,7 @@ public:
     void setFilename (std::string fn){
         this->filename = fn;
     };
-    
+
     /**
      * open the mopfile for reading
      */
@@ -295,7 +290,7 @@ public:
             std::cerr << "error: cannot open mop file" << std::endl;
         }
     }
-    
+
     /**
      * reset the mop file back to the start of the file
      */
@@ -305,5 +300,5 @@ public:
         this->openMopfileReader();
         this->inFileStream.seekg (0, std::ios_base::beg);
     }
-    
+
 };

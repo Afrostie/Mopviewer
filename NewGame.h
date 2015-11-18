@@ -6,7 +6,7 @@
 #include <string>
 #include <cstring>
 #include "window.h"
-#include "mopfile/MopFileLight/MopFile.h"
+#include "mopfile/MopFile.h"
 
 
 
@@ -21,5 +21,6 @@ class newGame {
 	void calculator();
 	void showStats();
 	void selectGame();
-
+	MopFile * mopfile;
+	MopState * mopstate;
 };
