@@ -27,12 +27,13 @@ public:
         this->xf = mi.xf;
         this->yf = mi.yf;
         this->zf = mi.zf;
+        this->totalForce = mi.totalForce;
         this->red = mi.red;
-      this->green = mi.green;
+        this->green = mi.green;
         this->blue = mi.blue;
         memset(this->name, '\0',50 );
         strcpy(this->name,mi.name);
-       this->identity = mi.identity;
+        this->identity = mi.identity;
         this->interactionPermission = mi.interactionPermission;
         this->visualRepresentation = mi.visualRepresentation;
     }
@@ -50,32 +51,35 @@ public:
             this->zd = other.zd;
             this->xf = other.xf;
             this->yf = other.yf;
-           this->zf = other.zf;
+            this->zf = other.zf;
+            this->totalForce = other.totalForce;
             this->red = other.red;
-           this->red = other.red;
+            this->red = other.red;
             this->green = other.green;
             this->blue = other.blue;
             strcpy(this->name,other.name);
-           this->identity = other.identity;
+            this->identity = other.identity;
             this->interactionPermission = other.interactionPermission;
             this->visualRepresentation = other.visualRepresentation;
         }
     }
 
-    double mass;
-    double radius;
+    float mass;
+    float radius;
     //position in the WCS
-    double x;
-    double y;
-    double z;
+    float x;
+    float y;
+    float z;
     //Velocity in the WCS
-    double xd;
-    double yd;
-    double zd;
+    float xd;
+    float yd;
+    float zd;
     //Current summed forces acting on this particle
-    double xf;
-    double yf;
-    double zf;
+    float xf;
+    float yf;
+    float zf;
+    // same, all axis combined
+    float totalForce;
     // the colour of a particle
     int red;
     int green;
@@ -93,6 +97,6 @@ public:
     }
 
     int interactionPermission; // Used to say what types of particle this particle is allowed to interact with.
-    int identity;   // used to tell this particle what type it is (collapsor/normal particle/placemark/spacecraft)
+    int identity;   // used to tell this particle what type it is (collapsor/normal particle/placemark)
     int visualRepresentation; // what shape/size this particle will have when displayed in a visualisation
 };

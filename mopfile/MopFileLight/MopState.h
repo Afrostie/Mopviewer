@@ -8,8 +8,13 @@ private:
     MopItem * content;
     int itemCount;
 public:
-    MopState();
-    ~MopState();
+    MopState() {
+        this->itemCount = 0;
+    }
+    
+    ~MopState() {
+        delete [] this->content;
+    }
 
     MopState(const MopState& bs) {
         this->itemCount = bs.itemCount;
@@ -56,5 +61,25 @@ public:
     {
         return itemCount;
     }
-    void addMopItem(MopItem current);
+
+    void addMopItem(MopItem current)
+    {   int x;
+        MopItem * temp;
+        if (this->itemCount==0) {
+            this->content = new MopItem[1];
+            this->content[0].fillFromExistingMopItem(current);
+            this->itemCount = 1;
+        }
+        else {
+            this->itemCount++;
+            temp = new MopItem[this->itemCount];
+            for(x = 0; x <this->itemCount-1; x++) {
+                temp[x].fillFromExistingMopItem(this->content[x]);
+            }
+            temp[this->itemCount-1].fillFromExistingMopItem(current);
+            delete [] this->content;
+            this->content = temp;
+            temp = NULL;
+        }
+    }
 };
