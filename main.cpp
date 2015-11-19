@@ -1,16 +1,12 @@
-#include <iostream>
 #include <curses.h>
-#include <thread>
-#include <chrono>
-//#include "nCurses.h"
-#include "NewGame.h"
+#include <iostream>
+#include "mopViewer.h"
 #include <string>
 #include <cstring>
 
 
-int main(){
-
-	newGame newGames;
-	newGames.selectGame();
-	return 0;
+int main() {
+  mopViewer mopViewers;
+  mopViewers.selectGame();
+  return 0;
 }

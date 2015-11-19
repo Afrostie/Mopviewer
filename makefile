@@ -13,7 +13,7 @@ TARGET = main
 all: $(TARGET)
 
 $(TARGET): $(TARGET).cpp
-	$(CC) -o Mopviewer $(TARGET).cpp NewGame.cpp window.cpp $(CFLAGS)
+	$(CC) -o Mopviewer $(TARGET).cpp mopViewer.cpp window.cpp $(CFLAGS)
 
 clean:
 	$(RM) $(TARGET).o
