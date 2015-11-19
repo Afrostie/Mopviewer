@@ -1,7 +1,5 @@
 #include <curses.h>
 #include <iostream>
-#include <thread>
-#include <chrono>
 #include "nCurses.h"
 #include <string>
 #include <cstring>
