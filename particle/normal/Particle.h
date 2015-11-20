@@ -553,6 +553,7 @@ void fillFromExistingParticleStruct(ParticleStruct & p) {
 	this->name = p.name;
 	this->radius = p.radius;
 	this->x = p.x;
+	std::cout << p.x << std::endl;
 	this->xd = p.xd;
 	this->y = p.y;
 	this->yd = p.yd;
@@ -785,6 +786,7 @@ void interactWithAll(Particle * allParticles,const int numParticles, const doubl
 ParticleStruct exportContentAsParticleStruct() {
 	ParticleStruct tmp;
 	tmp.x = this->x;
+	std::cout << tmp.x << std::endl;
 	tmp.y = this->y;
 	tmp.z = this->z;
 	tmp.xd = this->xd;
@@ -830,6 +832,7 @@ ParticleStruct exportContentAsParticleStruct() {
         strcpy(mi.name,this->name.c_str());
         mi.radius =this->radius;
         mi.x =this->x;
+				std::cout << mi.x << std::endl;
         mi.xd =this->xd;
         mi.y =this->y;
         mi.yd =this->yd;
@@ -851,6 +854,7 @@ ParticleStruct exportContentAsParticleStruct() {
         mi.id =this->identity;
         mi.visualRepresentation =this->visualRepresentation;
         mi.x =this->x;
+				std::cout << mi.x << std::endl;
         mi.y =this->y;
         mi.z =this->z;
         return mi;
@@ -889,6 +893,7 @@ ParticleStruct exportContentAsParticleStruct() {
 	*/
 	void storeCurrentPosition() {
 		this->stored_x = this->x;
+		std::cout << stored_x << std::endl;
 		this->stored_y = this->y;
 		this->stored_z = this->z;
 	}
@@ -1215,6 +1220,7 @@ void finaliseStep(const int travelTime) {
             tmp << this->green << ",";
             tmp << this->blue << ",";
             tmp << this->x << ",";
+						std::cout << this->x << std::endl;
             tmp << this->y << ",";
             tmp << this->z << ",";
             tmp << this->xd << ",";
@@ -1270,6 +1276,7 @@ void finaliseStep(const int travelTime) {
             this->blue = thing.toInt();
             thing.fill(worker,',',pos2);
             this->x  = thing.toFloat();
+						std::cout << this->x << std::endl;
             thing.fill(worker,',',pos2);
             this->y = thing.toFloat();
             thing.fill(worker,',',pos2);

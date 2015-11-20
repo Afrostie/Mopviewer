@@ -16,4 +16,4 @@ $(TARGET): $(TARGET).cpp
 	$(CC) -o Mopviewer $(TARGET).cpp mopViewer.cpp window.cpp $(CFLAGS)
 
 clean:
-	$(RM) $(TARGET).o
+	$(RM) $(TARGET).o mopfile/MopFileLight/MopItem.h.gch mopfile/MopFileLight/MopFile.h.gch particle/normal/Particle.h.gch

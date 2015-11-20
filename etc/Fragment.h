@@ -2,7 +2,7 @@
 #include <iostream>
 #include <cstdlib>
 #include <math.h>
-
+#include <string>
 class Fragment {
 
     friend std::ostream& operator<<(std::ostream &os, const Fragment &fr) {
@@ -28,6 +28,13 @@ public:
     char *  c_str() {
         return this->string;
     }
+
+    std::string  str() {
+      std::string tmp;
+      tmp.append(this->string);
+        return tmp;
+    }
+
 
     char at(int x) {
         return this->string[x];
@@ -378,6 +385,8 @@ public:
     }
 
     float toFloat() {
+      //  std::cout << "Test String " << this->string << std::endl;
+      //  std::cout << "String to Float " << atof(this->string) << std::endl;
         return atof(this->string);
     }
 
@@ -439,7 +448,6 @@ public:
         this->len = other.len;
         return *this;
     }
-
 
 
 

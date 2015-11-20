@@ -83,12 +83,12 @@ private:
         int pos2(0);
         worker.fill(source,'|',pos);
         numParticles = worker.toInt();
-        //std::cout << "> Particle count " << numParticles << std::endl;
+        std::cout << "> Particle count " << numParticles << std::endl;
         for (int x(0);x<numParticles;x++) {
             MopItem mi;
             //pos++;
             worker.fill(source,'|',pos);
-            //std::cout << "> extracted string " << worker.getString() << std::endl;
+            std::cout << "> extracted string " << worker.c_str() << std::endl;
             pos2 = 0;
             thing.fill(worker,',',pos2);
             mi.id = thing.toInt();
@@ -103,15 +103,16 @@ private:
             mi.blue = thing.toInt();
             thing.fill(worker,',',pos2);
             mi.x  = thing.toFloat();
+              std::cout << "> extracted string " << thing.str() << std::endl;
+          //std::cout << "X value: " << mi.x << std::endl;
             thing.fill(worker,',',pos2);
             mi.y = thing.toFloat();
             thing.fill(worker,',',pos2);
             mi.z  = thing.toFloat();
             ms->addMopItem(mi);
         }
-        //std::cout << "> converted the String to a MopState" << std::endl;
+        std::cout << "> converted the String to a MopState" << std::endl;
         return ms;
-        return NULL;
     }
 
     /**
@@ -158,6 +159,8 @@ public:
             Fragment initial;
             //std::cerr <<" > Reading the state as a Text String  " << std::endl;
             bool worked = this->readMopStateFromFileAsText(initial);
+            std::cout <<initial.c_str()<<std::endl;
+
             if (!worked) {
                 return NULL;
             }
@@ -179,7 +182,7 @@ public:
         }
         return result;
     }
-    /**
+    /*
      * read a single state from the mop file, cycling back to the start of the file
      * if the end is reached
      */
