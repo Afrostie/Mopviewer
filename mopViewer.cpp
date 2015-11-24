@@ -14,12 +14,9 @@ void mopViewer::showStats() {
   mopstate = mopfile->readCyclingState();
   std::cout << "Item Count: " << mopstate->getItemCount() << std::endl;
   for (int i = 0; i < mopstate->getItemCount(); i++) {
-    std::cout << "Particle "<< i << " X value: " << mopstate->getMopItem(i).x
-    << std::endl;
-    std::cout << "Particle "<< i << " Y value: " << mopstate->getMopItem(i).y
-    << std::endl;
-    std::cout << "Particle "<< i << " Z value: " << mopstate->getMopItem(i).z
-    << std::endl;
+    std::cout << "Particle "<< i << " X value: " << mopstate->getMopItem(i).x << std::endl;
+    std::cout << "Particle "<< i << " Y value: " << mopstate->getMopItem(i).y << std::endl;
+    std::cout << "Particle "<< i << " Z value: " << mopstate->getMopItem(i).z << std::endl;
   }
   int x, y, x2, y2, x3, y3;
   nCurses nCurse;

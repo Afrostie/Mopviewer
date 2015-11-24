@@ -1207,7 +1207,7 @@ void finaliseStep(const int travelTime) {
 			}
 		}
 	}
-    const char * exportAsCharArray() {
+  /*  const char * exportAsCharArray() {
             std::stringstream tmp;
             tmp << this->name << "[";
             tmp << this->name << ",";
@@ -1232,13 +1232,14 @@ void finaliseStep(const int travelTime) {
             tmp << "]";
             std::string str = tmp.str();
             return str.c_str();
-    }
+    }*/
 
 
     /**
      * fill this particle from a char array
      *
      */
+		 /*
     void fillFromCharArray(const char *str) {
         Fragment thing, worker;
         int pos2(0);
@@ -1293,7 +1294,7 @@ void finaliseStep(const int travelTime) {
             this->yf  = thing.toFloat();
             thing.fill(worker,',',pos2);
             this->zf = thing.toFloat();
-        }
+        }*/
 
     Json::Value exportAsJsonObject() {
         Json::Value tmp(Json::objectValue);

@@ -9,7 +9,12 @@
 #include "MopState.h"
 #include "MopItem.h"
 #include "../../etc/Fragment.h"
+#ifdef SERIAL
+#include "../../particle/serial/Particle.h"
+#else
 #include "../../particle/normal/Particle.h"
+#endif
+
 #include <zlib.h>
 class MopFile {
 private:
@@ -66,7 +71,7 @@ private:
             }
             tmp.push_back(ch);
         } while (ch!='$');
-        input.fill(tmp, tmp.length());
+        input.fill(tmp);
         return true;
     }
 
@@ -79,40 +84,64 @@ private:
         Fragment worker;
         Fragment thing;
         int numParticles;
-        int pos(0);
-        int pos2(0);
-        worker.fill(source,'|',pos);
+        int pos;
+        int pos2;
+        pos = source.coumtUpTo("|");
+        worker.fill(source.str(),pos);
+        source.deleteTill(pos);
+        source.deleteTill(1);
         numParticles = worker.toInt();
-        std::cout << "> Particle count " << numParticles << std::endl;
+        //std::cout << "> Particle count " << numParticles << std::endl;
         for (int x(0);x<numParticles;x++) {
             MopItem mi;
             //pos++;
-            worker.fill(source,'|',pos);
-            std::cout << "> extracted string " << worker.c_str() << std::endl;
-            pos2 = 0;
-            thing.fill(worker,',',pos2);
+        pos = source.coumtUpTo(",");
+        worker.fill(source.str(),pos);
+        source.deleteTill(pos);
+        source.deleteTill(1);
             mi.id = thing.toInt();
             //std::cout << "> particle name: " << mi.name << std::endl;
-            thing.fill(worker,',',pos2);
-            mi.visualRepresentation = thing.toInt();
-            thing.fill(worker,',',pos2);
+        pos = source.coumtUpTo(",");
+        worker.fill(source.str(),pos);
+        source.deleteTill(pos);
+        source.deleteTill(1);
+        mi.visualRepresentation = thing.toInt();
+        pos = source.coumtUpTo(",");
+        worker.fill(source.str(),pos);
+        source.deleteTill(pos);
+        source.deleteTill(1);
             mi.red = thing.toInt();
-            thing.fill(worker,',',pos2);
-            mi.green = thing.toInt();
-            thing.fill(worker,',',pos2);
-            mi.blue = thing.toInt();
-            thing.fill(worker,',',pos2);
+        pos = source.coumtUpTo(",");
+        worker.fill(source.str(),pos);
+        source.deleteTill(pos);
+        source.deleteTill(1);
+        mi.green = thing.toInt();
+        pos = source.coumtUpTo(",");
+        worker.fill(source.str(),pos);
+        source.deleteTill(pos);
+        source.deleteTill(1);
+        mi.blue = thing.toInt();
+        pos = source.coumtUpTo(",");
+        worker.fill(source.str(),pos);
+        source.deleteTill(pos);
+        source.deleteTill(1);
             mi.x  = thing.toFloat();
-              std::cout << "> extracted string " << thing.str() << std::endl;
-          //std::cout << "X value: " << mi.x << std::endl;
-            thing.fill(worker,',',pos2);
-            mi.y = thing.toFloat();
-            thing.fill(worker,',',pos2);
-            mi.z  = thing.toFloat();
-            ms->addMopItem(mi);
+        pos = source.coumtUpTo(",");
+        worker.fill(source.str(),pos);
+        source.deleteTill(pos);
+        source.deleteTill(1);
+        mi.y = thing.toFloat();
+        pos = source.coumtUpTo(",");
+        worker.fill(source.str(),pos);
+        source.deleteTill(pos);
+        source.deleteTill(1);
+        mi.z  = thing.toFloat();
+        ms->addMopItem(mi);
+        std::cout << "> extracted string " << worker.str() << std::endl;
         }
-        std::cout << "> converted the String to a MopState" << std::endl;
+        //std::cout << "> converted the String to a MopState" << std::endl;
         return ms;
+        return NULL;
     }
 
     /**
@@ -159,8 +188,6 @@ public:
             Fragment initial;
             //std::cerr <<" > Reading the state as a Text String  " << std::endl;
             bool worked = this->readMopStateFromFileAsText(initial);
-            std::cout <<initial.c_str()<<std::endl;
-
             if (!worked) {
                 return NULL;
             }
@@ -182,7 +209,7 @@ public:
         }
         return result;
     }
-    /*
+    /**
      * read a single state from the mop file, cycling back to the start of the file
      * if the end is reached
      */

@@ -15,7 +15,7 @@
 #include "../../particle/normal/Particle.h"
 #endif
 #include <zlib.h>
- 
+
 class MopFile {
 private:
 
@@ -49,7 +49,7 @@ private:
      */
     bool readMopStateFromFileAsText(Fragment &input) {
         std::string tmp;
-		
+
         char ch;
         bool result = false;
         do {
@@ -131,7 +131,7 @@ private:
         return ms;
         return NULL;
     }
-    
+
 
 
     /**
@@ -184,7 +184,7 @@ public:
 
             // now convert that to a MopState object
             //std::cerr <<" > starting string to mopstate conversion" << std::endl;
- 
+
             result = this->buildMopStateFromFragment(initial);
 
             //std::cerr <<" >finishing string to mopstate conversion" << std::endl;
@@ -215,7 +215,7 @@ public:
             incoming = this->readState();
         }
         return incoming;
-    } 
+    }
 
     /**
      * This method sets the filename Mopfile will use. This varient prepends the path
@@ -266,8 +266,8 @@ public:
 		this->outFileStream << str;
 		this->outFileStream << "$";
         this->outFileStream.close();
-    } 
-	 
+    }
+
 	 */
     	void writeState(Particle *localSet, int environmentSetSize) {
         std::stringstream tmp;
@@ -302,7 +302,7 @@ public:
         this->outFileStream << str;
         this->outFileStream.close();
     }
-    
+
 
    char *  compress (std::string str, int *size) {
         char * zLibInString = new char[str.length()];
@@ -328,13 +328,13 @@ public:
         deflate(&defstream, Z_FINISH);
         deflateEnd(&defstream);
         size= (int*) strlen(zLibOutString);
-        return zLibOutString;  
+        return zLibOutString;
     }
 
 
 
      char * decompress (char * zLibInString, int len) {
-         
+
         char * zLibOutString = new char[len];
         int g;
 
@@ -359,7 +359,7 @@ public:
         inflateEnd(&infstream);
         return zLibOutString;
     }
-    
+
 
 
     /**
