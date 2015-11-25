@@ -25,7 +25,7 @@ public:
     int size() {
         return this->string.size();
     }
-    
+
     /**
      * fill this Fragment with the content of a standard string
      */
@@ -42,7 +42,7 @@ public:
     int i= start;
         this->string.clear();
         char ch = s.string.at(i);
-        
+
     while(ch!=c) {
         this->string.push_back(ch);
         //std::cout<< ch <<std::endl;
