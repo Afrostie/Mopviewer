@@ -55,55 +55,111 @@ void mopViewer::showStats() {
   std::cout << "Max X2: " << x3 << std::endl;
   std::cout << "Max Y2: " << y3 << std::endl;
 
+  float maxitems = (x2-2)/8;
+  float maxremainder = ((x2-2)%8);
+  std::cout << "Max amount of items per column: " << maxitems << std::endl;
+  std::cout << "Max amount of remainders per column: " << maxremainder << std::endl;
+
  //Display the information to screen
   int currentRow = 1;
   int currentRow2 = 1;
-  for (int i = 0; i < mopstate->getItemCount(); i++) {
-    if(currentRow >= (x2-1)){
-        mvwprintw(window2, currentRow2,1, "Particle Number: %d", i);
+  int currentitem = 0;
+  for (int i = 0; i < (2*maxitems); i++) {
+    if((currentRow >= (8*maxitems))){
+        mvwprintw(window2, currentRow2,1, "Particle Number: %d", currentitem);
         currentRow2++;
-        mvwprintw(window2, currentRow2,1, "Particle X %f", mopstate->getMopItem(i).x);
+        mvwprintw(window2, currentRow2,1, "Particle X %f", mopstate->getMopItem(currentitem).x);
         currentRow2++;
-        mvwprintw(window2, currentRow2,1, "Particle Y:  %f", mopstate->getMopItem(i).y);
+        mvwprintw(window2, currentRow2,1, "Particle Y:  %f", mopstate->getMopItem(currentitem).y);
         currentRow2++;
-        mvwprintw(window2, currentRow2,1, "Particle Z %f", mopstate->getMopItem(i).z);
+        mvwprintw(window2, currentRow2,1, "Particle Z %f", mopstate->getMopItem(currentitem).z);
         currentRow2++;
-        mvwprintw(window2, currentRow2,1, "Particle Red:  %d", mopstate->getMopItem(i).red);
+        mvwprintw(window2, currentRow2,1, "Particle Red:  %d", mopstate->getMopItem(currentitem).red);
         currentRow2++;
-        mvwprintw(window2, currentRow2,1, "Particle Green %d", mopstate->getMopItem(i).green);
+        mvwprintw(window2, currentRow2,1, "Particle Green %d", mopstate->getMopItem(currentitem).green);
         currentRow2++;
-        mvwprintw(window2, currentRow2,1, "Particle Blue:  %d", mopstate->getMopItem(i).blue);
+        mvwprintw(window2, currentRow2,1, "Particle Blue:  %d", mopstate->getMopItem(currentitem).blue);
         currentRow2+=2;
+        currentitem++;
 
     }
     else{
-      mvwprintw(window1, currentRow,1, "Particle Number:  %d", i);
+      mvwprintw(window1, currentRow,1, "Particle Number:  %d", currentitem);
       currentRow++;
-      mvwprintw(window1, currentRow,1, "Particle X %f", mopstate->getMopItem(i).x);
+      mvwprintw(window1, currentRow,1, "Particle X %f", mopstate->getMopItem(currentitem).x);
       currentRow++;
-      mvwprintw(window1, currentRow,1, "Particle Y:  %f", mopstate->getMopItem(i).y);
+      mvwprintw(window1, currentRow,1, "Particle Y:  %f", mopstate->getMopItem(currentitem).y);
       currentRow++;
-      mvwprintw(window1, currentRow,1, "Particle Z %f", mopstate->getMopItem(i).z);
+      mvwprintw(window1, currentRow,1, "Particle Z %f", mopstate->getMopItem(currentitem).z);
       currentRow++;
-      mvwprintw(window1, currentRow,1, "Particle Red:  %d", mopstate->getMopItem(i).red);
+      mvwprintw(window1, currentRow,1, "Particle Red:  %d", mopstate->getMopItem(currentitem).red);
       currentRow++;
-      mvwprintw(window1, currentRow,1, "Particle Green %d", mopstate->getMopItem(i).green);
+      mvwprintw(window1, currentRow,1, "Particle Green %d", mopstate->getMopItem(currentitem).green);
       currentRow++;
-      mvwprintw(window1, currentRow,1, "Particle Blue:  %d", mopstate->getMopItem(i).blue);
+      mvwprintw(window1, currentRow,1, "Particle Blue:  %d", mopstate->getMopItem(currentitem).blue);
       currentRow+=2;
+      currentitem++;
     }
   }
-
-
 
   refresh();
   wrefresh(window1);
   wrefresh(window2);
 
-  std::cout << "Amount per column: " << std::endl;
+  int ch;
+  while((ch = getch()) != GLFW_KEY_2)
+	{	switch(ch) {
+      case KEY_RIGHT:
+      currentRow = 1;
+      currentRow2 = 1;
+      for (int i = 0; i < (2*maxitems); i++) {
+        if((currentRow >= (8*maxitems)) && (currentitem <= mopstate->getItemCount())){
+            mvwprintw(window2, currentRow2,1, "Particle Number: %d", currentitem);
+            currentRow2++;
+            mvwprintw(window2, currentRow2,1, "Particle X %f", mopstate->getMopItem(currentitem).x);
+            currentRow2++;
+            mvwprintw(window2, currentRow2,1, "Particle Y:  %f", mopstate->getMopItem(currentitem).y);
+            currentRow2++;
+            mvwprintw(window2, currentRow2,1, "Particle Z %f", mopstate->getMopItem(currentitem).z);
+            currentRow2++;
+            mvwprintw(window2, currentRow2,1, "Particle Red:  %d", mopstate->getMopItem(currentitem).red);
+            currentRow2++;
+            mvwprintw(window2, currentRow2,1, "Particle Green %d", mopstate->getMopItem(currentitem).green);
+            currentRow2++;
+            mvwprintw(window2, currentRow2,1, "Particle Blue:  %d", mopstate->getMopItem(currentitem).blue);
+            currentRow2+=2;
+            currentitem++;
 
+        }
+        else if (currentitem <= mopstate->getItemCount()){
+          mvwprintw(window1, currentRow,1, "Particle Number:  %d", currentitem);
+          currentRow++;
+          mvwprintw(window1, currentRow,1, "Particle X %f", mopstate->getMopItem(currentitem).x);
+          currentRow++;
+          mvwprintw(window1, currentRow,1, "Particle Y:  %f", mopstate->getMopItem(currentitem).y);
+          currentRow++;
+          mvwprintw(window1, currentRow,1, "Particle Z %f", mopstate->getMopItem(currentitem).z);
+          currentRow++;
+          mvwprintw(window1, currentRow,1, "Particle Red:  %d", mopstate->getMopItem(currentitem).red);
+          currentRow++;
+          mvwprintw(window1, currentRow,1, "Particle Green %d", mopstate->getMopItem(currentitem).green);
+          currentRow++;
+          mvwprintw(window1, currentRow,1, "Particle Blue:  %d", mopstate->getMopItem(currentitem).blue);
+          currentRow+=2;
+          currentitem++;
+        }
+      }
+      refresh();
+      wrefresh(window1);
+      wrefresh(window2);
+    break;
 
-  getch();
+    }
+  }
+  refresh();
+  wrefresh(window1);
+  wrefresh(window2);
+  //getch();
   endwin();
 }
 
