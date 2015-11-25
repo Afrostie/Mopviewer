@@ -55,11 +55,31 @@ void mopViewer::showStats() {
   std::cout << "Max X2: " << x3 << std::endl;
   std::cout << "Max Y2: " << y3 << std::endl;
 
+ //Display the information to screen
+  int currentRow = 1;
+  int currentRow2 = 1;
+  for (int i = 0; i < mopstate->getItemCount(); i++) {
+    if(currentRow >= (x2-1)){
+        mvwprintw(window2, currentRow2,1, "Particle Number: %d", i);
+        currentRow2++;
+        mvwprintw(window2, currentRow2,1, "Particle X %f", mopstate->getMopItem(i).x);
+        currentRow2++;
+    }
+    else{
+      mvwprintw(window1, currentRow,1, "Particle Number:  %d", i);
+      currentRow++;
+      mvwprintw(window1, currentRow,1, "Particle X %f", mopstate->getMopItem(i).x);
+      currentRow++;
+    }
+  }
+
+
+
   refresh();
   wrefresh(window1);
   wrefresh(window2);
 
-
+  std::cout << "Amount per column: " << std::endl;
 
 
   getch();
