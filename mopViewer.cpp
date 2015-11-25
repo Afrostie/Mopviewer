@@ -64,12 +64,33 @@ void mopViewer::showStats() {
         currentRow2++;
         mvwprintw(window2, currentRow2,1, "Particle X %f", mopstate->getMopItem(i).x);
         currentRow2++;
+        mvwprintw(window2, currentRow2,1, "Particle Y:  %f", mopstate->getMopItem(i).y);
+        currentRow2++;
+        mvwprintw(window2, currentRow2,1, "Particle Z %f", mopstate->getMopItem(i).z);
+        currentRow2++;
+        mvwprintw(window2, currentRow2,1, "Particle Red:  %d", mopstate->getMopItem(i).red);
+        currentRow2++;
+        mvwprintw(window2, currentRow2,1, "Particle Green %d", mopstate->getMopItem(i).green);
+        currentRow2++;
+        mvwprintw(window2, currentRow2,1, "Particle Blue:  %d", mopstate->getMopItem(i).blue);
+        currentRow2+=2;
+
     }
     else{
       mvwprintw(window1, currentRow,1, "Particle Number:  %d", i);
       currentRow++;
       mvwprintw(window1, currentRow,1, "Particle X %f", mopstate->getMopItem(i).x);
       currentRow++;
+      mvwprintw(window1, currentRow,1, "Particle Y:  %f", mopstate->getMopItem(i).y);
+      currentRow++;
+      mvwprintw(window1, currentRow,1, "Particle Z %f", mopstate->getMopItem(i).z);
+      currentRow++;
+      mvwprintw(window1, currentRow,1, "Particle Red:  %d", mopstate->getMopItem(i).red);
+      currentRow++;
+      mvwprintw(window1, currentRow,1, "Particle Green %d", mopstate->getMopItem(i).green);
+      currentRow++;
+      mvwprintw(window1, currentRow,1, "Particle Blue:  %d", mopstate->getMopItem(i).blue);
+      currentRow+=2;
     }
   }
 
