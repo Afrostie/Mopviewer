@@ -9,12 +9,7 @@
 #include "MopState.h"
 #include "MopItem.h"
 #include "../../etc/Fragment.h"
-#ifdef SERIAL
-#include "../../particle/serial/Particle.h"
-#else
 #include "../../particle/normal/Particle.h"
-#endif
-
 #include <zlib.h>
 class MopFile {
 private:
@@ -84,64 +79,49 @@ private:
         Fragment worker;
         Fragment thing;
         int numParticles;
-        int pos;
-        int pos2;
-        pos = source.coumtUpTo("|");
-        worker.fill(source.str(),pos);
-        source.deleteTill(pos);
-        source.deleteTill(1);
+        int pos(0);
+        int pos2(0);
+        pos = worker.fill(source,pos,'|');
         numParticles = worker.toInt();
-        //std::cout << "> Particle count " << numParticles << std::endl;
+        std::cout << "> Particle count " << numParticles << std::endl;
         for (int x(0);x<numParticles;x++) {
             MopItem mi;
-            //pos++;
-        pos = source.coumtUpTo(",");
-        worker.fill(source.str(),pos);
-        source.deleteTill(pos);
-        source.deleteTill(1);
+            pos++;
+            pos = thing.fill(source,pos,',');
             mi.id = thing.toInt();
-            //std::cout << "> particle name: " << mi.name << std::endl;
-        pos = source.coumtUpTo(",");
-        worker.fill(source.str(),pos);
-        source.deleteTill(pos);
-        source.deleteTill(1);
-        mi.visualRepresentation = thing.toInt();
-        pos = source.coumtUpTo(",");
-        worker.fill(source.str(),pos);
-        source.deleteTill(pos);
-        source.deleteTill(1);
+            std::cout << "> particle id: " << mi.id << std::endl;
+
+            mi.id = thing.toInt();
+            pos++;
+            pos = thing.fill(source,pos,',');
+            mi.visualRepresentation = thing.toInt();
+            std::cout << ">  mi.visualRepresentation " <<  mi.visualRepresentation << std::endl;
+
+            pos++;
+            pos = thing.fill(source,pos,',');
             mi.red = thing.toInt();
-        pos = source.coumtUpTo(",");
-        worker.fill(source.str(),pos);
-        source.deleteTill(pos);
-        source.deleteTill(1);
-        mi.green = thing.toInt();
-        pos = source.coumtUpTo(",");
-        worker.fill(source.str(),pos);
-        source.deleteTill(pos);
-        source.deleteTill(1);
-        mi.blue = thing.toInt();
-        pos = source.coumtUpTo(",");
-        worker.fill(source.str(),pos);
-        source.deleteTill(pos);
-        source.deleteTill(1);
+            pos++;
+            pos = thing.fill(source,pos,',');
+            mi.green = thing.toInt();
+            pos++;
+            pos = thing.fill(source,pos,',');
+            mi.blue = thing.toInt();
+            pos++;
+            pos = thing.fill(source,pos,',');
             mi.x  = thing.toFloat();
-        pos = source.coumtUpTo(",");
-        worker.fill(source.str(),pos);
-        source.deleteTill(pos);
-        source.deleteTill(1);
-        mi.y = thing.toFloat();
-        pos = source.coumtUpTo(",");
-        worker.fill(source.str(),pos);
-        source.deleteTill(pos);
-        source.deleteTill(1);
-        mi.z  = thing.toFloat();
-        ms->addMopItem(mi);
-        std::cout << "> extracted string " << worker.str() << std::endl;
+            std::cout << "> x: " << mi.x << std::endl;
+            //std::cout << "> extracted string " << thing.str() << std::endl;
+            //std::cout << "X value: " << mi.x << std::endl;
+            pos++;
+            pos = thing.fill(source,pos,',');
+            mi.y = thing.toFloat();
+            pos++;
+            pos = thing.fill(source,pos,',');
+            mi.z  = thing.toFloat();
+            ms->addMopItem(mi);
         }
-        //std::cout << "> converted the String to a MopState" << std::endl;
+        std::cout << "> converted the String to a MopState" << std::endl;
         return ms;
-        return NULL;
     }
 
     /**
@@ -188,6 +168,8 @@ public:
             Fragment initial;
             //std::cerr <<" > Reading the state as a Text String  " << std::endl;
             bool worked = this->readMopStateFromFileAsText(initial);
+            //std::cout <<initial.c_str()<<std::endl;
+
             if (!worked) {
                 return NULL;
             }
@@ -209,7 +191,7 @@ public:
         }
         return result;
     }
-    /**
+    /*
      * read a single state from the mop file, cycling back to the start of the file
      * if the end is reached
      */
@@ -239,34 +221,34 @@ public:
      * 1: An integer declaring how many particles are in the state
      * 2: A set of MopItems in text form, each holding the data for a particle
      * Note: the trailing comma is required, as reading the elements back correctly requires it
-	 */
-         /**
+     */
+    /**
 
-    void writeState(Particle *localSet, int environmentSetSize) {
-        std::stringstream tmp;
-        MopItem mi;
+     void writeState(Particle *localSet, int environmentSetSize) {
+     std::stringstream tmp;
+     MopItem mi;
 
-        tmp << environmentSetSize;
-        for (int x(0); x<environmentSetSize; x++) {
-            tmp << "|";
-            mi = localSet[x].exportAsMopItem();
-            tmp << mi.id << ",";
-            tmp << mi.visualRepresentation << ",";
-            tmp << mi.red << ",";
-            tmp << mi.green << ",";
-            tmp << mi.blue << ",";
-            tmp << mi.x << ",";
-            tmp << mi.y << ",";
-            tmp << mi.z << ",";
-        }
-        std::string str = this->compress(tmp.str());
-        this->outFileStream.open(this->filename.c_str(),std::ios::app);
-        this->outFileStream << "@";
-		this->outFileStream << str;
-		this->outFileStream << "$";
-        this->outFileStream.close();
-    }
-	*/
+     tmp << environmentSetSize;
+     for (int x(0); x<environmentSetSize; x++) {
+     tmp << "|";
+     mi = localSet[x].exportAsMopItem();
+     tmp << mi.id << ",";
+     tmp << mi.visualRepresentation << ",";
+     tmp << mi.red << ",";
+     tmp << mi.green << ",";
+     tmp << mi.blue << ",";
+     tmp << mi.x << ",";
+     tmp << mi.y << ",";
+     tmp << mi.z << ",";
+     }
+     std::string str = this->compress(tmp.str());
+     this->outFileStream.open(this->filename.c_str(),std::ios::app);
+     this->outFileStream << "@";
+     this->outFileStream << str;
+     this->outFileStream << "$";
+     this->outFileStream.close();
+     }
+     */
 
     void writeState(Particle *localSet, int environmentSetSize) {
         std::stringstream tmp;

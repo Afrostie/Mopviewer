@@ -6,7 +6,6 @@
 class Fragment {
 private:
 
-    std::string string;
 
 public:
     Fragment() {
@@ -14,7 +13,7 @@ public:
 
     ~Fragment() {
     }
-
+    std::string string;
     std::string  str() {
         return this->string;
     }
@@ -26,51 +25,40 @@ public:
     int size() {
         return this->string.size();
     }
+    
+    /**
+     * fill this Fragment with the content of a standard string
+     */
+    void fill(std::string s) {
+        // this->string.clear();
+        this->string = s;
+        //std::cout<< tmp <<std::endl;
+        // std::cout<< test <<std::endl;
+    }
     /**
  * fill this Fragment with the content of a standard string up to count chars
  */
- std::string fill(std::string s,int count) {
-    int i;
-    std::string tmp;
-    for (i=0;i<count;i++) {
-        tmp.push_back(s.at(i));
+    int fill(Fragment s,int start, char c) {
+    int i= start;
+        this->string.clear();
+        char ch = s.string.at(i);
+        
+    while(ch!=c) {
+        this->string.push_back(ch);
+        //std::cout<< ch <<std::endl;
+        i++;
+        ch = s.string.at(i);
+        //std::cout<< ch <<std::endl;
     }
-    deleteTill(count);
-    deleteTill(1);
-
-   std::cout<< tmp <<std::endl;
-   // std::cout<< test <<std::endl;
-     return tmp;
+     return i;
 }
 
 
-    std::size_t coumtUpTo (std::string s) {
-        return this->string.find(s.at(0));
-    }
 
-    void deleteTill(std::size_t loc) {
-        this->string.erase(0,loc);
-    }
-
-    /**
-    * fill this Fragment with the content of a standard string
-    */
-    void fill(std::string input) {
-        this->string=input;
-
-    }
-    /**
-    * fill this Fragment with the content of another Fragment.
-    */
-    void fill (Fragment &input) {
-        if(this!=&input) {
-            this->string = input.string;
-        }
-    }
 
 
     int toInt() {
-      std::cout << this->string << std::endl;
+      //std::cout << this->string << std::endl;
         return atoi(this->string.c_str());
 
     }

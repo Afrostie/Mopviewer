@@ -3,7 +3,7 @@
 #include "mopViewer.h"
 #include <string>
 #include <cstring>
-
+#include "mopfile/MopFile.h"
 
 int main() {
   mopViewer mopViewers;

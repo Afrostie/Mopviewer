@@ -7,7 +7,7 @@ mopViewer::~mopViewer() {
 
 void mopViewer::showStats() {
   mopfile = new MopFile();
-  mopfile->setFilename("Testing_Project.mop");
+  mopfile->setFilename("Testing_Project.mop");ma
   mopfile->openMopfileReader();
   mopstate = new MopState();
   mopstate = mopfile->readCyclingState();
