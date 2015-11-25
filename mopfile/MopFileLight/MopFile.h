@@ -89,13 +89,13 @@ private:
             pos++;
             pos = thing.fill(source,pos,',');
             mi.id = thing.toInt();
-            std::cout << "> particle id: " << mi.id << std::endl;
+            //std::cout << "> particle id: " << mi.id << std::endl;
 
             mi.id = thing.toInt();
             pos++;
             pos = thing.fill(source,pos,',');
             mi.visualRepresentation = thing.toInt();
-            std::cout << ">  mi.visualRepresentation " <<  mi.visualRepresentation << std::endl;
+            //std::cout << ">  mi.visualRepresentation " <<  mi.visualRepresentation << std::endl;
 
             pos++;
             pos = thing.fill(source,pos,',');
@@ -109,7 +109,7 @@ private:
             pos++;
             pos = thing.fill(source,pos,',');
             mi.x  = thing.toFloat();
-            std::cout << "> x: " << mi.x << std::endl;
+            //std::cout << "> x: " << mi.x << std::endl;
             //std::cout << "> extracted string " << thing.str() << std::endl;
             //std::cout << "X value: " << mi.x << std::endl;
             pos++;
@@ -120,7 +120,7 @@ private:
             mi.z  = thing.toFloat();
             ms->addMopItem(mi);
         }
-        std::cout << "> converted the String to a MopState" << std::endl;
+        //std::cout << "> converted the String to a MopState" << std::endl;
         return ms;
     }
 

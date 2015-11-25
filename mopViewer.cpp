@@ -45,6 +45,16 @@ void mopViewer::showStats() {
   getmaxyx(window1, x2, y2);
   getmaxyx(window2, x3, y3);
 
+  //Get the output for sizes of windows, helps me
+  std::cout << "Max X: " << x << std::endl;
+  std::cout << "Max Y: " << y << std::endl;
+
+  std::cout << "Max X1: " << x2 << std::endl;
+  std::cout << "Max Y1: " << y2 << std::endl;
+
+  std::cout << "Max X2: " << x3 << std::endl;
+  std::cout << "Max Y2: " << y3 << std::endl;
+
   refresh();
   wrefresh(window1);
   wrefresh(window2);
