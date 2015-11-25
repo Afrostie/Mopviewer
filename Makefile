@@ -4,7 +4,7 @@ CC = g++
 # compiler flags:
 #  -g    adds debugging information to the executable file
 #  -Wall turns on most, but not all, compiler warnings
-CFLAGS  = -lncurses -std=c++11 -lGLEW -lglfw3 -lGL -lX11 -lXi -lXrandr -lXxf86vm -lXinerama -lXcursor -lrt -lm -lpthread -ldl -lz -D MOPFILELIGHT
+CFLAGS  = -lncurses -std=c++11 -lX11 -lXi -lXrandr -lXxf86vm -lXinerama -lXcursor -lrt -lm -lpthread -ldl -lz -D MOPFILELIGHT
 
 
 # the build target executable:
@@ -13,7 +13,7 @@ TARGET = main
 all: $(TARGET)
 
 $(TARGET): $(TARGET).cpp
-	$(CC) -o Mopviewer $(TARGET).cpp mopViewer.cpp window.cpp $(CFLAGS)
+	$(CC) -o Mopviewer $(TARGET).cpp mopViewer.cpp $(CFLAGS)
 
 clean:
 	$(RM) $(TARGET).o mopfile/MopFileLight/MopItem.h.gch mopfile/MopFileLight/MopFile.h.gch particle/normal/Particle.h.gch
