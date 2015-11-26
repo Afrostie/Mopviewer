@@ -83,7 +83,7 @@ private:
         int pos2(0);
         pos = worker.fill(source,pos,'|');
         numParticles = worker.toInt();
-        std::cout << "> Particle count " << numParticles << std::endl;
+        //std::cout << "> Particle count " << numParticles << std::endl;
         for (int x(0);x<numParticles;x++) {
             MopItem mi;
             pos++;
