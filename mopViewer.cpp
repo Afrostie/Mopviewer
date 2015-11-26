@@ -196,6 +196,11 @@ void mopViewer::showStats() {
         currentitem++;
       }
     }
+    //TODO: Need to either create a function to clear and redraw or find a different method of clearing
+    //Redraw boxes around windows as clear deletes them
+    nCurse.drawBox(window1, ACS_VLINE, ACS_HLINE);
+    nCurse.drawBox(window2, ACS_VLINE, ACS_HLINE);
+
     refresh();
     wrefresh(window1);
     wrefresh(window2);
@@ -216,6 +221,7 @@ TODO: Create helper functions. These include:
     Print information
     Clear then refresh all screens
     Draw box for window
+    Properly comment/organise the code
 
 */
 
