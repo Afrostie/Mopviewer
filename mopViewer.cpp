@@ -178,7 +178,7 @@ void mopViewer::showStats() {
           currentitem++;
 
       }
-      else if (currentitem <= mopstate->getItemCount()){
+      else if (currentitem <= mopstate->getItemCount() && (currentitem <= mopstate->getItemCount())){
         mvwprintw(window1, currentRow,1, "Particle Number: %d", currentitem);
         currentRow++;
         mvwprintw(window1, currentRow,1, "Particle X: %f", mopstate->getMopItem(currentitem).x);
@@ -212,6 +212,7 @@ void mopViewer::showStats() {
   wrefresh(window2);
   //getch();
   endwin();
+  mopViewer::selectGame();
 }
 
 
