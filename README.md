@@ -12,6 +12,7 @@ New Version of Mopviewer for my 3rd Year Project
 
 
 #TODO:
-1. Up/Down arrows to cycle through states
-2. Start working on the actual Mopviewer
-3. Adapt for use with large mopfile, if the reader gets updated?
+1. Up arrow to cycle through states
+2. Down arrow to reset to original state
+3. Start working on the actual Mopviewer
+4. Adapt for use with large mopfile, if the reader gets updated?

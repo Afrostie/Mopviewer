@@ -252,6 +252,54 @@ void mopViewer::showStats() {
   wrefresh(window2);
   break;
   case KEY_DOWN:
+  mopfile = new MopFile();
+  mopfile->setFilename("Testing_Project.mop");
+  mopfile->openMopfileReader();
+  mopstate = new MopState();
+  mopstate = mopfile->readCyclingState();
+  currentitem = currentitem - (maxitems*2);
+  currentRow = 1;
+  currentRow2 = 1;
+  for (int i = 0; i < (2*maxitems); i++) {
+    if((currentRow >= (8*maxitems)) && (currentitem <= mopstate->getItemCount())){
+        mvwprintw(window2, currentRow2,1, "Particle Number: %d", currentitem);
+        currentRow2++;
+        mvwprintw(window2, currentRow2,1, "Particle X: %f", mopstate->getMopItem(currentitem).x);
+        currentRow2++;
+        mvwprintw(window2, currentRow2,1, "Particle Y: %f", mopstate->getMopItem(currentitem).y);
+        currentRow2++;
+        mvwprintw(window2, currentRow2,1, "Particle Z: %f", mopstate->getMopItem(currentitem).z);
+        currentRow2++;
+        mvwprintw(window2, currentRow2,1, "Particle Red: %d", mopstate->getMopItem(currentitem).red);
+        currentRow2++;
+        mvwprintw(window2, currentRow2,1, "Particle Green: %d", mopstate->getMopItem(currentitem).green);
+        currentRow2++;
+        mvwprintw(window2, currentRow2,1, "Particle Blue: %d", mopstate->getMopItem(currentitem).blue);
+        currentRow2+=2;
+        currentitem++;
+
+    }
+    else if (currentitem <= mopstate->getItemCount()){
+      mvwprintw(window1, currentRow,1, "Particle Number: %d", currentitem);
+      currentRow++;
+      mvwprintw(window1, currentRow,1, "Particle X: %f", mopstate->getMopItem(currentitem).x);
+      currentRow++;
+      mvwprintw(window1, currentRow,1, "Particle Y: %f", mopstate->getMopItem(currentitem).y);
+      currentRow++;
+      mvwprintw(window1, currentRow,1, "Particle Z: %f", mopstate->getMopItem(currentitem).z);
+      currentRow++;
+      mvwprintw(window1, currentRow,1, "Particle Red: %d", mopstate->getMopItem(currentitem).red);
+      currentRow++;
+      mvwprintw(window1, currentRow,1, "Particle Gree: %d", mopstate->getMopItem(currentitem).green);
+      currentRow++;
+      mvwprintw(window1, currentRow,1, "Particle Blue: %d", mopstate->getMopItem(currentitem).blue);
+      currentRow+=2;
+      currentitem++;
+    }
+  }
+  refresh();
+  wrefresh(window1);
+  wrefresh(window2);
         break;
     }
   }
