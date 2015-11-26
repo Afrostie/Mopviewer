@@ -45,7 +45,7 @@ void mopViewer::showStats() {
   getmaxyx(window1, x2, y2);
   getmaxyx(window2, x3, y3);
 
-  //Get the output for sizes of windows, helps me
+  //Get the output for sizes of windows, helps me understand the sizing
   std::cout << "Max X: " << x << std::endl;
   std::cout << "Max Y: " << y << std::endl;
 
@@ -55,16 +55,20 @@ void mopViewer::showStats() {
   std::cout << "Max X2: " << x3 << std::endl;
   std::cout << "Max Y2: " << y3 << std::endl;
 
+  //Calculate the total amount of items per column, relative to screen size
+  //Output the size for debugging etc
   float maxitems = (x2-2)/8;
-  float maxremainder = ((x2-2)%8);
   std::cout << "Max amount of items per column: " << maxitems << std::endl;
-  std::cout << "Max amount of remainders per column: " << maxremainder << std::endl;
 
  //Display the information to screen
+ //TODO: Plan to move all the print lines to a single function, eventually
+ //Setup a couple of variables to keep track of the loaded items and rows
   int currentRow = 1;
   int currentRow2 = 1;
   int currentitem = 0;
+  //Cycles through and prints each item , maxitems*2 as it prints to both columns
   for (int i = 0; i < (2*maxitems); i++) {
+    //If the current row is greater than the the max amount of items, print to 2nd column
     if((currentRow >= (8*maxitems))){
         mvwprintw(window2, currentRow2,1, "Particle Number: %d", currentitem);
         currentRow2++;
@@ -83,6 +87,7 @@ void mopViewer::showStats() {
         currentitem++;
 
     }
+    //Else print to 1st column
     else{
       mvwprintw(window1, currentRow,1, "Particle Number: %d", currentitem);
       currentRow++;
@@ -101,11 +106,12 @@ void mopViewer::showStats() {
       currentitem++;
     }
   }
-
+  //Refresh all windows to update the display
   refresh();
   wrefresh(window1);
   wrefresh(window2);
-
+  //Pretty much copy and pasting the same chunk of code, small changes
+  //According to which button is pressed, really horrible/long atm
   int ch;
   while((ch = getch()) != GLFW_KEY_2)
 	{	switch(ch) {
@@ -153,11 +159,14 @@ void mopViewer::showStats() {
       wrefresh(window1);
       wrefresh(window2);
     break;
+
     case KEY_LEFT:
+    //Need to clear otherwise if the number is shorter than previous, ends will show
     wclear(window1);
     wclear(window2);
     currentRow = 1;
     currentRow2 = 1;
+    //When going back, reduce the currentitem to make sure right ones are showed
     currentitem = currentitem - ((maxitems*2)*2);
     for (int i = 0; i < (2*maxitems); i++) {
       if((currentRow >= (8*maxitems)) && (currentitem <= mopstate->getItemCount())){
@@ -205,6 +214,7 @@ void mopViewer::showStats() {
     wrefresh(window1);
     wrefresh(window2);
   break;
+
   case KEY_UP:
   mopstate = mopfile->readCyclingState();
   currentRow = 1;
@@ -252,6 +262,8 @@ void mopViewer::showStats() {
   wrefresh(window2);
   break;
   case KEY_DOWN:
+  //TODO: Find a better way to reset the file
+  //Reopen the mopfile to start from begining
   mopfile = new MopFile();
   mopfile->setFilename("Testing_Project.mop");
   mopfile->openMopfileReader();
@@ -303,7 +315,7 @@ void mopViewer::showStats() {
         break;
     }
   }
-
+  //When finished end the session and return to the main menu screen
   endwin();
   mopViewer::selectGame();
 }
@@ -316,7 +328,6 @@ TODO: Create helper functions. These include:
     Clear then refresh all screens
     Draw box for window
     Properly comment/organise the code
-
 */
 
 void mopViewer::selectGame() {
