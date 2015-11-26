@@ -11,15 +11,15 @@ void mopViewer::showStats() {
   mopfile->openMopfileReader();
   mopstate = new MopState();
   mopstate = mopfile->readCyclingState();
-  mopstate = mopfile->readCyclingState();
-  std::cout << "Item Count: " << mopstate->getItemCount() << std::endl;
+/*  std::cout << "Item Count: " << mopstate->getItemCount() << std::endl;
   for (int i = 0; i < mopstate->getItemCount(); i++) {
     std::cout << "Particle "<< i << " X value: " << mopstate->getMopItem(i).x << std::endl;
     std::cout << "Particle "<< i << " Y value: " << mopstate->getMopItem(i).y << std::endl;
     std::cout << "Particle "<< i << " Z value: " << mopstate->getMopItem(i).z << std::endl;
-  }
+  }*/
   int x, y, x2, y2, x3, y3;
   nCurses nCurse;
+  //TODO: Switch to a single init function
   // nCurse.start(true, true, true, false);sd
   initscr();
   raw();
@@ -196,7 +196,7 @@ void mopViewer::showStats() {
         currentitem++;
       }
     }
-    //TODO: Need to either create a function to clear and redraw or find a different method of clearing
+    //TODO: Need to either create a function tovredraw and refresh or find a different method of clearing
     //Redraw boxes around windows as clear deletes them
     nCurse.drawBox(window1, ACS_VLINE, ACS_HLINE);
     nCurse.drawBox(window2, ACS_VLINE, ACS_HLINE);
@@ -205,12 +205,14 @@ void mopViewer::showStats() {
     wrefresh(window1);
     wrefresh(window2);
   break;
+  case KEY_UP:
+  mopstate = mopfile->readCyclingState();
+        break;
+  case KEY_DOWN:
+        break;
     }
   }
-  refresh();
-  wrefresh(window1);
-  wrefresh(window2);
-  //getch();
+
   endwin();
   mopViewer::selectGame();
 }
@@ -227,6 +229,7 @@ TODO: Create helper functions. These include:
 */
 
 void mopViewer::selectGame() {
+  clear();
   int mx = 0, my = 0, mx2 = 0, my2 = 0;
   char welcome[] = "Enter 1 to View Stats and 2 to Open MopViewer: ";
   char exitMessage[] = "Enter anything else to exit";
