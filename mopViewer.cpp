@@ -37,16 +37,16 @@ void mopViewer::showStats() {
   mopfile->openMopfileReader();
   mopstate = new MopState();
   mopstate = mopfile->readCyclingState();
-/*  std::cout << "Item Count: " << mopstate->getItemCount() << std::endl;
+  std::cout << "Item Count: " << mopstate->getItemCount() << std::endl;
   for (int i = 0; i < mopstate->getItemCount(); i++) {
     std::cout << "Particle "<< i << " X value: " << mopstate->getMopItem(i).x << std::endl;
     std::cout << "Particle "<< i << " Y value: " << mopstate->getMopItem(i).y << std::endl;
     std::cout << "Particle "<< i << " Z value: " << mopstate->getMopItem(i).z << std::endl;
-  }*/
+  }
   int x, y, x2, y2, x3, y3;
   nCurses nCurse;
   //TODO: Switch to a single init function
-  // nCurse.start(true, true, true, false);sd
+  // nCurse.start(true, true, true, false);
   initscr();
   raw();
   nCurse.startColour();
@@ -86,8 +86,7 @@ void mopViewer::showStats() {
   float maxitems = (x2-2)/8;
   std::cout << "Max amount of items per column: " << maxitems << std::endl;
 
- //Display the information to screen
- //TODO: Plan to move all the print lines to a single function, eventually
+ //Display the information to
  //Setup a couple of variables to keep track of the loaded items and rows
   int currentRow = 1;
   int currentRow2 = 1;
@@ -100,7 +99,7 @@ void mopViewer::showStats() {
       currentitem++;
     }
     //Else print to 1st column
-    else{
+    else if(currentitem >= 0){
       currentRow = mopViewer::printOutput(mopstate, currentRow,currentitem, window1);
       currentitem++;
     }
@@ -143,11 +142,17 @@ void mopViewer::showStats() {
         currentRow2 = mopViewer::printOutput(mopstate, currentRow2,currentitem, window2);
           currentitem++;
       }
-      else if (currentitem <= mopstate->getItemCount() && (currentitem <= mopstate->getItemCount())){
+      else if (currentitem <= mopstate->getItemCount() && (currentitem <= mopstate->getItemCount()) && currentitem >= 0){
+        currentRow = mopViewer::printOutput(mopstate, currentRow,currentitem, window1);
+        currentitem++;
+      }
+      else{
+        currentitem = 0;
         currentRow = mopViewer::printOutput(mopstate, currentRow,currentitem, window1);
         currentitem++;
       }
     }
+
     //TODO: Need to either create a function tovredraw and refresh or find a different method of clearing
     //Redraw boxes around windows as clear deletes them
     nCurse.drawBox(window1, ACS_VLINE, ACS_HLINE);
@@ -209,7 +214,6 @@ void mopViewer::showStats() {
 
 /*
 TODO: Create helper functions. These include:
-    Print information
     Clear then refresh all screens
     Draw box for window
     Properly comment/organise the code
