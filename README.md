@@ -1,5 +1,6 @@
 # Mopviewer
-New Version of Mopviewer for my 3rd Year Project
+A new version of the Mopviewer for use with moody: https://gitlab.com/carey.pridgeon/moody
+It is going to use an nCurses screen for the main interface with OpenGL for main viewer
 
 ##Current Features:
 1. Enter 1 to look at Particle information
