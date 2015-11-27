@@ -5,6 +5,32 @@ mopViewer::mopViewer() {
 mopViewer::~mopViewer() {
 }
 
+void mopViewer::refreshAll(WINDOW* window1, WINDOW* window2){
+  refresh();
+  wrefresh(window1);
+  wrefresh(window2);
+}
+
+int mopViewer::printOutput(MopState * mopstate, int currentRow, int currentitem, WINDOW* window){
+  mvwprintw(window, currentRow,1, "Particle Number: %d", currentitem);
+  currentRow++;
+  mvwprintw(window, currentRow,1, "Particle X: %f", mopstate->getMopItem(currentitem).x);
+  currentRow++;
+  mvwprintw(window, currentRow,1, "Particle Y: %f", mopstate->getMopItem(currentitem).y);
+  currentRow++;
+  mvwprintw(window, currentRow,1, "Particle Z: %f", mopstate->getMopItem(currentitem).z);
+  currentRow++;
+  mvwprintw(window, currentRow,1, "Particle Red: %d", mopstate->getMopItem(currentitem).red);
+  currentRow++;
+  mvwprintw(window, currentRow,1, "Particle Green: %d", mopstate->getMopItem(currentitem).green);
+  currentRow++;
+  mvwprintw(window, currentRow,1, "Particle Blue: %d", mopstate->getMopItem(currentitem).blue);
+  currentRow+=2;;
+  return currentRow;
+}
+
+
+
 void mopViewer::showStats() {
   mopfile = new MopFile();
   mopfile->setFilename("Testing_Project.mop");
@@ -70,46 +96,18 @@ void mopViewer::showStats() {
   for (int i = 0; i < (2*maxitems); i++) {
     //If the current row is greater than the the max amount of items, print to 2nd column
     if((currentRow >= (8*maxitems))){
-        mvwprintw(window2, currentRow2,1, "Particle Number: %d", currentitem);
-        currentRow2++;
-        mvwprintw(window2, currentRow2,1, "Particle X: %f", mopstate->getMopItem(currentitem).x);
-        currentRow2++;
-        mvwprintw(window2, currentRow2,1, "Particle Y: %f", mopstate->getMopItem(currentitem).y);
-        currentRow2++;
-        mvwprintw(window2, currentRow2,1, "Particle Z: %f", mopstate->getMopItem(currentitem).z);
-        currentRow2++;
-        mvwprintw(window2, currentRow2,1, "Particle Red: %d", mopstate->getMopItem(currentitem).red);
-        currentRow2++;
-        mvwprintw(window2, currentRow2,1, "Particle Green: %d", mopstate->getMopItem(currentitem).green);
-        currentRow2++;
-        mvwprintw(window2, currentRow2,1, "Particle Blue: %d", mopstate->getMopItem(currentitem).blue);
-        currentRow2+=2;
-        currentitem++;
-
+      currentRow2 = mopViewer::printOutput(mopstate, currentRow2,currentitem, window2);
+      currentitem++;
     }
     //Else print to 1st column
     else{
-      mvwprintw(window1, currentRow,1, "Particle Number: %d", currentitem);
-      currentRow++;
-      mvwprintw(window1, currentRow,1, "Particle X: %f", mopstate->getMopItem(currentitem).x);
-      currentRow++;
-      mvwprintw(window1, currentRow,1, "Particle Y: %f", mopstate->getMopItem(currentitem).y);
-      currentRow++;
-      mvwprintw(window1, currentRow,1, "Particle Z: %f", mopstate->getMopItem(currentitem).z);
-      currentRow++;
-      mvwprintw(window1, currentRow,1, "Particle Red: %d", mopstate->getMopItem(currentitem).red);
-      currentRow++;
-      mvwprintw(window1, currentRow,1, "Particle Green: %d", mopstate->getMopItem(currentitem).green);
-      currentRow++;
-      mvwprintw(window1, currentRow,1, "Particle Blue: %d", mopstate->getMopItem(currentitem).blue);
-      currentRow+=2;
+      currentRow = mopViewer::printOutput(mopstate, currentRow,currentitem, window1);
       currentitem++;
     }
   }
   //Refresh all windows to update the display
-  refresh();
-  wrefresh(window1);
-  wrefresh(window2);
+  mopViewer::refreshAll(window1, window2);
+
   //Pretty much copy and pasting the same chunk of code, small changes
   //According to which button is pressed, really horrible/long atm
   int ch;
@@ -120,44 +118,16 @@ void mopViewer::showStats() {
       currentRow2 = 1;
       for (int i = 0; i < (2*maxitems); i++) {
         if((currentRow >= (8*maxitems)) && (currentitem <= mopstate->getItemCount())){
-            mvwprintw(window2, currentRow2,1, "Particle Number: %d", currentitem);
-            currentRow2++;
-            mvwprintw(window2, currentRow2,1, "Particle X: %f", mopstate->getMopItem(currentitem).x);
-            currentRow2++;
-            mvwprintw(window2, currentRow2,1, "Particle Y: %f", mopstate->getMopItem(currentitem).y);
-            currentRow2++;
-            mvwprintw(window2, currentRow2,1, "Particle Z: %f", mopstate->getMopItem(currentitem).z);
-            currentRow2++;
-            mvwprintw(window2, currentRow2,1, "Particle Red: %d", mopstate->getMopItem(currentitem).red);
-            currentRow2++;
-            mvwprintw(window2, currentRow2,1, "Particle Green: %d", mopstate->getMopItem(currentitem).green);
-            currentRow2++;
-            mvwprintw(window2, currentRow2,1, "Particle Blue: %d", mopstate->getMopItem(currentitem).blue);
-            currentRow2+=2;
-            currentitem++;
+          currentRow2 = mopViewer::printOutput(mopstate, currentRow2,currentitem, window2);
+          currentitem++;
 
         }
         else if (currentitem <= mopstate->getItemCount()){
-          mvwprintw(window1, currentRow,1, "Particle Number: %d", currentitem);
-          currentRow++;
-          mvwprintw(window1, currentRow,1, "Particle X: %f", mopstate->getMopItem(currentitem).x);
-          currentRow++;
-          mvwprintw(window1, currentRow,1, "Particle Y: %f", mopstate->getMopItem(currentitem).y);
-          currentRow++;
-          mvwprintw(window1, currentRow,1, "Particle Z: %f", mopstate->getMopItem(currentitem).z);
-          currentRow++;
-          mvwprintw(window1, currentRow,1, "Particle Red: %d", mopstate->getMopItem(currentitem).red);
-          currentRow++;
-          mvwprintw(window1, currentRow,1, "Particle Gree: %d", mopstate->getMopItem(currentitem).green);
-          currentRow++;
-          mvwprintw(window1, currentRow,1, "Particle Blue: %d", mopstate->getMopItem(currentitem).blue);
-          currentRow+=2;
+          currentRow = mopViewer::printOutput(mopstate, currentRow,currentitem, window1);
           currentitem++;
         }
       }
-      refresh();
-      wrefresh(window1);
-      wrefresh(window2);
+      mopViewer::refreshAll(window1, window2);
     break;
 
     case KEY_LEFT:
@@ -170,38 +140,11 @@ void mopViewer::showStats() {
     currentitem = currentitem - ((maxitems*2)*2);
     for (int i = 0; i < (2*maxitems); i++) {
       if((currentRow >= (8*maxitems)) && (currentitem <= mopstate->getItemCount())){
-          mvwprintw(window2, currentRow2,1, "Particle Number: %d", currentitem);
-          currentRow2++;
-          mvwprintw(window2, currentRow2,1, "Particle X: %f", mopstate->getMopItem(currentitem).x);
-          currentRow2++;
-          mvwprintw(window2, currentRow2,1, "Particle Y: %f", mopstate->getMopItem(currentitem).y);
-          currentRow2++;
-          mvwprintw(window2, currentRow2,1, "Particle Z: %f", mopstate->getMopItem(currentitem).z);
-          currentRow2++;
-          mvwprintw(window2, currentRow2,1, "Particle Red: %d", mopstate->getMopItem(currentitem).red);
-          currentRow2++;
-          mvwprintw(window2, currentRow2,1, "Particle Green: %d", mopstate->getMopItem(currentitem).green);
-          currentRow2++;
-          mvwprintw(window2, currentRow2,1, "Particle Blue: %d", mopstate->getMopItem(currentitem).blue);
-          currentRow2+=2;
+        currentRow2 = mopViewer::printOutput(mopstate, currentRow2,currentitem, window2);
           currentitem++;
-
       }
       else if (currentitem <= mopstate->getItemCount() && (currentitem <= mopstate->getItemCount())){
-        mvwprintw(window1, currentRow,1, "Particle Number: %d", currentitem);
-        currentRow++;
-        mvwprintw(window1, currentRow,1, "Particle X: %f", mopstate->getMopItem(currentitem).x);
-        currentRow++;
-        mvwprintw(window1, currentRow,1, "Particle Y: %f", mopstate->getMopItem(currentitem).y);
-        currentRow++;
-        mvwprintw(window1, currentRow,1, "Particle Z: %f", mopstate->getMopItem(currentitem).z);
-        currentRow++;
-        mvwprintw(window1, currentRow,1, "Particle Red: %d", mopstate->getMopItem(currentitem).red);
-        currentRow++;
-        mvwprintw(window1, currentRow,1, "Particle Gree: %d", mopstate->getMopItem(currentitem).green);
-        currentRow++;
-        mvwprintw(window1, currentRow,1, "Particle Blue: %d", mopstate->getMopItem(currentitem).blue);
-        currentRow+=2;
+        currentRow = mopViewer::printOutput(mopstate, currentRow,currentitem, window1);
         currentitem++;
       }
     }
@@ -210,9 +153,7 @@ void mopViewer::showStats() {
     nCurse.drawBox(window1, ACS_VLINE, ACS_HLINE);
     nCurse.drawBox(window2, ACS_VLINE, ACS_HLINE);
 
-    refresh();
-    wrefresh(window1);
-    wrefresh(window2);
+    mopViewer::refreshAll(window1, window2);
   break;
 
   case KEY_UP:
@@ -222,44 +163,16 @@ void mopViewer::showStats() {
   currentitem = currentitem - (maxitems*2);
   for (int i = 0; i < (2*maxitems); i++) {
     if((currentRow >= (8*maxitems)) && (currentitem <= mopstate->getItemCount())){
-        mvwprintw(window2, currentRow2,1, "Particle Number: %d", currentitem);
-        currentRow2++;
-        mvwprintw(window2, currentRow2,1, "Particle X: %f", mopstate->getMopItem(currentitem).x);
-        currentRow2++;
-        mvwprintw(window2, currentRow2,1, "Particle Y: %f", mopstate->getMopItem(currentitem).y);
-        currentRow2++;
-        mvwprintw(window2, currentRow2,1, "Particle Z: %f", mopstate->getMopItem(currentitem).z);
-        currentRow2++;
-        mvwprintw(window2, currentRow2,1, "Particle Red: %d", mopstate->getMopItem(currentitem).red);
-        currentRow2++;
-        mvwprintw(window2, currentRow2,1, "Particle Green: %d", mopstate->getMopItem(currentitem).green);
-        currentRow2++;
-        mvwprintw(window2, currentRow2,1, "Particle Blue: %d", mopstate->getMopItem(currentitem).blue);
-        currentRow2+=2;
-        currentitem++;
+      currentRow2 = mopViewer::printOutput(mopstate, currentRow2,currentitem, window2);
+      currentitem++;
 
     }
     else if (currentitem <= mopstate->getItemCount()){
-      mvwprintw(window1, currentRow,1, "Particle Number: %d", currentitem);
-      currentRow++;
-      mvwprintw(window1, currentRow,1, "Particle X: %f", mopstate->getMopItem(currentitem).x);
-      currentRow++;
-      mvwprintw(window1, currentRow,1, "Particle Y: %f", mopstate->getMopItem(currentitem).y);
-      currentRow++;
-      mvwprintw(window1, currentRow,1, "Particle Z: %f", mopstate->getMopItem(currentitem).z);
-      currentRow++;
-      mvwprintw(window1, currentRow,1, "Particle Red: %d", mopstate->getMopItem(currentitem).red);
-      currentRow++;
-      mvwprintw(window1, currentRow,1, "Particle Gree: %d", mopstate->getMopItem(currentitem).green);
-      currentRow++;
-      mvwprintw(window1, currentRow,1, "Particle Blue: %d", mopstate->getMopItem(currentitem).blue);
-      currentRow+=2;
+      currentRow = mopViewer::printOutput(mopstate, currentRow,currentitem, window1);
       currentitem++;
     }
   }
-  refresh();
-  wrefresh(window1);
-  wrefresh(window2);
+  mopViewer::refreshAll(window1, window2);
   break;
   case KEY_DOWN:
   //TODO: Find a better way to reset the file
@@ -274,44 +187,16 @@ void mopViewer::showStats() {
   currentRow2 = 1;
   for (int i = 0; i < (2*maxitems); i++) {
     if((currentRow >= (8*maxitems)) && (currentitem <= mopstate->getItemCount())){
-        mvwprintw(window2, currentRow2,1, "Particle Number: %d", currentitem);
-        currentRow2++;
-        mvwprintw(window2, currentRow2,1, "Particle X: %f", mopstate->getMopItem(currentitem).x);
-        currentRow2++;
-        mvwprintw(window2, currentRow2,1, "Particle Y: %f", mopstate->getMopItem(currentitem).y);
-        currentRow2++;
-        mvwprintw(window2, currentRow2,1, "Particle Z: %f", mopstate->getMopItem(currentitem).z);
-        currentRow2++;
-        mvwprintw(window2, currentRow2,1, "Particle Red: %d", mopstate->getMopItem(currentitem).red);
-        currentRow2++;
-        mvwprintw(window2, currentRow2,1, "Particle Green: %d", mopstate->getMopItem(currentitem).green);
-        currentRow2++;
-        mvwprintw(window2, currentRow2,1, "Particle Blue: %d", mopstate->getMopItem(currentitem).blue);
-        currentRow2+=2;
-        currentitem++;
+      currentRow2 = mopViewer::printOutput(mopstate, currentRow2,currentitem, window2);
+      currentitem++;
 
     }
     else if (currentitem <= mopstate->getItemCount()){
-      mvwprintw(window1, currentRow,1, "Particle Number: %d", currentitem);
-      currentRow++;
-      mvwprintw(window1, currentRow,1, "Particle X: %f", mopstate->getMopItem(currentitem).x);
-      currentRow++;
-      mvwprintw(window1, currentRow,1, "Particle Y: %f", mopstate->getMopItem(currentitem).y);
-      currentRow++;
-      mvwprintw(window1, currentRow,1, "Particle Z: %f", mopstate->getMopItem(currentitem).z);
-      currentRow++;
-      mvwprintw(window1, currentRow,1, "Particle Red: %d", mopstate->getMopItem(currentitem).red);
-      currentRow++;
-      mvwprintw(window1, currentRow,1, "Particle Gree: %d", mopstate->getMopItem(currentitem).green);
-      currentRow++;
-      mvwprintw(window1, currentRow,1, "Particle Blue: %d", mopstate->getMopItem(currentitem).blue);
-      currentRow+=2;
+      currentRow = mopViewer::printOutput(mopstate, currentRow,currentitem, window1);
       currentitem++;
     }
   }
-  refresh();
-  wrefresh(window1);
-  wrefresh(window2);
+    mopViewer::refreshAll(window1, window2);
         break;
     }
   }

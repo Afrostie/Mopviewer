@@ -19,9 +19,9 @@ class mopViewer {
   void calculator();
   void showStats();
   void selectGame();
-  void refreshAll();
+  void refreshAll(WINDOW * window1, WINDOW * window2);
   void redrawBox();
-  void printOutput();
+  int printOutput(MopState * mopstate, int currentrow, int currentitem, WINDOW* window);
   MopFile * mopfile;
   MopState * mopstate;
 };
