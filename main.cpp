@@ -6,7 +6,7 @@
 
 
 int main() {
-  mopViewer mopViewers;
-  mopViewers.selectGame();
-  return 0;
+        mopViewer mopViewers;
+        mopViewers.selectGame();
+        return 0;
 }
