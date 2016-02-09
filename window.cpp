@@ -66,12 +66,12 @@ void testWindow::init ( void )
 		0, 1, 3, // First Triangle
 		1, 2, 3 // Second Triangle
 	};
-
+int skip = 3;
   mopfile = new MopFile();
-  mopfile->setFilename("10000.mop");
+  mopfile->setFilename("Testing_Project.mop");
   mopfile->openMopfileReader();
   mopstate = new MopState();
-  mopstate = mopfile->readCyclingState();
+  mopstate = mopfile->readCyclingState(skip);
   std::cout << "Item Count: " << mopstate->getItemCount() << std::endl;
 
 
@@ -167,7 +167,7 @@ void testWindow::init ( void )
 	//Start the main game loop,
 
 while(!glfwWindowShouldClose(window)) {
-mopstate = mopfile->readCyclingState();
+mopstate = mopfile->readCyclingState(skip);
   GLfloat currentFrame = glfwGetTime();
   deltaTime = currentFrame - lastFrame;
   lastFrame = currentFrame;

@@ -47,28 +47,150 @@ private:
             return false;
         }
     }
+    bool consumeCharPeek(char &ch) {
+        if (!this->inFileStream.eof()) {
+            ch = this->inFileStream.peek();
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    bool consumeCharIgnore(char &ch, int length) {
+        if (!this->inFileStream.eof()) {
+            this->inFileStream.ignore(length, '$');
+            return true;
+        } else {
+            return false;
+        }
+    }
 
     /**
      * read a MopState from the mop file and store it in a fragment
      * uses a std::string as an intermediate structure.
      *
      */
-    bool readMopStateFromFileAsText(Fragment &input) {
-        std::string tmp;
-        char ch;
-        bool result = false;
-        do {
-            result = this->consumeChar(ch);
-            if (!result) return false;
-            if(ch=='[') {
-                this->error = 1;
-                return false;
+      bool readMopStateFromFileAsText(Fragment &input, int skip) {
+           std::string tmp;
+           std::string tmp2;
+           char ch;
+           bool result = false;
+           int count = 0;
+           int particleLength;
+          // while(ch != '|'){
+             result = this->consumeChar(ch);
+             std::cout << "Current Result is: " << ch << std::endl;
+             tmp.push_back(ch);
+             result = this->consumeChar(ch);
+             std::cout << "Current Result is: " << ch << std::endl;
+             tmp.push_back(ch);
+             //result = this->consumeChar(ch);
+        //   }
+           //std::cout << "Current Result is: " << ch << std::endl;
+          // result = this->inFileStream.peek();
+          // std::cout << "Next Result is: " << ch << std::endl;
+
+
+           do {
+               result = this->consumeChar(ch);
+
+               if (!result) return false;
+               if(ch=='[') {
+                   this->error = 1;
+                   return false;
+               }
+               else if(ch == '|'){
+                if(count < skip){
+
+                 tmp2.clear();
+                  //this->consumeChar(ch);
+                  this->consumeChar(ch);
+                  std::cout << "Char 1: " << ch << std::endl;
+                  tmp2.push_back(ch);
+                  this->consumeChar(ch);
+                  tmp2.push_back(ch);
+                  std::cout << "Char 2: " << ch << std::endl;
+                particleLength = std::stoi(tmp2.c_str());
+                particleLength++;
+                particleLength++;
+                std::cout << "Particle Length: " << particleLength << std::endl;
+                // particleLength = getMopItemLength();
+
+                result = this->consumeCharIgnore(ch, particleLength);
+                count++;
+              }
+              else{
+                //tmp.push_back(ch);
+                 tmp2.clear();
+                this->consumeChar(ch);
+                std::cout << "Char 1: " << ch << std::endl;
+                tmp2.push_back(ch);
+                this->consumeChar(ch);
+                tmp2.push_back(ch);
+                std::cout << "Char 2: " << ch << std::endl;
+              particleLength = std::stoi(tmp2.c_str());
+              particleLength++;
+              particleLength++;
+              std::cout << "Particle Length: " << particleLength << std::endl;
+              for(int i = 0; i < particleLength; i++){
+                result = this->consumeChar(ch);
+                tmp.push_back(ch);
+              }
+
+                count = 0;
+              }
+              //count = 0;
             }
-            tmp.push_back(ch);
-        } while (ch!='$');
-        input.fill(tmp);
-        return true;
+            else
+              tmp.push_back(ch);
+
+
+
+
+
+
+           } while (ch!='$');
+           for(int i = 0; i < tmp.length(); i++){
+             std::cout << tmp.at(i);
+           }
+           input.fill(tmp);
+           std::cout << "> Finished Reading State" << std::endl;
+           return true;
+        }
+
+
+std::string loadSingleMopItem(int len) {
+      std::string tmp;
+      char ch;
+      bool result = false;
+      int i;
+      result = this->consumeChar(ch); // will be '|'
+      for (i=0;i<len;i++){
+        result = this->consumeChar(ch);
+	tmp.push_back(ch);
+      }
+     return tmp;
     }
+
+
+    int getMopItemLength() {
+      std::string tmp;
+      char ch;
+      int len;
+      int i;
+      bool result = false;
+      for(i = 0; i < 3; i++){
+         result = this->consumeChar(ch);
+	if(ch=='|') {
+         //skip
+        } else {
+	tmp.push_back(ch);
+        }
+      }
+      len = atoi(tmp.c_str());
+    return len;
+    }
+
 
     /**
      * build a MopState from a fragment
@@ -80,7 +202,6 @@ private:
         Fragment thing;
         int numParticles;
         int pos(0);
-        int pos2(0);
         pos = worker.fill(source,pos,'|');
         numParticles = worker.toInt();
         //std::cout << "> Particle count " << numParticles << std::endl;
@@ -89,7 +210,7 @@ private:
             pos++;
             pos = thing.fill(source,pos,',');
             mi.id = thing.toInt();
-            //std::cout << "> particle id: " << mi.id << std::endl;
+          //  std::cout << "> particle id: " << mi.id << std::endl;
 
             mi.id = thing.toInt();
             pos++;
@@ -110,6 +231,9 @@ private:
             pos = thing.fill(source,pos,',');
             mi.x  = thing.toFloat();
             //std::cout << "> x: " << mi.x << std::endl;
+            //if(x==2) {
+            //exit(0);
+          //  }
             //std::cout << "> extracted string " << thing.str() << std::endl;
             //std::cout << "X value: " << mi.x << std::endl;
             pos++;
@@ -120,7 +244,7 @@ private:
             mi.z  = thing.toFloat();
             ms->addMopItem(mi);
         }
-        //std::cout << "> converted the String to a MopState" << std::endl;
+        std::cout << "> converted the String to a MopState" << std::endl;
         return ms;
     }
 
@@ -160,14 +284,14 @@ public:
     /**
      * read a single state from a mopfile (mopfile must already be open)
      */
-    MopState * readState() {
+    MopState * readState(int skipCount) {
         MopState * result = new MopState();
         //int itemCount;
         try {
             // start by reading in the next state from the file as a whole string
             Fragment initial;
             //std::cerr <<" > Reading the state as a Text String  " << std::endl;
-            bool worked = this->readMopStateFromFileAsText(initial);
+            bool worked = this->readMopStateFromFileAsText(initial, skipCount);
             //std::cout <<initial.c_str()<<std::endl;
 
             if (!worked) {
@@ -191,16 +315,17 @@ public:
         }
         return result;
     }
+
     /*
      * read a single state from the mop file, cycling back to the start of the file
      * if the end is reached
      */
-    MopState * readCyclingState() {
+    MopState * readCyclingState(int skipCount) {
         // get the next state from the mopfile
-        MopState *incoming = this->readState();
+        MopState *incoming = this->readState(skipCount);
         if (incoming == NULL) {
             this->resetFile();
-            incoming = this->readState();
+            incoming = this->readState(skipCount);
         }
         return incoming;
     }
@@ -222,40 +347,13 @@ public:
      * 2: A set of MopItems in text form, each holding the data for a particle
      * Note: the trailing comma is required, as reading the elements back correctly requires it
      */
-    /**
-
-     void writeState(Particle *localSet, int environmentSetSize) {
-     std::stringstream tmp;
-     MopItem mi;
-
-     tmp << environmentSetSize;
-     for (int x(0); x<environmentSetSize; x++) {
-     tmp << "|";
-     mi = localSet[x].exportAsMopItem();
-     tmp << mi.id << ",";
-     tmp << mi.visualRepresentation << ",";
-     tmp << mi.red << ",";
-     tmp << mi.green << ",";
-     tmp << mi.blue << ",";
-     tmp << mi.x << ",";
-     tmp << mi.y << ",";
-     tmp << mi.z << ",";
-     }
-     std::string str = this->compress(tmp.str());
-     this->outFileStream.open(this->filename.c_str(),std::ios::app);
-     this->outFileStream << "@";
-     this->outFileStream << str;
-     this->outFileStream << "$";
-     this->outFileStream.close();
-     }
-     */
 
     void writeState(Particle *localSet, int environmentSetSize) {
         std::stringstream tmp;
+        std::stringstream write;
         MopItem mi;
-        tmp << environmentSetSize;
         for (int x(0);x<environmentSetSize;x++) {
-            tmp << "|";
+
             mi = localSet[x].exportAsMopItem();
             tmp << mi.id << ",";
             tmp << mi.visualRepresentation << ",";
@@ -264,11 +362,18 @@ public:
             tmp << mi.blue << ",";
             tmp << mi.x << ",";
             tmp << mi.y << ",";
-            tmp << mi.z << ",";;
+            tmp << mi.z << ",";
+            write<< environmentSetSize;
+
+            write << "|";
+	    write << tmp.str().length()+1;
+            write << "|";
+            write << tmp.str();
+            tmp.str("");
         }
 
-        tmp << "$";
-        std::string str = tmp.str();
+        write<< "$";
+        std::string str = write.str();
         this->outFileStream.open(this->filename.c_str(),std::ios::app);
         this->outFileStream << str;
         this->outFileStream.close();

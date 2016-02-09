@@ -32,11 +32,12 @@ int mopViewer::printOutput(MopState * mopstate, int currentRow, int currentitem,
 
 
 void mopViewer::showStats() {
+  int skip = 2;
         mopfile = new MopFile();
         mopfile->setFilename("Testing_Project.mop");
         mopfile->openMopfileReader();
         mopstate = new MopState();
-        mopstate = mopfile->readCyclingState();
+        mopstate = mopfile->readCyclingState(skip);
         std::cout << "Item Count: " << mopstate->getItemCount() << std::endl;
         for (int i = 0; i < mopstate->getItemCount(); i++) {
                 std::cout << "Particle "<< i << " X value: " << mopstate->getMopItem(i).x << std::endl;
@@ -164,7 +165,7 @@ void mopViewer::showStats() {
                   break;
 
           case KEY_UP:
-                  mopstate = mopfile->readCyclingState();
+                  mopstate = mopfile->readCyclingState(skip);
                   currentRow = 1;
                   currentRow2 = 1;
                   currentitem = currentitem - (maxitems*2);
@@ -190,7 +191,7 @@ void mopViewer::showStats() {
                   mopfile->setFilename("Testing_Project.mop");
                   mopfile->openMopfileReader();
                   mopstate = new MopState();
-                  mopstate = mopfile->readCyclingState();
+                  mopstate = mopfile->readCyclingState(skip);
                   currentitem = currentitem - (maxitems*2);
                   currentRow = 1;
                   currentRow2 = 1;
