@@ -66,7 +66,7 @@ void testWindow::init ( void )
 		0, 1, 3, // First Triangle
 		1, 2, 3 // Second Triangle
 	};
-int skip = 3;
+int skip = 22;
   mopfile = new MopFile();
   mopfile->setFilename("Testing_Project.mop");
   mopfile->openMopfileReader();

@@ -78,11 +78,15 @@ private:
            int count = 0;
            int particleLength;
           // while(ch != '|'){
+            result = this->consumeChar(ch);
              result = this->consumeChar(ch);
-             std::cout << "Current Result is: " << ch << std::endl;
+            // std::cout << "Current Result is: " << ch << std::endl;
              tmp.push_back(ch);
              result = this->consumeChar(ch);
-             std::cout << "Current Result is: " << ch << std::endl;
+            // std::cout << "Current Result is: " << ch << std::endl;
+             tmp.push_back(ch);
+             result = this->consumeChar(ch);
+            // std::cout << "Current Result is: " << ch << std::endl;
              tmp.push_back(ch);
              //result = this->consumeChar(ch);
         //   }
@@ -105,15 +109,15 @@ private:
                  tmp2.clear();
                   //this->consumeChar(ch);
                   this->consumeChar(ch);
-                  std::cout << "Char 1: " << ch << std::endl;
+                //  std::cout << "Char 1: " << ch << std::endl;
                   tmp2.push_back(ch);
                   this->consumeChar(ch);
                   tmp2.push_back(ch);
-                  std::cout << "Char 2: " << ch << std::endl;
+                //  std::cout << "Char 2: " << ch << std::endl;
                 particleLength = std::stoi(tmp2.c_str());
-                particleLength++;
-                particleLength++;
-                std::cout << "Particle Length: " << particleLength << std::endl;
+                //particleLength++;
+                //particleLength++;
+                //std::cout << "Particle Length: " << particleLength << std::endl;
                 // particleLength = getMopItemLength();
 
                 result = this->consumeCharIgnore(ch, particleLength);
@@ -123,15 +127,15 @@ private:
                 //tmp.push_back(ch);
                  tmp2.clear();
                 this->consumeChar(ch);
-                std::cout << "Char 1: " << ch << std::endl;
+                //std::cout << "Char 1: " << ch << std::endl;
                 tmp2.push_back(ch);
                 this->consumeChar(ch);
                 tmp2.push_back(ch);
-                std::cout << "Char 2: " << ch << std::endl;
+                //std::cout << "Char 2: " << ch << std::endl;
               particleLength = std::stoi(tmp2.c_str());
-              particleLength++;
-              particleLength++;
-              std::cout << "Particle Length: " << particleLength << std::endl;
+              //particleLength++;
+              //particleLength++;
+              //std::cout << "Particle Length: " << particleLength << std::endl;
               for(int i = 0; i < particleLength; i++){
                 result = this->consumeChar(ch);
                 tmp.push_back(ch);
@@ -150,9 +154,9 @@ private:
 
 
            } while (ch!='$');
-           for(int i = 0; i < tmp.length(); i++){
-             std::cout << tmp.at(i);
-           }
+          // for(int i = 0; i < tmp.length(); i++){
+          //   std::cout << tmp.at(i);
+        //   }
            input.fill(tmp);
            std::cout << "> Finished Reading State" << std::endl;
            return true;
@@ -196,7 +200,7 @@ std::string loadSingleMopItem(int len) {
      * build a MopState from a fragment
      *
      */
-    MopState  * buildMopStateFromFragment(Fragment &source) {
+    MopState  * buildMopStateFromFragment(Fragment &source, int skip) {
         MopState *ms = new MopState();
         Fragment worker;
         Fragment thing;
@@ -205,7 +209,7 @@ std::string loadSingleMopItem(int len) {
         pos = worker.fill(source,pos,'|');
         numParticles = worker.toInt();
         //std::cout << "> Particle count " << numParticles << std::endl;
-        for (int x(0);x<numParticles;x++) {
+        for (int x(0);x<numParticles/(skip+1);x++) {
             MopItem mi;
             pos++;
             pos = thing.fill(source,pos,',');
@@ -300,7 +304,7 @@ public:
 
             // now convert that to a MopState object
             //std::cerr <<" > starting string to mopstate conversion" << std::endl;
-            result = this->buildMopStateFromFragment(initial);
+            result = this->buildMopStateFromFragment(initial, skipCount);
             //std::cerr <<" >finishing string to mopstate conversion" << std::endl;
             if (!result) {
                 return NULL;
