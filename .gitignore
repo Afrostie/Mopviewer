@@ -2,4 +2,5 @@
 Mopviewer
 *.gch
 *.pch
-mopviewer
+mopViewer
+*.d
