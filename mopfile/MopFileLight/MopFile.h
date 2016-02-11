@@ -55,7 +55,7 @@ private:
             return false;
         }
     }
-
+    //Utility function to ignore characters for a certain length
     bool consumeCharIgnore(char &ch, int length) {
         if (!this->inFileStream.eof()) {
             this->inFileStream.ignore(length, '$');
@@ -77,29 +77,12 @@ private:
            bool result = false;
            int count = 0;
            int particleLength;
-          // while(ch != '|'){
-
-             result = this->consumeChar(ch);
-            // std::cout << "Current Result is: " << ch << std::endl;
-             tmp.push_back(ch);
-             result = this->consumeChar(ch);
-            // std::cout << "Current Result is: " << ch << std::endl;
-             tmp.push_back(ch);
-             result = this->consumeChar(ch);
-            // std::cout << "Current Result is: " << ch << std::endl;
-             tmp.push_back(ch);
-             result = this->consumeChar(ch);
-            // std::cout << "Current Result is: " << ch << std::endl;
-             tmp.push_back(ch);
-             result = this->consumeChar(ch);
-            // std::cout << "Current Result is: " << ch << std::endl;
-             tmp.push_back(ch);
-             //result = this->consumeChar(ch);
-        //   }
-           //std::cout << "Current Result is: " << ch << std::endl;
-          // result = this->inFileStream.peek();
-          // std::cout << "Next Result is: " << ch << std::endl;
-
+           //Start by adding number of particles to string
+          while(this->inFileStream.peek() != '|'){
+            result = this->consumeChar(ch);
+           // std::cout << "Current Result is: " << ch << std::endl;
+            tmp.push_back(ch);
+          }
 
            do {
                result = this->consumeChar(ch);
@@ -109,39 +92,37 @@ private:
                    this->error = 1;
                    return false;
                }
+               //Check for start of a particles
                else if(ch == '|'){
+                 //Check whether to skip a paticle
                 if(count < skip){
-
+                  //For now tmp2 stores the length of particle, will be moved
+                  //To Seperate function late
                  tmp2.clear();
+                 //Read length of particle, assuming only two characters, will be
+                 //Fixed to use any length soon
                   //this->consumeChar(ch);
                   this->consumeChar(ch);
-                //  std::cout << "Char 1: " << ch << std::endl;
                   tmp2.push_back(ch);
                   this->consumeChar(ch);
                   tmp2.push_back(ch);
-                //  std::cout << "Char 2: " << ch << std::endl;
+                  //Convert string to int and ignore characters to particle length
                 particleLength = std::stoi(tmp2.c_str());
-                //particleLength++;
-                //particleLength++;
-                //std::cout << "Particle Length: " << particleLength << std::endl;
-                // particleLength = getMopItemLength();
 
                 result = this->consumeCharIgnore(ch, particleLength);
                 count++;
               }
               else{
+                //Same as above but read rather than ignore
                 //tmp.push_back(ch);
                  tmp2.clear();
                 this->consumeChar(ch);
-                //std::cout << "Char 1: " << ch << std::endl;
+
                 tmp2.push_back(ch);
                 this->consumeChar(ch);
                 tmp2.push_back(ch);
-                //std::cout << "Char 2: " << ch << std::endl;
+
               particleLength = std::stoi(tmp2.c_str());
-              //particleLength++;
-              //particleLength++;
-              //std::cout << "Particle Length: " << particleLength << std::endl;
               for(int i = 0; i < particleLength; i++){
                 result = this->consumeChar(ch);
                 tmp.push_back(ch);
@@ -149,20 +130,13 @@ private:
 
                 count = 0;
               }
-              //count = 0;
             }
             else
               tmp.push_back(ch);
 
-
-
-
-
-
            } while (ch!='$');
-          // for(int i = 0; i < tmp.length(); i++){
-          //   std::cout << tmp.at(i);
-        //   }
+           //Output contents of read string for debugging
+        std::cout << tmp;
            input.fill(tmp);
            std::cout << "> Finished Reading State" << std::endl;
            return true;
