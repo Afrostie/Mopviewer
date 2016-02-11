@@ -78,7 +78,13 @@ private:
            int count = 0;
            int particleLength;
           // while(ch != '|'){
-            result = this->consumeChar(ch);
+
+             result = this->consumeChar(ch);
+            // std::cout << "Current Result is: " << ch << std::endl;
+             tmp.push_back(ch);
+             result = this->consumeChar(ch);
+            // std::cout << "Current Result is: " << ch << std::endl;
+             tmp.push_back(ch);
              result = this->consumeChar(ch);
             // std::cout << "Current Result is: " << ch << std::endl;
              tmp.push_back(ch);

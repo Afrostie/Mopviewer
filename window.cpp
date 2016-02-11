@@ -66,9 +66,9 @@ void testWindow::init ( void )
 		0, 1, 3, // First Triangle
 		1, 2, 3 // Second Triangle
 	};
-int skip = 22;
+int skip = 2;
   mopfile = new MopFile();
-  mopfile->setFilename("Testing_Project.mop");
+  mopfile->setFilename("Testing_Project_10000.mop");
   mopfile->openMopfileReader();
   mopstate = new MopState();
   mopstate = mopfile->readCyclingState(skip);
