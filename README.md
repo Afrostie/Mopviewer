@@ -6,14 +6,15 @@ It is going to use an nCurses screen for the main interface with OpenGL for main
 1. Enter 1 to look at Particle information
 2. Enter 2 to Open Mopviewer
 3. Enter any other key on main screen to exit
+4. Uses a scale value to determine how many particles to load, speeds up the loading of extremly large data files
 
 ##Particle Information:
 1. Use the left and right arrow keys to cycle between particles
 2. Use 2 to exit program to main menu
-
+3. Up arrow to cycle through states
+4. Down arrow to reset to original state
 
 #TODO:
-1. Up arrow to cycle through states
-2. Down arrow to reset to original state
-3. Start working on the actual Mopviewer
-4. Adapt for use with large mopfile, if the reader gets updated?
+1. Start working on the actual Mopviewer
+2. Create option to change scale value while program is running/on startup
+3. Potentially use a wrapper for opengl such as oglplus (http://oglplus.org/)
