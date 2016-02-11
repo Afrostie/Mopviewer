@@ -62,10 +62,10 @@ MY_CFLAGS = -D MOPFILELIGHT
 MY_LIBS   = -lncurses -lGLEW -lglfw3 -lGL -lX11 -lXi -lXrandr -lXxf86vm -lXinerama -lXcursor -lrt -lm -lpthread -ldl -lz
 
 # The pre-processor options used by the cpp (man cpp for more).
-CPPFLAGS  =  -Wall -fopenmp -std=c++11
+CPPFLAGS  =  -Wall -std=c++11
 
 # The options used in linking as well as in any direct use of ld.
-LDFLAGS   = -gomp -lz
+LDFLAGS   =
 
 # The directories in which source files reside.
 # If not specified, only the current directory will be serached.

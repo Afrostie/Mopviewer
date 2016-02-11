@@ -124,7 +124,7 @@ private:
         }
 
         //Not currently used
-        std::string loadSingleMopItem(int len) {
+        /*std::string loadSingleMopItem(int len) {
                 std::string tmp;
                 char ch;
                 bool result = false;
@@ -135,7 +135,7 @@ private:
                         tmp.push_back(ch);
                 }
                 return tmp;
-        }
+        }*/
 
 
         int getMopItemLength() {

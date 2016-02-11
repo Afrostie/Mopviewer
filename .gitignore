@@ -4,3 +4,4 @@ Mopviewer
 *.pch
 mopViewer
 *.d
+*.o
