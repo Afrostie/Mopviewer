@@ -11,6 +11,8 @@ testWindow::testWindow(void){
 testWindow::~testWindow(void){
 
 }
+//Declare the file name
+std::string fileLocation2 = "10000.mop";
 
 // Code for vertex shader, should be moved to external file
 const GLchar* vertexShaderSource = "#version 330 core\n"
@@ -66,9 +68,9 @@ void testWindow::init ( void )
 		0, 1, 3, // First Triangle
 		1, 2, 3 // Second Triangle
 	};
-  int skip = 3;
+  int skip = 20;
   mopfile = new MopFile();
-  mopfile->setFilename("Testing_Project_10000.mop");
+  mopfile->setFilename(fileLocation2);
   mopfile->openMopfileReader();
   mopstate = new MopState();
   mopstate = mopfile->readCyclingState(skip);

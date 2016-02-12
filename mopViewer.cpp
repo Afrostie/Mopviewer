@@ -1,9 +1,13 @@
 #include "mopViewer.h"
 
+
+
 mopViewer::mopViewer() {
 }
 mopViewer::~mopViewer() {
 }
+//Declare the file name
+std::string fileLocation = "10000.mop";
 
 void mopViewer::refreshAll(WINDOW* window1, WINDOW* window2){
         refresh();
@@ -32,18 +36,18 @@ int mopViewer::printOutput(MopState * mopstate, int currentRow, int currentitem,
 
 
 void mopViewer::showStats() {
-  int skip = 3;
+  int skip = 21;
         mopfile = new MopFile();
-        mopfile->setFilename("Testing_Project_10000.mop");
+        mopfile->setFilename(fileLocation);
         mopfile->openMopfileReader();
         mopstate = new MopState();
         mopstate = mopfile->readCyclingState(skip);
         std::cout << "Item Count: " << mopstate->getItemCount() << std::endl;
-        for (int i = 0; i < mopstate->getItemCount(); i++) {
+       /* for (int i = 0; i < mopstate->getItemCount(); i++) {
                 std::cout << "Particle "<< i << " X value: " << mopstate->getMopItem(i).x << std::endl;
                 std::cout << "Particle "<< i << " Y value: " << mopstate->getMopItem(i).y << std::endl;
                 std::cout << "Particle "<< i << " Z value: " << mopstate->getMopItem(i).z << std::endl;
-        }
+        }*/
         int x, y, x2, y2, x3, y3;
         nCurses nCurse;
         //TODO: Switch to a single init function
@@ -188,7 +192,7 @@ void mopViewer::showStats() {
                   //TODO: Find a better way to reset the file
                   //Reopen the mopfile to start from begining
                   mopfile = new MopFile();
-                  mopfile->setFilename("Testing_Project.mop");
+                  mopfile->setFilename(fileLocation);
                   mopfile->openMopfileReader();
                   mopstate = new MopState();
                   mopstate = mopfile->readCyclingState(skip);

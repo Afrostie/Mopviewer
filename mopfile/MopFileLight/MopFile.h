@@ -98,18 +98,18 @@ private:
                                         //Convert string to int and ignore characters to particle length
                                         particleLength = this->getMopItemLength();
                                         result = this->consumeCharIgnore(ch, particleLength);
+                                        result = this->consumeChar(ch);
                                         count++;
-                                        std::cout << "> " << particleLength << std::endl;
+                                        //std::cout << "> " << particleLength << std::endl;
                                 }
                                 else{
                                         //Same as above but read rather than ignore
                                         particleLength = this->getMopItemLength();
-                                        std::cout << "> " << particleLength << std::endl;
-                                        for(int i = 0; i < particleLength; i++) {
+                                        //std::cout << "> " << particleLength << std::endl;
+                                        for(int i = 0; i < particleLength+1; i++) {
                                                 result = this->consumeChar(ch);
                                                 tmp.push_back(ch);
                                         }
-
                                         count = 0;
                                 }
                         }
@@ -118,7 +118,7 @@ private:
 
                 } while (ch!='$');
                 //Output contents of read string for debugging
-                //std::cout << tmp;
+                std::cout << tmp;
                 input.fill(tmp);
                 std::cout << "> Finished Reading State" << std::endl;
                 return true;
@@ -148,7 +148,9 @@ private:
                         tmp.push_back(ch);
                 }
                 len = atoi(tmp.c_str());
-                return len;
+                //This could do with changing, without this if it ignores the last particle
+                //It seems to skip past the end state indicator, causing seg fault
+                return len-1;
         }
 
 
@@ -372,6 +374,7 @@ public:
          * reset the mop file back to the start of the file
          */
         void resetFile() {
+            std::cout << "Resetting File: " << std::endl;
                 this->closeMopfileReader();
                 this->inFileStream.clear();
                 this->openMopfileReader();
