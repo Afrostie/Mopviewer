@@ -59,7 +59,7 @@
 # The pre-processor and compiler options.
 MY_CFLAGS = -D MOPFILELIGHT
 # The linker options.
-MY_LIBS   = -lncurses -lGLEW -lglfw3 -lGL -lX11 -lXi -lXrandr -lXxf86vm -lXinerama -lXcursor -lrt -lm -lpthread -ldl -lz
+MY_LIBS   = -lncurses -lGLEW -lglfw3 -lGL -lX11 -lXi -lXrandr -lXxf86vm -lXinerama -lXcursor
 
 # The pre-processor options used by the cpp (man cpp for more).
 CPPFLAGS  =  -Wall -std=c++11
