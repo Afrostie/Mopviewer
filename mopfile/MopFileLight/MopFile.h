@@ -81,7 +81,7 @@ private:
                 //Start by adding number of particles to string
                 while(this->consumeCharPeek(ch) != '|') {
                         result = this->consumeChar(ch);
-                        // std::cout << "Current Result is: " << ch << std::endl;
+                        //std::cout << "Current Result is: " << ch << std::endl;
                         tmp.push_back(ch);
                 }
                 do {
@@ -146,7 +146,7 @@ private:
                         this->consumeChar(ch);
                         tmp.push_back(ch);
                 }
-                len = std::stoi(tmp.c_str());
+                len = atoi(tmp.c_str());
                 return len;
         }
 

@@ -32,7 +32,7 @@ int mopViewer::printOutput(MopState * mopstate, int currentRow, int currentitem,
 
 
 void mopViewer::showStats() {
-  int skip = 9;
+  int skip = 3;
         mopfile = new MopFile();
         mopfile->setFilename("Testing_Project_10000.mop");
         mopfile->openMopfileReader();

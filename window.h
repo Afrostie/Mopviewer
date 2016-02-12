@@ -12,8 +12,8 @@ public:
 	~testWindow(void);
 	void init();
 	static void key_callback(GLFWwindow* window, int key, int scancode, int action, int mode);
-	GLfloat deltaTime = 0.0f;	// Time between current frame and last frame
-	GLfloat lastFrame = 0.0f;
+	GLfloat deltaTime;	// Time between current frame and last frame
+	GLfloat lastFrame;
 	MopFile * mopfile;
 	MopState * mopstate;
 };

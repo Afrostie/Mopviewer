@@ -58,11 +58,12 @@
 
 # The pre-processor and compiler options.
 MY_CFLAGS = -D MOPFILELIGHT
+
 # The linker options.
 MY_LIBS   = -lncurses -lGLEW -lglfw3 -lGL -lX11 -lXi -lXrandr -lXxf86vm -lXinerama -lXcursor
 
 # The pre-processor options used by the cpp (man cpp for more).
-CPPFLAGS  =  -Wall -std=c++11
+CPPFLAGS  = -Wall
 
 # The options used in linking as well as in any direct use of ld.
 LDFLAGS   =
@@ -73,7 +74,7 @@ SRCDIRS   =
 
 # The executable file name.
 # If not specified, current directory name or `a.out' will be used.
-PROGRAM   = mopViewer
+PROGRAM   = Mopviewer
 
 ## Implicit Section: change the following only when necessary.
 ##==========================================================================
@@ -87,8 +88,8 @@ HDREXTS = .h .H .hh .hpp .HPP .h++ .hxx .hp
 
 # The pre-processor and compiler options.
 # Users can override those variables from the command line.
-CFLAGS  = -O3
-CXXFLAGS= -O3
+CFLAGS  = -g -O2
+CXXFLAGS= -g -O2
 
 # The C program compiler.
 #CC     = gcc
@@ -224,7 +225,7 @@ ifeq ($(SRC_CXX),)              # C program
 	$(LINK.c)   $(OBJS) $(MY_LIBS) -o $@
 	@echo Type ./$@ to execute the program.
 else                            # C++ program
-	$(LINK.cxx) $(OBJS) $(MY_LIBS) -o $@ -lncurses
+	$(LINK.cxx) $(OBJS) $(MY_LIBS) -o $@
 	@echo Type ./$@ to execute the program.
 endif
 

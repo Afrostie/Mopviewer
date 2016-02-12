@@ -38,8 +38,8 @@ void testWindow::init ( void )
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 	glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);                                                         //Stop the window from being resized
 	//Create a glfw window, size 800 x 600
-	GLFWwindow* window = glfwCreateWindow(800, 600, "LearnOpenGL", nullptr, nullptr);
-	if (window == nullptr) {                                                         //Some error checking
+	GLFWwindow* window = glfwCreateWindow(800, 600, "LearnOpenGL", NULL, NULL);
+	if (window == NULL) {                                                         //Some error checking
 		std::cout << "Failed to create GLFW window" << std::endl;
 		glfwTerminate();
 		//return -1;
@@ -66,7 +66,7 @@ void testWindow::init ( void )
 		0, 1, 3, // First Triangle
 		1, 2, 3 // Second Triangle
 	};
-int skip = 5;
+  int skip = 19;
   mopfile = new MopFile();
   mopfile->setFilename("Testing_Project_10000.mop");
   mopfile->openMopfileReader();
