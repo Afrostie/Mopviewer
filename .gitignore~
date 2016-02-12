@@ -2,5 +2,6 @@
 Mopviewer
 *.gch
 *.pch
+mopViewer
 *.d
 *.o
