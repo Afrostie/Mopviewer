@@ -99,11 +99,12 @@ private:
                                         particleLength = this->getMopItemLength();
                                         result = this->consumeCharIgnore(ch, particleLength);
                                         count++;
+                                        std::cout << "> " << particleLength << std::endl;
                                 }
                                 else{
                                         //Same as above but read rather than ignore
                                         particleLength = this->getMopItemLength();
-
+                                        std::cout << "> " << particleLength << std::endl;
                                         for(int i = 0; i < particleLength; i++) {
                                                 result = this->consumeChar(ch);
                                                 tmp.push_back(ch);
