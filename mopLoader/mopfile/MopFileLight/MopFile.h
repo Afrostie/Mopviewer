@@ -166,8 +166,9 @@ private:
                 int pos(0);
                 pos = worker.fill(source,pos,'|');
                 numParticles = worker.toInt();
+                numParticles = round(numParticles/(skip+1));
                 //std::cout << "> Particle count " << numParticles << std::endl;
-                for (int x(0); x<numParticles/(skip+1); x++) {
+                for (int x(0); x<numParticles; x++) {
                         MopItem mi;
                         pos++;
                         pos = thing.fill(source,pos,',');
@@ -243,6 +244,9 @@ public:
                 return this->filename;
         }
 
+        int maxStates;
+        int countStates;
+
         /**
          * read a single state from a mopfile (mopfile must already be open)
          */
@@ -285,11 +289,25 @@ public:
         MopState * readCyclingState(int skipCount) {
                 // get the next state from the mopfile
                 MopState *incoming = this->readState(skipCount);
+              /* if(this->countStates < this->maxStates){
+                    this->countStates++;
+                    std::cout << "Count States: " << countStates << std::endl;
+                    return incoming;
+                }
+                else{
+                        this->countStates = 1;
+                        std::cout << "Count States: " << countStates << std::endl;
+                        this->resetFile();
+                        incoming = this->readState(skipCount);
+                        return incoming;
+                }*/
                 if (incoming == NULL) {
                         this->resetFile();
+
                         incoming = this->readState(skipCount);
                 }
                 return incoming;
+                
         }
 
         /**
@@ -355,6 +373,11 @@ public:
          */
         void setFilename (std::string fn){
                 this->filename = fn;
+        };
+
+         void setMaxStates (int max){
+            this->maxStates = max;
+            this->countStates = 0;
         };
 
         /**

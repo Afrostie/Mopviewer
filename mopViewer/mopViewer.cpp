@@ -7,7 +7,7 @@ mopViewer::mopViewer() {
 mopViewer::~mopViewer() {
 }
 //Declare the file name
-std::string fileLocation = "10000.mop";
+std::string fileLocation = "175.mop";
 
 void mopViewer::refreshAll(WINDOW* window1, WINDOW* window2){
         refresh();
@@ -36,11 +36,12 @@ int mopViewer::printOutput(MopState * mopstate, int currentRow, int currentitem,
 
 
 void mopViewer::showStats() {
-  int skip = 19;
+  int skip = 3;
         mopfile = new MopFile();
         mopfile->setFilename(fileLocation);
         mopfile->openMopfileReader();
         mopstate = new MopState();
+        mopfile->setMaxStates(8);
         mopstate = mopfile->readCyclingState(skip);
         std::cout << "Item Count: " << mopstate->getItemCount() << std::endl;
        /* for (int i = 0; i < mopstate->getItemCount(); i++) {
@@ -189,12 +190,8 @@ void mopViewer::showStats() {
                   break;
 
           case KEY_DOWN:
-                  //TODO: Find a better way to reset the file
-                  //Reopen the mopfile to start from begining
-                  mopfile = new MopFile();
-                  mopfile->setFilename(fileLocation);
-                  mopfile->openMopfileReader();
-                  mopstate = new MopState();
+
+                  mopfile->resetFile();
                   mopstate = mopfile->readCyclingState(skip);
                   currentitem = currentitem - (maxitems*2);
                   currentRow = 1;
@@ -264,7 +261,7 @@ void mopViewer::selectGame() {
         wattron(myWindow2, COLOR_PAIR(2));
         wbkgd(myWindow2, COLOR_PAIR(2));
         // Add the title string to the main window
-        mvaddstr(1, (my2/2)-10, "Welcome to MopViewer!");
+        mvaddstr(1, (my2/2)-10, "Welcome to the MopViewer!");
         // Print string to second window at the x,y co-ordinates specificed
         mvwprintw(myWindow2, mx2/2, ((my2-std::strlen(welcome))/2), "%s", welcome);
         mvwprintw(myWindow2, (mx2/2)+10, ((my2-std::strlen(exitMessage))/2), "%s", exitMessage);

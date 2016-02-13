@@ -68,11 +68,12 @@ void testWindow::init ( void )
 		0, 1, 3, // First Triangle
 		1, 2, 3 // Second Triangle
 	};
-  int skip = 5;
+  int skip = 20;
   mopfile = new MopFile();
   mopfile->setFilename(fileLocation2);
   mopfile->openMopfileReader();
   mopstate = new MopState();
+          mopfile->setMaxStates(9);
   mopstate = mopfile->readCyclingState(skip);
   std::cout << "Item Count: " << mopstate->getItemCount() << std::endl;
 
