@@ -121,24 +121,9 @@ private:
                 //Output contents of read string for debugging
                 //std::cout << tmp;
                 input.fill(tmp);
-                std::cout << "> Finished Reading State" << std::endl;
+                //std::cout << "> Finished Reading State" << std::endl;
                 return true;
         }
-
-        //Not currently used
-        /*std::string loadSingleMopItem(int len) {
-                std::string tmp;
-                char ch;
-                bool result = false;
-                int i;
-                result = this->consumeChar(ch); // will be '|'
-                for (i=0; i<len; i++) {
-                        result = this->consumeChar(ch);
-                        tmp.push_back(ch);
-                }
-                return tmp;
-        }*/
-
 
         int getMopItemLength() {
                 std::string tmp;
@@ -195,11 +180,6 @@ private:
                         pos = thing.fill(source,pos,',');
                         mi.x  = thing.toFloat();
                         //std::cout << "> x: " << mi.x << std::endl;
-                        //if(x==2) {
-                        //exit(0);
-                        //  }
-                        //std::cout << "> extracted string " << thing.str() << std::endl;
-                        //std::cout << "X value: " << mi.x << std::endl;
                         pos++;
                         pos = thing.fill(source,pos,',');
                         mi.y = thing.toFloat();
@@ -208,7 +188,7 @@ private:
                         mi.z  = thing.toFloat();
                         ms->addMopItem(mi);
                 }
-                std::cout << "> converted the String to a MopState" << std::endl;
+                //pstd::cout << "> converted the String to a MopState" << std::endl;
                 return ms;
         }
 
@@ -381,7 +361,7 @@ public:
          * reset the mop file back to the start of the file
          */
         void resetFile() {
-            std::cout << "Resetting File: " << std::endl;
+            //std::cout << "Resetting File: " << std::endl;
                 this->closeMopfileReader();
                 this->inFileStream.clear();
                 this->openMopfileReader();
