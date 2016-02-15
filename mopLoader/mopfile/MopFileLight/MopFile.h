@@ -289,7 +289,7 @@ public:
         MopState * readCyclingState(int skipCount) {
                 // get the next state from the mopfile
                 MopState *incoming = this->readState(skipCount);
-              /* if(this->countStates < this->maxStates){
+               if(this->countStates < this->maxStates){
                     this->countStates++;
                     std::cout << "Count States: " << countStates << std::endl;
                     return incoming;
@@ -300,12 +300,12 @@ public:
                         this->resetFile();
                         incoming = this->readState(skipCount);
                         return incoming;
-                }*/
-                if (incoming == NULL) {
+                }
+                /*if (incoming == NULL) {
                         this->resetFile();
 
                         incoming = this->readState(skipCount);
-                }
+                }*/
                 return incoming;
                 
         }

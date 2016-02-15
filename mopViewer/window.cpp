@@ -44,7 +44,7 @@ void testWindow::init ( void )
 	if (window == NULL) {                                                         //Some error checking
 		std::cout << "Failed to create GLFW window" << std::endl;
 		glfwTerminate();
-		//return -1;
+		//return 0;
 	}
 
 	glfwMakeContextCurrent(window);                                                         //Make this window the main window
@@ -53,7 +53,7 @@ void testWindow::init ( void )
 
 	//Makes sure glew uses te latest techniques
 	glewExperimental = GL_TRUE;
-	if(glewInit() != GLEW_OK) {                                                         //Check glew is set up ok
+	if(glewInit()) {                                                         //Check glew is set up ok
 		std::cout << "Failed to initalise GLEW" << std::endl;
 	}
 
