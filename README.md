@@ -15,11 +15,11 @@ It is going to use an nCurses screen for the main interface with OpenGL for main
 4. Down arrow to reset to original state
 
 ##Requirments
-I will list requirments as I go. These are the main requirments for compiling, although I have probably missed quite a few at the moment.
 1. glfw
 2. glew
 3. nCurses
 4. OpenGL 3.3 compatible or higher
+There is a good chance I missed off some important parts
 
 ##MopFile
 1. MopFiles should be placed in the Resources Folder
