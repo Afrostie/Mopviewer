@@ -6,8 +6,7 @@ mopViewer::mopViewer() {
 }
 mopViewer::~mopViewer() {
 }
-//Declare the file name
-std::string fileLocation = "175.mop";
+
 
 void mopViewer::refreshAll(WINDOW* window1, WINDOW* window2){
         refresh();
@@ -35,14 +34,13 @@ int mopViewer::printOutput(MopState * mopstate, int currentRow, int currentitem,
 
 
 
-void mopViewer::showStats() {
-  int skip = 3;
+void mopViewer::showStats(std::string fileName, int skipCount) {
+
         mopfile = new MopFile();
-        mopfile->setFilename(fileLocation);
+        mopfile->setFilename(fileName);
         mopfile->openMopfileReader();
         mopstate = new MopState();
-        mopfile->setMaxStates(8);
-        mopstate = mopfile->readCyclingState(skip);
+        mopstate = mopfile->readCyclingState(skipCount);
         std::cout << "Item Count: " << mopstate->getItemCount() << std::endl;
        /* for (int i = 0; i < mopstate->getItemCount(); i++) {
                 std::cout << "Particle "<< i << " X value: " << mopstate->getMopItem(i).x << std::endl;
@@ -170,7 +168,7 @@ void mopViewer::showStats() {
                   break;
 
           case KEY_UP:
-                  mopstate = mopfile->readCyclingState(skip);
+                  mopstate = mopfile->readCyclingState(skipCount);
                   currentRow = 1;
                   currentRow2 = 1;
                   currentitem = currentitem - (maxitems*2);
@@ -192,7 +190,7 @@ void mopViewer::showStats() {
           case KEY_DOWN:
 
                   mopfile->resetFile();
-                  mopstate = mopfile->readCyclingState(skip);
+                  mopstate = mopfile->readCyclingState(skipCount);
                   currentitem = currentitem - (maxitems*2);
                   currentRow = 1;
                   currentRow2 = 1;
@@ -213,7 +211,7 @@ void mopViewer::showStats() {
           }}
         //When finished end the session and return to the main menu screen
         endwin();
-        mopViewer::selectGame();
+        mopViewer::selectGame(fileName, skipCount);
 }
 
 
@@ -225,7 +223,7 @@ void mopViewer::showStats() {
     Properly comment/organise the code
  */
 
-void mopViewer::selectGame() {
+void mopViewer::selectGame(std::string fileName, int skipCount) {
         clear();
         int mx = 0, my = 0, mx2 = 0, my2 = 0;
         char welcome[] = "Enter 1 to View Stats and 2 to Open MopViewer: ";
@@ -277,13 +275,13 @@ void mopViewer::selectGame() {
                 clear();
                 refresh();
                 endwin();
-                mopViewers.showStats();
+                mopViewers.showStats(fileName, skipCount);
         } else if (inputString[0] == '2') {
                 clear();
                 refresh();
                 endwin();
-                newWindow.init();
-                mopViewers.selectGame();
+                newWindow.init(fileName, skipCount);
+                mopViewers.selectGame(fileName, skipCount);
         }
         endwin();
 }

@@ -245,9 +245,6 @@ public:
                 return this->filename;
         }
 
-        int maxStates;
-        int countStates;
-
         /**
          * read a single state from a mopfile (mopfile must already be open)
          */
@@ -290,18 +287,7 @@ public:
         MopState * readCyclingState(int skipCount) {
                 // get the next state from the mopfile
                 MopState *incoming = this->readState(skipCount);
-               /*if(this->countStates < this->maxStates){
-                    this->countStates++;
-                    std::cout << "Count States: " << countStates << std::endl;
-                    return incoming;
-                }
-                else{
-                        this->countStates = 1;
-                        std::cout << "Count States: " << countStates << std::endl;
-                        this->resetFile();
-                        incoming = this->readState(skipCount);
-                        return incoming;
-                }*/
+
                 if (incoming == NULL) {
                         this->resetFile();
 
@@ -373,12 +359,9 @@ public:
          * The mop extention is also not added.
          */
         void setFilename (std::string fn){
-                this->filename = fn;
-        };
-
-         void setMaxStates (int max){
-            this->maxStates = max;
-            this->countStates = 0;
+            std::string location = "Resources/";
+            std::string extension = ".mop";
+                this->filename = location +fn + extension;
         };
 
         /**

@@ -11,8 +11,7 @@ testWindow::testWindow(void){
 testWindow::~testWindow(void){
 
 }
-//Declare the file name
-std::string fileLocation2 = "10000.mop";
+
 
 // Code for vertex shader, should be moved to external file
 const GLchar* vertexShaderSource = "#version 330 core\n"
@@ -28,7 +27,7 @@ const GLchar* fragmentShaderSource = "#version 330 core\n"
                                      "{\n"
                                      "color = vec4(1.0f, 0.5f, 0.2f, 1.0f);\n"
                                      "}\n\0";
-void testWindow::init ( void )
+void testWindow::init (std::string fileName, int skipCount )
 {
 
 
@@ -69,13 +68,11 @@ void testWindow::init ( void )
 		0, 1, 3, // First Triangle
 		1, 2, 3 // Second Triangle
 	};
-  int skip = 3;
   mopfile = new MopFile();
-  mopfile->setFilename(fileLocation2);
+  mopfile->setFilename(fileName);
   mopfile->openMopfileReader();
   mopstate = new MopState();
-          mopfile->setMaxStates(9);
-  mopstate = mopfile->readCyclingState(skip);
+  mopstate = mopfile->readCyclingState(skipCount);
   std::cout << "Item Count: " << mopstate->getItemCount() << std::endl;
 
 
@@ -171,7 +168,7 @@ void testWindow::init ( void )
 	//Start the main game loop,
 
 while(!glfwWindowShouldClose(window)) {
-mopstate = mopfile->readCyclingState(skip);
+mopstate = mopfile->readCyclingState(skipCount);
   GLfloat currentFrame = glfwGetTime();
   deltaTime = currentFrame - lastFrame;
   lastFrame = currentFrame;
