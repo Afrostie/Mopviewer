@@ -34,11 +34,11 @@ void testWindow::init ( void )
 
 	glfwInit();                                                         //Init glfw
 	//For purposes of learning get OpenGL version to 3.3
-	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
-	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
+	//glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
+	//glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
 	//Using core profile of OpenGL prevents use of any legacy functions
-	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-	glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);                                                         //Stop the window from being resized
+	//	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+	//	glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);                                                         //Stop the window from being resized
 	//Create a glfw window, size 800 x 600
 	GLFWwindow* window = glfwCreateWindow(800, 600, "LearnOpenGL", NULL, NULL);
 	if (window == NULL) {                                                         //Some error checking
@@ -53,7 +53,8 @@ void testWindow::init ( void )
 
 	//Makes sure glew uses te latest techniques
 	glewExperimental = GL_TRUE;
-	if(glewInit()) {                                                         //Check glew is set up ok
+	GLenum err = glewInit();
+	if(err != GLEW_OK) {                                                         //Check glew is set up ok
 		std::cout << "Failed to initalise GLEW" << std::endl;
 	}
 
