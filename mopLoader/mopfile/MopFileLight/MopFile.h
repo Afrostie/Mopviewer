@@ -81,6 +81,7 @@ private:
                 //Start by adding number of particles to string
                 while(this->consumeCharPeek(ch) != '|') {
                         result = this->consumeChar(ch);
+                        if (!result) return false;
                         //std::cout << "Current Result is: " << ch << std::endl;
                         tmp.push_back(ch);
                 }
@@ -118,7 +119,7 @@ private:
 
                 } while (ch!='$');
                 //Output contents of read string for debugging
-                std::cout << tmp;
+                //std::cout << tmp;
                 input.fill(tmp);
                 std::cout << "> Finished Reading State" << std::endl;
                 return true;
@@ -289,7 +290,7 @@ public:
         MopState * readCyclingState(int skipCount) {
                 // get the next state from the mopfile
                 MopState *incoming = this->readState(skipCount);
-               if(this->countStates < this->maxStates){
+               /*if(this->countStates < this->maxStates){
                     this->countStates++;
                     std::cout << "Count States: " << countStates << std::endl;
                     return incoming;
@@ -300,12 +301,12 @@ public:
                         this->resetFile();
                         incoming = this->readState(skipCount);
                         return incoming;
-                }
-                /*if (incoming == NULL) {
+                }*/
+                if (incoming == NULL) {
                         this->resetFile();
 
                         incoming = this->readState(skipCount);
-                }*/
+                }
                 return incoming;
                 
         }
