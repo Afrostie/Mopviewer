@@ -1,7 +1,5 @@
 #include "mopViewer.h"
 
-
-
 mopViewer::mopViewer() {
 }
 mopViewer::~mopViewer() {
@@ -28,12 +26,9 @@ int mopViewer::printOutput(MopState * mopstate, int currentRow, int currentitem,
         mvwprintw(window, currentRow,1, "Particle Green: %d", mopstate->getMopItem(currentitem).green);
         currentRow++;
         mvwprintw(window, currentRow,1, "Particle Blue: %d", mopstate->getMopItem(currentitem).blue);
-        currentRow+=2;;
+        currentRow+=2;
         return currentRow;
 }
-
-
-
 void mopViewer::showStats(std::string fileName, int skipCount) {
 
         mopfile = new MopFile();
