@@ -1,6 +1,6 @@
 ﻿#include "mopViewer.h"
 
-void viewer::init(const GLuint width, const GLuint height)
+void mopViewer::init(const GLuint width, const GLuint height)
 {
 	std::cout << "Starting GLFW context, OpenGL 3.3" << std::endl;
 	// Init GLFW
@@ -29,9 +29,14 @@ void viewer::init(const GLuint width, const GLuint height)
 	glEnable(GL_DEPTH_TEST);
 }
 
-void viewer::deleteBuffer(GLuint VAO, GLuint VBO, GLuint EBO)
+void mopViewer::deleteBuffer(GLuint VAO, GLuint VBO, GLuint EBO)
 {
 	glDeleteVertexArrays(1, &VAO);
 	glDeleteBuffers(1, &VBO);
 	glDeleteBuffers(1, &EBO);
+}
+
+void mopViewer::render(){
+	    glfwPollEvents();
+    // Render
 }

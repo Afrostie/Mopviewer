@@ -88,7 +88,7 @@ void gameWindow::doMovement()
     camera.ProcessKeyboard(RIGHT, this->deltaTime);
 };
 
-viewer activeWindow;
+mopViewer activeWindow;
 Texture activeTexture;
   //gameWindow mainGame;
 
