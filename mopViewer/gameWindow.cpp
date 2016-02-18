@@ -212,7 +212,7 @@ void gameWindow::init(std::string fileName, int skipCount) {
     GLfloat currentFrame = glfwGetTime();
     deltaTime = currentFrame - lastFrame;
     lastFrame = currentFrame;
-
+    std::cout << "> Time Since Last Frame: " << deltaTime << std::endl;
     // Check if any events have been activiated (key pressed, mouse moved etc.) and call corresponding response functions
     glfwPollEvents();
     // Render
