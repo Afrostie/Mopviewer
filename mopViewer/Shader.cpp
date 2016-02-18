@@ -5,10 +5,10 @@
 #include "Shader.h"
 std::string Shader::loadShader(const GLchar* shaderPath) {
   // Load the contents of the specified file into a string
-  std::ifstream ifs(shaderPath);
-  std::string shaderCode((std::istreambuf_iterator<char>(ifs)),
+  std::ifstream inFileStream(shaderPath);
+  std::string shaderCode((std::istreambuf_iterator<char>(inFileStream)),
                          (std::istreambuf_iterator<char>()));
-  ifs.close();
+  inFileStream.close();
   return shaderCode;
 }
 
