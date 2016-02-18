@@ -1,12 +1,12 @@
 #include <curses.h>
 #include <iostream>
-#include "mopViewer.h"
+#include "mainWindow.h"
 #include <string>
 
 
 
 int main() {
-        mopViewer mopViewers;
+        mainWindow mainWindows;
         std::string fileName;
         int skipCount;
         std::cout << "Enter the MopFile Name (No need to use extension/location): ";
@@ -19,6 +19,6 @@ int main() {
                 std::cout << "Exiting Now!" << std::endl;
                 return 0;
         }
-        mopViewers.selectGame(fileName, skipCount);
+        mainWindows.selectGame(fileName, skipCount);
         return 0;
 }

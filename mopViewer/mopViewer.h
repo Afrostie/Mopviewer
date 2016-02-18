@@ -1,22 +1,22 @@
-#include <curses.h>
+﻿#ifndef MOPVIEWER_H
+#define MOPVIEWER_H
+
 #include <iostream>
-#include "nCurses.h"
-#include <string>
-#include <cstring>
-#include "window.h"
-#include "../mopLoader/mopfile/MopFile.h"
 
+// GLEW
+#define GLEW_STATIC
+#include <GL/glew.h>
 
+// GLFW
+#include <GLFW/glfw3.h>
 
-
-class mopViewer {
+class viewer
+{
 public:
-mopViewer(void);
-~mopViewer(void);
-void showStats(std::string fileName, int skipCount);
-void selectGame(std::string fileName, int skipCount);
-void refreshAll(WINDOW * window1, WINDOW * window2);
-int printOutput(MopState * mopstate, int currentrow, int currentitem, WINDOW* window);
-MopFile * mopfile;
-MopState * mopstate;
+	GLFWwindow* currentWindow;
+	void init(const GLuint width, const GLuint height);
+	static void deleteBuffer(GLuint VAO, GLuint VBO, GLuint EBO);
 };
+
+
+#endif
