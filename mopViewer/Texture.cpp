@@ -18,7 +18,7 @@ GLuint Texture::createTexture(const GLchar* path)
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 	//Load the image using SOIL
 	int width, height;
-	unsigned char* image = stbi_load(path, &width, &height, 0, SOIL_LOAD_RGB);
+	unsigned char* image = stbi_load(path, &width, &height, 0, STBI_rgb);
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, image);
 	//Make OpenGL create the mipmap versions of texture
 	glGenerateMipmap(GL_TEXTURE_2D);

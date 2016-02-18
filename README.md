@@ -19,6 +19,8 @@ It is going to use an nCurses screen for the main interface with OpenGL for main
 2. glew
 3. nCurses
 4. OpenGL 3.3 compatible or higher
+5. STB/SOIL for image loading
+6. Assimp for model loading
 There is a good chance I missed off some important parts
 
 ##MopFile
