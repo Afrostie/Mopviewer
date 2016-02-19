@@ -5,6 +5,8 @@
 // Include GLFW
 #include <GLFW/glfw3.h>
 
+#define GLM_FORCE_RADIANS
+
 //glm
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>

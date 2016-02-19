@@ -11,7 +11,7 @@ gameWindow::~gameWindow(void) {}
 GLfloat mixValue = 0.2f;
 GLint WIDTH = 800;
 GLint HEIGHT = 600;
-
+int skips = 0;
 Camera camera(glm::vec3(0.0f, 0.0f, 3.0f));
 
 bool firstMouse = true;
@@ -34,17 +34,13 @@ GLfloat lastY = HEIGHT / 2;
     glfwSetWindowShouldClose(window, GL_TRUE);
 
   if (key == GLFW_KEY_UP && action == GLFW_PRESS){
-    std::cout << "> Current Mix Value: " << mixValue << std::endl;
-    mixValue += 0.1f;
-    if (mixValue >= 1.0f)
-      mixValue = 1.0f;
+    std::cout << "> Current Mix Value: " << skips << std::endl;
+    skips += 1;
   }
 
   if(key == GLFW_KEY_DOWN && action == GLFW_PRESS){
-    std::cout << "> Current Mix Value: " << mixValue << std::endl;
-    mixValue -= 0.1f;
-    if (mixValue <= 0.0f)
-      mixValue = 0.0f;
+    std::cout << "> Current Mix Value: " << skips << std::endl;
+    skips -= 1;
   }
 
 
@@ -94,7 +90,7 @@ Texture activeTexture;
 
 
 void gameWindow::init(std::string fileName, int skipCount) {
-
+  skips = skipCount;
   activeWindow.init(WIDTH, HEIGHT);
   glfwSetCursorPosCallback(activeWindow.currentWindow, gameWindow::mouse_callback);
   // Set the required callback functions
@@ -162,6 +158,14 @@ void gameWindow::init(std::string fileName, int skipCount) {
     glm::vec3(-1.3f,  1.0f, -1.5f)
   };
 
+  mopfile = new MopFile();
+  mopfile->setFilename(fileName);
+  mopfile->openMopfileReader();
+  mopstate = new MopState();
+  mopstate = mopfile->readCyclingState(skips);
+  std::cout << "Item Count: " << mopstate->getItemCount() << std::endl;
+
+
   GLuint VBO, VAO;
   glGenVertexArrays(1, &VAO);
   glGenBuffers(1, &VBO);
@@ -208,6 +212,7 @@ void gameWindow::init(std::string fileName, int skipCount) {
   // Game loop
   while (!glfwWindowShouldClose(activeWindow.currentWindow))
   {
+    mopstate = mopfile->readCyclingState(skips);
     //Calculate time since last frame
     GLfloat currentFrame = glfwGetTime();
     deltaTime = currentFrame - lastFrame;
