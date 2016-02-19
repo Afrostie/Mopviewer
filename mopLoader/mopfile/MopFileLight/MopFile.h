@@ -71,7 +71,7 @@ class MopFile {
    * uses a std::string as an intermediate structure.
    *
    */
-  bool readMopStateFromFileAsText(Fragment &input, int skip) {
+  bool readMopStateFromFileAsText(Fragment &input, float skip) {
     std::string tmp;
     std::string tmp2;
     char ch;
@@ -96,13 +96,6 @@ class MopFile {
       else if (ch == '|') {
         // Check whether to skip a paticle
         if (count < skip) {
-          // Convert string to int and ignore characters to particle length
-          particleLength = this->getMopItemLength();
-          result = this->consumeCharIgnore(ch, particleLength);
-          result = this->consumeChar(ch);
-          count++;
-          // std::cout << "> " << particleLength << std::endl;
-        } else {
           // Same as above but read rather than ignore
           particleLength = this->getMopItemLength();
           // std::cout << "> " << particleLength << std::endl;
@@ -110,14 +103,36 @@ class MopFile {
             result = this->consumeChar(ch);
             tmp.push_back(ch);
           }
-          count = 0;
+          count++;
+        } else {
+          if(count == 10){
+            //std::cout << "Resseting Count" << std::endl;
+            particleLength = this->getMopItemLength();
+            // std::cout << "> " << particleLength << std::endl;
+            for (int i = 0; i < particleLength + 1; i++) {
+              result = this->consumeChar(ch);
+              tmp.push_back(ch);
+            }
+            count = 0;
+          }
+          else{
+            //result = this->consumeChar(ch);
+          // Convert string to int and ignore characters to particle length
+          particleLength = this->getMopItemLength();
+        //  result = this->consumeChar(ch);
+          result = this->consumeCharIgnore(ch, particleLength);
+          result = this->consumeChar(ch);
+          count++;
+          // std::cout << "> " << particleLength << std::endl;
+          }
+
         }
       } else
         tmp.push_back(ch);
 
     } while (ch != '$');
     // Output contents of read string for debugging
-    // std::cout << tmp;
+     //std::cout << tmp;
     input.fill(tmp);
     // std::cout << "> Finished Reading State" << std::endl;
     return true;
@@ -134,14 +149,14 @@ class MopFile {
     len = atoi(tmp.c_str());
     // This could do with changing, without this if it ignores the last particle
     // It seems to skip past the end state indicator, causing seg fault
-    return len - 1;
+    return len -1;
   }
 
   /**
    * build a MopState from a fragment
    *
    */
-  MopState *buildMopStateFromFragment(Fragment &source, int skip) {
+  MopState *buildMopStateFromFragment(Fragment &source, float skip) {
     MopState *ms = new MopState();
     Fragment worker;
     Fragment thing;
@@ -149,8 +164,8 @@ class MopFile {
     int pos(0);
     pos = worker.fill(source, pos, '|');
     numParticles = worker.toInt();
-    numParticles = round(numParticles / (skip + 1));
-    // std::cout << "> Particle count " << numParticles << std::endl;
+    numParticles = round(numParticles * (skip / 10));
+    std::cout << "> Particle count " << numParticles << std::endl;
     for (int x(0); x < numParticles; x++) {
       MopItem mi;
       pos++;
@@ -219,7 +234,7 @@ class MopFile {
   /**
    * read a single state from a mopfile (mopfile must already be open)
    */
-  MopState *readState(int skipCount) {
+  MopState *readState(float skipCount) {
     MopState *result = new MopState();
     // int itemCount;
     try {
@@ -256,7 +271,7 @@ class MopFile {
    * file
    * if the end is reached
    */
-  MopState *readCyclingState(int skipCount) {
+  MopState *readCyclingState(float skipCount) {
     // get the next state from the mopfile
     MopState *incoming = this->readState(skipCount);
 

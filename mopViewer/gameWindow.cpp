@@ -11,7 +11,7 @@ gameWindow::~gameWindow(void) {}
 GLfloat mixValue = 0.2f;
 GLint WIDTH = 800;
 GLint HEIGHT = 600;
-int skips = 0;
+float skips = 0;
 Camera camera(glm::vec3(0.0f, 0.0f, 3.0f));
 
 bool firstMouse = true;
@@ -34,13 +34,17 @@ GLfloat lastY = HEIGHT / 2;
     glfwSetWindowShouldClose(window, GL_TRUE);
 
   if (key == GLFW_KEY_UP && action == GLFW_PRESS){
-    std::cout << "> Current Mix Value: " << skips << std::endl;
+    std::cout << "> Current Skips Value: " << skips << std::endl;
     skips += 1;
+    if(skips >= 9)
+      skips = 9;
   }
 
   if(key == GLFW_KEY_DOWN && action == GLFW_PRESS){
-    std::cout << "> Current Mix Value: " << skips << std::endl;
+    std::cout << "> Current Skips Value: " << skips << std::endl;
     skips -= 1;
+    if(skips <= 1)
+      skips = 1;
   }
 
 
@@ -89,7 +93,7 @@ Texture activeTexture;
   //gameWindow mainGame;
 
 
-void gameWindow::init(std::string fileName, int skipCount) {
+void gameWindow::init(std::string fileName, float skipCount) {
   skips = skipCount;
   activeWindow.init(WIDTH, HEIGHT);
   glfwSetCursorPosCallback(activeWindow.currentWindow, gameWindow::mouse_callback);

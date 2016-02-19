@@ -11,7 +11,7 @@ public:
     MopState() {
         this->itemCount = 0;
     }
-    
+
     ~MopState() {
         delete [] this->content;
     }

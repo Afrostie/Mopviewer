@@ -30,7 +30,7 @@ class gameWindow {
  public:
   gameWindow(void);
   ~gameWindow(void);
-  void init(std::string fileName, int skipCount);
+  void init(std::string fileName, float skipCount);
   static void key_callback(GLFWwindow* window, int key, int scancode, int action, int mode);
   static void mouse_callback(GLFWwindow* window, double xpos, double ypos);
   static void scroll_callback(GLFWwindow* window, double xoffset, double yoffset);

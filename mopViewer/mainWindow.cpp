@@ -33,7 +33,7 @@ int mainWindow::printOutput(MopState *mopstate, int currentRow, int currentitem,
   currentRow += 2;
   return currentRow;
 }
-void mainWindow::showStats(std::string fileName, int skipCount) {
+void mainWindow::showStats(std::string fileName, float skipCount) {
   mopfile = new MopFile();
   mopfile->setFilename(fileName);
   mopfile->openMopfileReader();
@@ -240,7 +240,7 @@ void mainWindow::showStats(std::string fileName, int skipCount) {
     Properly comment/organise the code
  */
 
-void mainWindow::selectGame(std::string fileName, int skipCount) {
+void mainWindow::selectGame(std::string fileName, float skipCount) {
   clear();
   int mx = 0, my = 0, mx2 = 0, my2 = 0;
   char welcome[] = "Enter 1 to View Stats, 2 to Open mainWindow and 3 to change Mopfile: ";

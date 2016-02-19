@@ -8,7 +8,7 @@
 int main() {
         mainWindow mainWindows;
         std::string fileName;
-        int skipCount;
+        float skipCount;
         std::cout << "Enter the MopFile Name (No need to use extension/location): ";
         std::cin >> fileName;
         std::cout << std::endl
