@@ -24,8 +24,10 @@
 //Texture Class
 #include "Texture.h"
 
-
 #include "../mopLoader/mopfile/MopFile.h"
+
+#include <thread>
+
 class gameWindow {
  public:
   gameWindow(void);
@@ -34,9 +36,11 @@ class gameWindow {
   static void key_callback(GLFWwindow* window, int key, int scancode, int action, int mode);
   static void mouse_callback(GLFWwindow* window, double xpos, double ypos);
   static void scroll_callback(GLFWwindow* window, double xoffset, double yoffset);
+  static void threadFunc(MopState* mopstate1, MopFile* mopfile1);
   void doMovement();
   GLfloat deltaTime;  // Time between current frame and last frame
   GLfloat lastFrame;
   MopFile* mopfile;
   MopState* mopstate;
+
 };
