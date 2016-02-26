@@ -9,8 +9,12 @@ gameWindow::gameWindow(void) {}
 gameWindow::~gameWindow(void) {}
 
 GLfloat mixValue = 0.2f;
-GLint WIDTH = 1600;
-GLint HEIGHT = 900;
+GLint WIDTH = 1366;
+GLint HEIGHT = 768;
+/*
+GLint WIDTH = 1366;
+GLint HEIGHT = 768;
+*/
 float skips = 0;
 Camera camera(glm::vec3(0.0f, 0.0f, 3.0f));
 
@@ -38,16 +42,16 @@ bool loadStates = true;
 
   if (key == GLFW_KEY_UP && action == GLFW_PRESS){
     std::cout << "> Current Skips Value: " << skips << std::endl;
-    skips += 1;
-    if(skips >= 9)
-      skips = 9;
+    skips += 0.5;
+    if(skips >= 10)
+      skips = 10;
   }
 
   if(key == GLFW_KEY_DOWN && action == GLFW_PRESS){
     std::cout << "> Current Skips Value: " << skips << std::endl;
-    skips -= 1;
-    if(skips <= 1)
-      skips = 1;
+    skips -= 0.5;
+    if(skips <= 0.5)
+      skips = 0.5;
   }
 
 
@@ -92,7 +96,7 @@ void gameWindow::doMovement()
 };
 
 
-void gameWindow::threadFunc(MopState* mopstate1,   MopFile* mopfile1){
+void gameWindow::readStates(MopState* mopstate1,   MopFile* mopfile1){
 
   std::cout << "Started thread" << std::endl;
   while(loadStates == true){
@@ -230,8 +234,8 @@ void gameWindow::init(std::string fileName, float skipCount) {
   //glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
   void* arg;
 
-  std::thread threadOne(gameWindow::threadFunc, mopstate, mopfile);
-  //threadOne.join();
+  std::thread loadThread(gameWindow::loadStates, mopstate, mopfile);
+  //loadThread.join();
 
   // Game loop
   while (!glfwWindowShouldClose(activeWindow.currentWindow))
@@ -241,7 +245,7 @@ void gameWindow::init(std::string fileName, float skipCount) {
     GLfloat currentFrame = glfwGetTime();
     deltaTime = currentFrame - lastFrame;
     lastFrame = currentFrame;
-    std::cout << "> Time Since Last Frame: " << deltaTime << std::endl;
+    //std::cout << "> Time Since Last Frame: " << deltaTime << std::endl;
     // Check if any events have been activiated (key pressed, mouse moved etc.) and call corresponding response functions
     glfwPollEvents();
     // Render
@@ -249,7 +253,7 @@ void gameWindow::init(std::string fileName, float skipCount) {
 
     // Render
     // Clear the colorbuffer
-    glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+    glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 
@@ -289,9 +293,9 @@ void gameWindow::init(std::string fileName, float skipCount) {
     for (GLuint i = 0; i < newWindow.mopstate->getItemCount(); i++)
     {
       glm::mat4 model;
-      model = glm::translate(model, glm::vec3(newWindow.mopstate->getMopItem(i).x/1000000000,newWindow.mopstate->getMopItem(i).y/1000000000,newWindow.mopstate->getMopItem(i).z/1000000000));
-      GLfloat angle = 20.0f * i;
-      model = glm::scale(model, glm::vec3(newWindow.mopstate->getMopItem(i).visualRepresentation,newWindow.mopstate->getMopItem(i).visualRepresentation,newWindow.mopstate->getMopItem(i).visualRepresentation));
+      model = glm::translate(model, glm::vec3(newWindow.mopstate->getMopItem(i).x/10000000000,newWindow.mopstate->getMopItem(i).y/10000000000,newWindow.mopstate->getMopItem(i).z/10000000000));
+      //GLfloat angle = 20.0f * i;
+      model = glm::scale(model, glm::vec3(newWindow.mopstate->getMopItem(i).visualRepresentation/5,newWindow.mopstate->getMopItem(i).visualRepresentation/5,newWindow.mopstate->getMopItem(i).visualRepresentation/5));
       //model = glm::rotate(model, angle, glm::vec3(1.0f, 0.3f, 0.5f));
       glUniformMatrix4fv(modelLocation, 1, GL_FALSE, glm::value_ptr(model));
 
@@ -307,7 +311,7 @@ void gameWindow::init(std::string fileName, float skipCount) {
   glDeleteVertexArrays(1, &VAO);
   glDeleteBuffers(1, &VBO);
   loadStates = false;
-  threadOne.detach();
+  loadThread.detach();
   // Terminate GLFW, clearing any resources allocated by GLFW.
   glfwTerminate();
 }

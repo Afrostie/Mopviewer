@@ -13,13 +13,13 @@
 	{
 		GLfloat velocity = this->MovementSpeed * deltaTime;
 		if (direction == FORWARD)
-			this->Position += this->Front * (velocity * 200);
+			this->Position += this->Front * (velocity * 5);
 		if (direction == BACKWARD)
-			this->Position -= this->Front * (velocity * 200);
+			this->Position -= this->Front * (velocity * 5);
 		if (direction == LEFT)
-			this->Position -= this->Right * (velocity * 200);
+			this->Position -= this->Right * (velocity * 5);
 		if (direction == RIGHT)
-			this->Position += this->Right * (velocity * 200);
+			this->Position += this->Right * (velocity * 5);
 	}
 
 void Camera::ProcessMouseMovement(GLfloat xoffset, GLfloat yoffset, GLboolean constrainPitch)
