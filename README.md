@@ -29,6 +29,5 @@ There is a good chance I missed off some important parts
 3. E.G to use the 10000 particles file simply enter 10000 when prompted
 
 #TODO:
-1. Start working on the actual Mopviewer
-2. Create option to change scale value while program is running/on startup
-3. Potentially use a wrapper for opengl such as oglplus (http://oglplus.org/)
+1. Make Improvments To Viewer
+2. Make improvments to skipping to allow for finer tuning of performance
