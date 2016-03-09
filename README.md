@@ -7,6 +7,7 @@ It is going to use an nCurses screen for the main interface with OpenGL for main
 2. Enter 2 to Open Mopviewer
 3. Enter any other key on main screen to exit
 4. Uses a scale value to determine how many particles to load, speeds up the loading of extremly large data files
+5. Left and Right Arrow Keys scale down the distances between particles
 
 ##Particle Information:
 1. Use the left and right arrow keys to cycle between particles
