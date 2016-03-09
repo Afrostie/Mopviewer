@@ -9,12 +9,8 @@ gameWindow::gameWindow(void) {}
 gameWindow::~gameWindow(void) {}
 
 GLfloat mixValue = 0.2f;
-GLint WIDTH = 1366;
-GLint HEIGHT = 768;
-/*
-GLint WIDTH = 1366;
-GLint HEIGHT = 768;
-*/
+GLint WIDTH = 1600;
+GLint HEIGHT = 900;
 float skips = 0;
 Camera camera(glm::vec3(0.0f, 0.0f, 3.0f));
 
@@ -25,6 +21,7 @@ GLfloat lastFrame = 0.0f;   // Time of last frame
 GLfloat lastX = WIDTH / 2;
 GLfloat lastY = HEIGHT / 2;
   gameWindow newWindow;
+unsigned long int scaler = 1000000000;
 
 bool loadStates = true;
 
@@ -42,16 +39,24 @@ bool loadStates = true;
 
   if (key == GLFW_KEY_UP && action == GLFW_PRESS){
     std::cout << "> Current Skips Value: " << skips << std::endl;
-    skips += 0.5;
+    skips += 1;
     if(skips >= 10)
       skips = 10;
   }
 
   if(key == GLFW_KEY_DOWN && action == GLFW_PRESS){
     std::cout << "> Current Skips Value: " << skips << std::endl;
-    skips -= 0.5;
-    if(skips <= 0.5)
-      skips = 0.5;
+    skips -= 1;
+    if(skips <= 1)
+      skips = 1;
+  }
+  if(key == GLFW_KEY_LEFT && action == GLFW_PRESS){
+    std::cout << "> Current Scaler Value: " << scaler << std::endl;
+    scaler = scaler - 1000000000;
+  }
+  if(key == GLFW_KEY_RIGHT && action == GLFW_PRESS){
+    std::cout << "> Current Scaler Value: " << scaler << std::endl;
+    scaler =  scaler + 1000000000;
   }
 
 
@@ -96,7 +101,7 @@ void gameWindow::doMovement()
 };
 
 
-void gameWindow::readStates(MopState* mopstate1,   MopFile* mopfile1){
+void gameWindow::threadFunc(MopState* mopstate1,   MopFile* mopfile1){
 
   std::cout << "Started thread" << std::endl;
   while(loadStates == true){
@@ -169,19 +174,6 @@ void gameWindow::init(std::string fileName, float skipCount) {
     -0.5f,  0.5f, -0.5f,  0.0f, 1.0f
   };
 
-  glm::vec3 cubePositions[] = {
-    glm::vec3(0.0f,  0.0f,  0.0f),
-    glm::vec3(2.0f,  5.0f, -15.0f),
-    glm::vec3(-1.5f, -2.2f, -2.5f),
-    glm::vec3(-3.8f, -2.0f, -12.3f),
-    glm::vec3(2.4f, -0.4f, -3.5f),
-    glm::vec3(-1.7f,  3.0f, -7.5f),
-    glm::vec3(1.3f, -2.0f, -2.5f),
-    glm::vec3(1.5f,  2.0f, -2.5f),
-    glm::vec3(1.5f,  0.2f, -1.5f),
-    glm::vec3(-1.3f,  1.0f, -1.5f)
-  };
-
   newWindow.mopstate = new MopState();
   newWindow.mopfile = new MopFile();
   newWindow.mopfile->setFilename(fileName);
@@ -232,10 +224,9 @@ void gameWindow::init(std::string fileName, float skipCount) {
 
   //Uncomment for wireframe mode, useful for debugging
   //glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-  void* arg;
 
-  std::thread loadThread(gameWindow::loadStates, mopstate, mopfile);
-  //loadThread.join();
+  std::thread threadOne(gameWindow::threadFunc, mopstate, mopfile);
+  //threadOne.join();
 
   // Game loop
   while (!glfwWindowShouldClose(activeWindow.currentWindow))
@@ -253,7 +244,7 @@ void gameWindow::init(std::string fileName, float skipCount) {
 
     // Render
     // Clear the colorbuffer
-    glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
+    glClearColor(0.2f, 0.2f, 0.3f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 
@@ -293,10 +284,10 @@ void gameWindow::init(std::string fileName, float skipCount) {
     for (GLuint i = 0; i < newWindow.mopstate->getItemCount(); i++)
     {
       glm::mat4 model;
-      model = glm::translate(model, glm::vec3(newWindow.mopstate->getMopItem(i).x/10000000000,newWindow.mopstate->getMopItem(i).y/10000000000,newWindow.mopstate->getMopItem(i).z/10000000000));
-      //GLfloat angle = 20.0f * i;
-      model = glm::scale(model, glm::vec3(newWindow.mopstate->getMopItem(i).visualRepresentation/5,newWindow.mopstate->getMopItem(i).visualRepresentation/5,newWindow.mopstate->getMopItem(i).visualRepresentation/5));
-      //model = glm::rotate(model, angle, glm::vec3(1.0f, 0.3f, 0.5f));
+      model = glm::translate(model, glm::vec3(newWindow.mopstate->getMopItem(i).x/scaler,newWindow.mopstate->getMopItem(i).y/scaler,newWindow.mopstate->getMopItem(i).z/scaler));
+
+      model = glm::scale(model, glm::vec3(newWindow.mopstate->getMopItem(i).visualRepresentation,newWindow.mopstate->getMopItem(i).visualRepresentation,newWindow.mopstate->getMopItem(i).visualRepresentation));
+
       glUniformMatrix4fv(modelLocation, 1, GL_FALSE, glm::value_ptr(model));
 
       glDrawArrays(GL_TRIANGLES, 0, 36);
@@ -311,7 +302,7 @@ void gameWindow::init(std::string fileName, float skipCount) {
   glDeleteVertexArrays(1, &VAO);
   glDeleteBuffers(1, &VBO);
   loadStates = false;
-  loadThread.detach();
+  threadOne.detach();
   // Terminate GLFW, clearing any resources allocated by GLFW.
   glfwTerminate();
 }

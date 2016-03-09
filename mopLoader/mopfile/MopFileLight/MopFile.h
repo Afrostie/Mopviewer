@@ -11,8 +11,14 @@
 #include "../../etc/Fragment.h"
 #include "../../particle/normal/Particle.h"
 #include <zlib.h>
+#include <math.h>
 class MopFile {
  private:
+
+   inline double sqr( double x) const {
+       return ((x)*(x));
+   }
+
   /**
    * the output file stream
    */
@@ -132,7 +138,7 @@ class MopFile {
 
     } while (ch != '$');
     // Output contents of read string for debugging
-     //std::cout << tmp;
+    // std::cout << tmp;
     input.fill(tmp);
     // std::cout << "> Finished Reading State" << std::endl;
     return true;
@@ -222,9 +228,12 @@ class MopFile {
   void closeMopfileReader() { this->inFileStream.close(); }
 
  public:
+
   MopFile() { this->error = 0; }
   ~MopFile() {}
   // no copy constructor for this class, there's no need to copy it anyway.
+
+
 
   /**
    * retrieve the filename
@@ -236,6 +245,7 @@ class MopFile {
    */
   MopState *readState(float skipCount) {
     MopState *result = new MopState();
+    MopState *final = new MopState();
     // int itemCount;
     try {
       // start by reading in the next state from the file as a whole string
@@ -251,6 +261,8 @@ class MopFile {
       // now convert that to a MopState object
       // std::cerr <<" > starting string to mopstate conversion" << std::endl;
       result = this->buildMopStateFromFragment(initial, skipCount);
+
+      //final = this->rescale2(result);
       // std::cerr <<" >finishing string to mopstate conversion" << std::endl;
       if (!result) {
         return NULL;
@@ -372,4 +384,81 @@ class MopFile {
     this->openMopfileReader();
     this->inFileStream.seekg(0, std::ios_base::beg);
   }
-};
+
+
+
+
+MopState *rescale(MopState *inputState) {
+   MopState *displayState = new MopState();
+  double m1,m2,m3;
+double maxDistanceFromOrigin;
+MopState *loadedState = inputState;
+
+    MopItem tmp;
+       int scaler;
+       MopFile mopfile;
+          bool firstState = true;
+scaler = 1.5;
+
+       if (firstState) {
+                   firstState = false;
+                   // find out which particle is furthest out, on which axis
+                   double xv,yv,zv;
+                   double max = 0;
+                   for (int j(0); j<loadedState->getItemCount(); j++) {
+                       xv = sqrt(sqr(loadedState->getMopItem(j).x));
+                       yv = sqrt(sqr(loadedState->getMopItem(j).y));
+                       zv = sqrt(sqr(loadedState->getMopItem(j).z));
+                       if (xv>max) max = xv;
+                       if (yv >max) max = yv;
+                       if (zv>max) max = zv;
+                   }
+                   maxDistanceFromOrigin = max;
+               }
+               for (int x(0); x<loadedState->getItemCount(); x++) {
+                   m1 = sqrt(sqr(loadedState->getMopItem(x).x));
+                  m1 = m1 /(maxDistanceFromOrigin+(0.5*maxDistanceFromOrigin));
+                   std::cout << "M1: " << m1 << std::endl;
+                   m2 = (sqrt(sqr(loadedState->getMopItem(x).y))/(maxDistanceFromOrigin+(0.5*maxDistanceFromOrigin)));
+                   m3 = (sqrt(sqr(loadedState->getMopItem(x).z))/(maxDistanceFromOrigin+(0.5*maxDistanceFromOrigin)));
+                   if (loadedState->getMopItem(x).x>0) {
+                       tmp.x = m1*scaler;
+                       std::cout << "Tmp X: " << tmp.x << std::endl;
+                   } else {
+                       tmp.x = m1*(scaler);
+                       std::cout << "Tmp X: " << tmp.x << std::endl;
+                   }
+
+                   if (loadedState->getMopItem(x).y>0) {
+                       tmp.y = m2*scaler;
+                       std::cout << "Tmp Y: " << tmp.y << std::endl;
+                   } else {
+                       tmp.y = m2*(scaler);
+                       std::cout << "Tmp Y: " << tmp.y << std::endl;
+                   }
+
+                   if (loadedState->getMopItem(x).z>0) {
+                       tmp.z = m3*scaler;
+                       std::cout << "Tmp Z: " << tmp.z << std::endl;
+                   } else {
+                       tmp.z = m3*(scaler);
+                       std::cout << "Tmp Z: " << tmp.z << std::endl;
+                   }
+                   // now colour
+                   tmp.red = loadedState->getMopItem(x).red;
+                   tmp.green = loadedState->getMopItem(x).green;
+                   tmp.blue = loadedState->getMopItem(x).blue;
+                   displayState->addMopItem(tmp);
+               }
+
+
+
+
+
+
+
+
+            //displayState->addMopItem(tmp);
+            return displayState;
+        }
+        };
