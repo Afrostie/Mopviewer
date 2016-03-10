@@ -24,6 +24,9 @@
 //Texture Class
 #include "Texture.h"
 
+//Model Class
+#include "model.h"
+
 #include "../mopLoader/mopfile/MopFile.h"
 
 #include <thread>

@@ -1,14 +1,12 @@
 #version 330 core
-in vec3 ourColor;
-in vec2 TexCoord;
+
+in vec2 TexCoords;
 
 out vec4 color;
 
-uniform sampler2D myTexture1;
-uniform sampler2D myTexture2;
-uniform float mixValue;
+uniform sampler2D texture_diffuse1;
 
 void main()
 {
-    color = texture(myTexture1, TexCoord);
+    color = vec4(texture(texture_diffuse1, TexCoords));
 }

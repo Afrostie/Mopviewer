@@ -269,7 +269,7 @@ MopState *readState(float skipCount) {
                 // std::cerr <<" > starting string to mopstate conversion" << std::endl;
                 result = this->buildMopStateFromFragment(initial, skipCount);
 
-                //final = this->rescale2(result);
+                //final = this->rescale(result);
                 // std::cerr <<" >finishing string to mopstate conversion" << std::endl;
                 if (!result) {
                         return NULL;
@@ -407,7 +407,7 @@ MopState *rescale(MopState *inputState) {
         int scaler;
         MopFile mopfile;
         bool firstState = true;
-        scaler = 1.5;
+        scaler = 1;
 
         if (firstState) {
                 firstState = false;

@@ -16,7 +16,7 @@ GLuint Texture::createTexture(const GLchar* path)
 	//Set texture filtering values
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-	//Load the image using SOIL
+	//Load the image using stb
 	int width, height;
 	unsigned char* image = stbi_load(path, &width, &height, 0, STBI_rgb);
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, image);

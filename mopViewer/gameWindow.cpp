@@ -131,50 +131,9 @@ void gameWindow::init(std::string fileName, float skipCount) {
         Shader myShader;
         myShader.compileShader("Resources/vertex.vert", "Resources/fragment.frag");
 
+        Model ourModel("Resources/Model/sphere/sphere.obj");
+
         // Set up vertex data (and buffer(s)) and attribute pointers as well as color values
-        GLfloat vertices[] = {
-                -0.5f, -0.5f, -0.5f,  0.0f, 0.0f,
-                0.5f, -0.5f, -0.5f,  1.0f, 0.0f,
-                0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
-                0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
-                -0.5f,  0.5f, -0.5f,  0.0f, 1.0f,
-                -0.5f, -0.5f, -0.5f,  0.0f, 0.0f,
-
-                -0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
-                0.5f, -0.5f,  0.5f,  1.0f, 0.0f,
-                0.5f,  0.5f,  0.5f,  1.0f, 1.0f,
-                0.5f,  0.5f,  0.5f,  1.0f, 1.0f,
-                -0.5f,  0.5f,  0.5f,  0.0f, 1.0f,
-                -0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
-
-                -0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
-                -0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
-                -0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
-                -0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
-                -0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
-                -0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
-
-                0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
-                0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
-                0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
-                0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
-                0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
-                0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
-
-                -0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
-                0.5f, -0.5f, -0.5f,  1.0f, 1.0f,
-                0.5f, -0.5f,  0.5f,  1.0f, 0.0f,
-                0.5f, -0.5f,  0.5f,  1.0f, 0.0f,
-                -0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
-                -0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
-
-                -0.5f,  0.5f, -0.5f,  0.0f, 1.0f,
-                0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
-                0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
-                0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
-                -0.5f,  0.5f,  0.5f,  0.0f, 0.0f,
-                -0.5f,  0.5f, -0.5f,  0.0f, 1.0f
-        };
 
         newWindow.mopstate = new MopState();
         newWindow.mopfile = new MopFile();
@@ -182,45 +141,6 @@ void gameWindow::init(std::string fileName, float skipCount) {
         newWindow.mopfile->openMopfileReader();
         newWindow.mopstate = newWindow.mopfile->readCyclingState(skips);
         std::cout << "Item Count: " << newWindow.mopstate->getItemCount() << std::endl;
-
-
-        GLuint VBO, VAO;
-        glGenVertexArrays(1, &VAO);
-        glGenBuffers(1, &VBO);
-        //glGenBuffers(1, &EBO);
-
-        glBindVertexArray(VAO);
-
-        glBindBuffer(GL_ARRAY_BUFFER, VBO);
-        glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
-
-        //glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
-        //glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
-
-        // Position attribute
-        glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(GLfloat), (GLvoid*)0);
-        glEnableVertexAttribArray(0);
-        // Color attribute
-        //glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(GLfloat), (GLvoid*)(3 * sizeof(GLfloat)));
-        //glEnableVertexAttribArray(1);
-        // TexCoord attribute
-        glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(GLfloat), (GLvoid*)(3 * sizeof(GLfloat)));
-        glEnableVertexAttribArray(2);
-
-        glBindVertexArray(0); // Unbind VAO
-
-        /*
-           Texture Stuff
-         */
-        //Create texture ID
-
-        GLuint texture1 = activeTexture.createTexture("Resources/container.jpg");
-        /*
-           2nd Texture Stuff
-         */
-        GLuint texture2 = activeTexture.createTexture("Resources/awesomeface.png");
-
-        // Bind Texture
 
 
 
@@ -246,18 +166,8 @@ void gameWindow::init(std::string fileName, float skipCount) {
 
                 // Render
                 // Clear the colorbuffer
-                glClearColor(0.2f, 0.2f, 0.3f, 1.0f);
+                glClearColor(0.05f, 0.05f, 0.05f, 1.0f);
                 glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
-
-                glActiveTexture(GL_TEXTURE0);
-                glBindTexture(GL_TEXTURE_2D, texture1);
-                glUniform1i(glGetUniformLocation(myShader.Program, "myTexture1"), 0);
-                glActiveTexture(GL_TEXTURE1);
-                glBindTexture(GL_TEXTURE_2D, texture2);
-                glUniform1i(glGetUniformLocation(myShader.Program, "myTexture2"), 1);
-                glUniform1f(glGetUniformLocation(myShader.Program, "mixValue"), mixValue);
-
 
                 //Use our shaders
                 myShader.Use();
@@ -265,44 +175,33 @@ void gameWindow::init(std::string fileName, float skipCount) {
                 glm::mat4 view;
                 glm::mat4 projection;
 
+
+                projection = glm::perspective(camera.Zoom, (float)WIDTH/(float)HEIGHT, 0.1f, 1000000000.0f);
                 view = camera.GetViewMatrix();
-                projection = glm::perspective(camera.Zoom, (GLfloat)WIDTH / (GLfloat)HEIGHT, 0.1f, 1000000000.0f);
+                glUniformMatrix4fv(glGetUniformLocation(myShader.Program, "projection"), 1, GL_FALSE, glm::value_ptr(projection));
+                glUniformMatrix4fv(glGetUniformLocation(myShader.Program, "view"), 1, GL_FALSE, glm::value_ptr(view));
 
-
-                GLint modelLocation = glGetUniformLocation(myShader.Program, "model");
-                GLint viewLocation = glGetUniformLocation(myShader.Program, "view");
-                GLint projectionLocation = glGetUniformLocation(myShader.Program, "projection");
-
-                glUniformMatrix4fv(modelLocation, 1, GL_FALSE, glm::value_ptr(model));
-                glUniformMatrix4fv(viewLocation, 1, GL_FALSE, glm::value_ptr(view));
-                glUniformMatrix4fv(projectionLocation, 1, GL_FALSE, glm::value_ptr(projection));
+                glUniformMatrix4fv(glGetUniformLocation(myShader.Program, "projection"), 1, GL_FALSE, glm::value_ptr(projection));
+                glUniformMatrix4fv(glGetUniformLocation(myShader.Program, "view"), 1, GL_FALSE, glm::value_ptr(view));
 
 
 
-                //Draw the objects
-                glBindVertexArray(VAO);
-                //glDrawArrays(GL_TRIANGLES, 0, 36);
-                //glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+
                 for (GLuint i = 0; i < newWindow.mopstate->getItemCount(); i++)
                 {
+
                         glm::mat4 model;
-                        model = glm::translate(model, glm::vec3(newWindow.mopstate->getMopItem(i).x/scaler,newWindow.mopstate->getMopItem(i).y/scaler,newWindow.mopstate->getMopItem(i).z/scaler));
+                        model = glm::translate(model, glm::vec3(newWindow.mopstate->getMopItem(i).x/scaler,newWindow.mopstate->getMopItem(i).y/scaler,newWindow.mopstate->getMopItem(i).z/scaler)); // Translate it down a bit so it's at the center of the scene
+                        model = glm::scale(model, glm::vec3(newWindow.mopstate->getMopItem(i).visualRepresentation,newWindow.mopstate->getMopItem(i).visualRepresentation,newWindow.mopstate->getMopItem(i).visualRepresentation)); // It's a bit too big for our scene, so scale it down
+                        glUniformMatrix4fv(glGetUniformLocation(myShader.Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
+                        ourModel.Draw(myShader);
 
-                        model = glm::scale(model, glm::vec3(newWindow.mopstate->getMopItem(i).visualRepresentation,newWindow.mopstate->getMopItem(i).visualRepresentation,newWindow.mopstate->getMopItem(i).visualRepresentation));
-
-                        glUniformMatrix4fv(modelLocation, 1, GL_FALSE, glm::value_ptr(model));
-
-                        glDrawArrays(GL_TRIANGLES, 0, 36);
                 }
-                glBindVertexArray(0);
 
                 // Swap the screen buffers
                 glfwSwapBuffers(activeWindow.currentWindow);
         }
         // Properly de-allocate all resources once they've outlived their purpose
-        //activeWindow.deleteBuffer(VAO, VBO, EBO);
-        glDeleteVertexArrays(1, &VAO);
-        glDeleteBuffers(1, &VBO);
         loadStates = false;
         threadOne.detach();
         // Terminate GLFW, clearing any resources allocated by GLFW.

@@ -60,7 +60,7 @@
 MY_CFLAGS = -D MOPFILELIGHT
 
 # The linker options.
-MY_LIBS   = -lncurses -lGLEW -lglfw3 -lGL -lX11 -lXi -lXrandr -lXxf86vm -lXinerama -lXcursor -lrt -lm -ldl -lz -lpthread -lSOIL
+MY_LIBS   = -lncurses -lGLEW -lglfw3 -lGL -lX11 -lXi -lXrandr -lXxf86vm -lXinerama -lXcursor -lrt -lm -ldl -lz -lpthread -lSOIL -lassimp
 
 # The pre-processor options used by the cpp (man cpp for more).
 CPPFLAGS  = -Wall -std=c++11
