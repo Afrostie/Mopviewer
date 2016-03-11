@@ -54,11 +54,14 @@ void gameWindow::key_callback(GLFWwindow* window, int key, int scancode, int act
         }
         if(key == GLFW_KEY_LEFT && action == GLFW_PRESS) {
                 std::cout << "> Current Scaler Value: " << scaler << std::endl;
-                scaler = scaler - 1000000000;
+                scaler = scaler - 100000000;
+                if(scaler <= 0){
+                  scaler = 1;
+                }
         }
         if(key == GLFW_KEY_RIGHT && action == GLFW_PRESS) {
                 std::cout << "> Current Scaler Value: " << scaler << std::endl;
-                scaler =  scaler + 1000000000;
+                scaler =  scaler + 100000000;
         }
 
 

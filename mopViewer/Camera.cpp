@@ -4,6 +4,8 @@
 
 #include "Camera.h"
 
+#define GLM_FORCE_RADIANS
+
 	glm::mat4 Camera::GetViewMatrix()
 	{
 		return glm::lookAt(this->Position, this->Position + this->Front, this->Up);
