@@ -131,10 +131,11 @@ void gameWindow::init(std::string fileName, float skipCount) {
         glfwSetKeyCallback(activeWindow.currentWindow, gameWindow::key_callback);
         glfwSetScrollCallback(activeWindow.currentWindow, gameWindow::scroll_callback);
 
-        Shader myShader;
-        myShader.compileShader("Resources/Shaders/object.vert", "Resources/Shaders/object.frag");
+        Shader objectShader;
+        objectShader.compileShader("Resources/Shaders/object.vert", "Resources/Shaders/object.frag");
 
-        Model ourModel("Resources/Model/sphere/sphere.obj");
+        Model newModel("Resources/Model/sphere/sphere.obj");
+        Model cubeModel("Resources/Model/cube/crate.obj");
 
         // Set up vertex data (and buffer(s)) and attribute pointers as well as color values
 
@@ -173,7 +174,7 @@ void gameWindow::init(std::string fileName, float skipCount) {
                 glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
 
                 //Use our shaders
-                myShader.Use();
+                objectShader.Use();
                 glm::mat4 model;
                 glm::mat4 view;
                 glm::mat4 projection;
@@ -181,11 +182,11 @@ void gameWindow::init(std::string fileName, float skipCount) {
 
                 projection = glm::perspective(camera.Zoom, (float)WIDTH/(float)HEIGHT, 0.1f, 1000000000.0f);
                 view = camera.GetViewMatrix();
-                glUniformMatrix4fv(glGetUniformLocation(myShader.Program, "projection"), 1, GL_FALSE, glm::value_ptr(projection));
-                glUniformMatrix4fv(glGetUniformLocation(myShader.Program, "view"), 1, GL_FALSE, glm::value_ptr(view));
+                glUniformMatrix4fv(glGetUniformLocation(objectShader.Program, "projection"), 1, GL_FALSE, glm::value_ptr(projection));
+                glUniformMatrix4fv(glGetUniformLocation(objectShader.Program, "view"), 1, GL_FALSE, glm::value_ptr(view));
 
-                glUniformMatrix4fv(glGetUniformLocation(myShader.Program, "projection"), 1, GL_FALSE, glm::value_ptr(projection));
-                glUniformMatrix4fv(glGetUniformLocation(myShader.Program, "view"), 1, GL_FALSE, glm::value_ptr(view));
+                glUniformMatrix4fv(glGetUniformLocation(objectShader.Program, "projection"), 1, GL_FALSE, glm::value_ptr(projection));
+                glUniformMatrix4fv(glGetUniformLocation(objectShader.Program, "view"), 1, GL_FALSE, glm::value_ptr(view));
 
 
 
@@ -196,10 +197,15 @@ void gameWindow::init(std::string fileName, float skipCount) {
                         glm::mat4 model;
                         model = glm::translate(model, glm::vec3(newWindow.mopstate->getMopItem(i).x/scaler,newWindow.mopstate->getMopItem(i).y/scaler,newWindow.mopstate->getMopItem(i).z/scaler)); // Translate it down a bit so it's at the center of the scene
                         model = glm::scale(model, glm::vec3(newWindow.mopstate->getMopItem(i).visualRepresentation,newWindow.mopstate->getMopItem(i).visualRepresentation,newWindow.mopstate->getMopItem(i).visualRepresentation)); // It's a bit too big for our scene, so scale it down
-                        glUniformMatrix4fv(glGetUniformLocation(myShader.Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
-                        ourModel.Draw(myShader);
+                        glUniformMatrix4fv(glGetUniformLocation(objectShader.Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
+                        newModel.Draw(objectShader);
 
                 }
+
+
+                model = glm::translate(model, glm::vec3(0,0,0)); // Translate it down a bit so it's at the center of the scene
+                glUniformMatrix4fv(glGetUniformLocation(objectShader.Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
+                cubeModel.Draw(objectShader);
 
                 // Swap the screen buffers
                 glfwSwapBuffers(activeWindow.currentWindow);
