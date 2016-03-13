@@ -13,21 +13,21 @@
 #include <glm/gtc/type_ptr.hpp>
 
 //Shader Class
-#include "Shader.h"
+#include "../Engine/Shader.h"
 
 //Camera Class
-#include "Camera.h"
+#include "../Engine/Camera.h"
 
 //viewer
 #include "mopViewer.h"
 
 //Texture Class
-#include "Texture.h"
+#include "../Engine/Texture.h"
 
 //Model Class
-#include "model.h"
+#include "../Engine/model.h"
 
-#include "../mopLoader/mopfile/MopFile.h"
+#include "../../mopLoader/mopfile/MopFile.h"
 
 #include <thread>
 
