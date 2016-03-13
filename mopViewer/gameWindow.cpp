@@ -132,7 +132,7 @@ void gameWindow::init(std::string fileName, float skipCount) {
         glfwSetScrollCallback(activeWindow.currentWindow, gameWindow::scroll_callback);
 
         Shader myShader;
-        myShader.compileShader("Resources/vertex.vert", "Resources/fragment.frag");
+        myShader.compileShader("Resources/Shaders/object.vert", "Resources/Shaders/object.frag");
 
         Model ourModel("Resources/Model/sphere/sphere.obj");
 
