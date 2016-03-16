@@ -57,7 +57,7 @@
 ##==========================================================================
 
 # The pre-processor and compiler options.
-MY_CFLAGS = -D MOPFILELIGHT
+MY_CFLAGS = -fopenmp -D MOPFILELIGHT
 
 # The linker options.
 MY_LIBS   = -lncurses -lGLEW -lglfw3 -lGL -lX11 -lXi -lXrandr -lXxf86vm -lXinerama -lXcursor -lrt -lm -ldl -lz -lpthread -lSOIL -lassimp

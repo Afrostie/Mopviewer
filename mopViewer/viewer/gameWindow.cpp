@@ -23,7 +23,7 @@ GLfloat lastFrame = 0.0f;   // Time of last frame
 GLfloat lastX = WIDTH / 2;
 GLfloat lastY = HEIGHT / 2;
 gameWindow newWindow;
-unsigned long int scaler = 1000000000;
+long long int scaler = 10000000;
 
 bool loadStates = true;
 
@@ -54,14 +54,14 @@ void gameWindow::key_callback(GLFWwindow* window, int key, int scancode, int act
         }
         if(key == GLFW_KEY_LEFT && action == GLFW_PRESS) {
                 std::cout << "> Current Scaler Value: " << scaler << std::endl;
-                scaler = scaler - 100000000;
+                scaler /= 10;
                 if(scaler <= 0){
                   scaler = 1;
                 }
         }
         if(key == GLFW_KEY_RIGHT && action == GLFW_PRESS) {
                 std::cout << "> Current Scaler Value: " << scaler << std::endl;
-                scaler =  scaler + 100000000;
+                scaler *= 10;
         }
 
 
@@ -135,7 +135,6 @@ void gameWindow::init(std::string fileName, float skipCount) {
         objectShader.compileShader("Resources/Shaders/object.vert", "Resources/Shaders/object.frag");
 
         Model newModel("Resources/Model/sphere/sphere.obj");
-        Model cubeModel("Resources/Model/cube/crate.obj");
 
         // Set up vertex data (and buffer(s)) and attribute pointers as well as color values
 
@@ -190,7 +189,7 @@ void gameWindow::init(std::string fileName, float skipCount) {
 
 
 
-
+                #pragma omp parallel for
                 for (GLuint i = 0; i < newWindow.mopstate->getItemCount(); i++)
                 {
 
@@ -201,11 +200,6 @@ void gameWindow::init(std::string fileName, float skipCount) {
                         newModel.Draw(objectShader);
 
                 }
-
-
-                model = glm::translate(model, glm::vec3(0,0,0)); // Translate it down a bit so it's at the center of the scene
-                glUniformMatrix4fv(glGetUniformLocation(objectShader.Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
-                cubeModel.Draw(objectShader);
 
                 // Swap the screen buffers
                 glfwSwapBuffers(activeWindow.currentWindow);

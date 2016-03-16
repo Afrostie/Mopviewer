@@ -172,6 +172,7 @@ MopState *buildMopStateFromFragment(Fragment &source, float skip) {
         numParticles = worker.toInt();
         numParticles = round(numParticles * (skip / 10));
         std::cout << "> Particle count " << numParticles << std::endl;
+
         for (int x(0); x < numParticles; x++) {
                 MopItem mi;
                 pos++;

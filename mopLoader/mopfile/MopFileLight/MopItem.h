@@ -46,9 +46,9 @@ public:
     int green;
     int blue;
     //position in the WCS
-    float x;
-    float y;
-    float z;
+    double x;
+    double y;
+    double z;
     // the colour of a particle
 
 };
