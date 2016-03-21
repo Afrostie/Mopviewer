@@ -57,7 +57,7 @@
 ##==========================================================================
 
 # The pre-processor and compiler options.
-MY_CFLAGS = -D MOPFILELIGHT
+MY_CFLAGS = -fopenmp -D MOPFILELIGHT
 
 # The linker options.
 MY_LIBS   = -lncurses -lGLEW -lglfw3 -lGL -lX11 -lXi -lXrandr -lXxf86vm -lXinerama -lXcursor -lrt -lm -ldl -lz -lpthread -lSOIL -lassimp
@@ -70,7 +70,7 @@ LDFLAGS   =
 
 # The directories in which source files reside.
 # If not specified, only the current directory will be serached.
-SRCDIRS   = mopViewer/
+SRCDIRS   = ./ mopViewer/viewer mopViewer/Engine
 
 # The executable file name.
 # If not specified, current directory name or `a.out' will be used.
@@ -88,8 +88,8 @@ HDREXTS = .h .H .hh .hpp .HPP .h++ .hxx .hp
 
 # The pre-processor and compiler options.
 # Users can override those variables from the command line.
-CFLAGS  = -g -O2
-CXXFLAGS= -g -O2
+CFLAGS  = -g
+CXXFLAGS= -g
 
 # The C program compiler.
 #CC     = gcc

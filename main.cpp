@@ -1,6 +1,6 @@
 #include <curses.h>
 #include <iostream>
-#include "mainWindow.h"
+#include "mopViewer/viewer/mainWindow.h"
 #include <string>
 
 

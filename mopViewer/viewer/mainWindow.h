@@ -1,10 +1,10 @@
 #include <curses.h>
 #include <iostream>
-#include "nCurses.h"
+#include "../Engine/nCurses.h"
 #include <string>
 #include <cstring>
 #include "gameWindow.h"
-#include "../mopLoader/mopfile/MopFile.h"
+#include "../../mopLoader/mopfile/MopFile.h"
 
 
 
