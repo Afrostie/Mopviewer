@@ -207,6 +207,7 @@ MopState *buildMopStateFromFragment(Fragment &source, float skip) {
                 pos = thing.fill(source, pos, ',');
                 mi.z = thing.toFloat();
                 ms->addMopItem(mi);
+                std::cout << "Loaded Object: " << x << " Out of: " << numParticles << std::endl;
         }
         // pstd::cout << "> converted the String to a MopState" << std::endl;
         return ms;

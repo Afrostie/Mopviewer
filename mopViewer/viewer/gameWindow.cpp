@@ -41,16 +41,16 @@ void gameWindow::key_callback(GLFWwindow* window, int key, int scancode, int act
 
         if (key == GLFW_KEY_UP && action == GLFW_PRESS) {
                 std::cout << "> Current Skips Value: " << skips << std::endl;
-                skips += 1;
+                skips += 0.5;
                 if(skips >= 10)
                         skips = 10;
         }
 
         if(key == GLFW_KEY_DOWN && action == GLFW_PRESS) {
                 std::cout << "> Current Skips Value: " << skips << std::endl;
-                skips -= 1;
+                skips -= 0.5;
                 if(skips <= 1)
-                        skips = 1;
+                        skips = 0.5;
         }
         if(key == GLFW_KEY_LEFT && action == GLFW_PRESS) {
                 std::cout << "> Current Scaler Value: " << scaler << std::endl;
