@@ -11,8 +11,8 @@ gameWindow::~gameWindow(void) {
 }
 
 GLfloat mixValue = 0.2f;
-GLint WIDTH = 1376;
-GLint HEIGHT = 768;
+GLint WIDTH = 1920;
+GLint HEIGHT = 1080;
 float skips = 0;
 Camera camera(glm::vec3(0.0f, 0.0f, 3.0f));
 
@@ -190,8 +190,6 @@ void gameWindow::init(std::string fileName, float skipCount) {
                 glUniformMatrix4fv(glGetUniformLocation(objectShader.Program, "view"), 1, GL_FALSE, glm::value_ptr(view));
 
 
-
-                #pragma omp parallel for
                 for (GLuint i = 0; i < newWindow.mopstate->getItemCount(); i++)
                 {
 
