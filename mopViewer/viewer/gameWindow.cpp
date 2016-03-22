@@ -11,8 +11,8 @@ gameWindow::~gameWindow(void) {
 }
 
 GLfloat mixValue = 0.2f;
-GLint WIDTH = 1600;
-GLint HEIGHT = 900;
+GLint WIDTH = 1376;
+GLint HEIGHT = 768;
 float skips = 0;
 Camera camera(glm::vec3(0.0f, 0.0f, 3.0f));
 
@@ -24,6 +24,7 @@ GLfloat lastX = WIDTH / 2;
 GLfloat lastY = HEIGHT / 2;
 gameWindow newWindow;
 long long int scaler = 10000000;
+int loadedStates = 0;
 
 bool loadStates = true;
 
@@ -111,7 +112,8 @@ void gameWindow::threadFunc(MopState* mopstate1,   MopFile* mopfile1){
         std::cout << "Started thread" << std::endl;
         while(loadStates == true) {
                 newWindow.mopstate = newWindow.mopfile->readCyclingState(skips);
-                std::cout << "Loaded State" << std::endl;
+                std::cout << "Loaded State: " << loadedStates << std::endl;
+                loadedStates++;
                 //newWindow.mopstate = mopstate1;
         }
 };
