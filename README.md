@@ -25,13 +25,13 @@ _This shows a MopFile with 100,000 particles_
 3. Enter any other key on main screen to exit
 4. Use _Up_ and _Down_ Arrow Keys to increase or decrease the amount of particles
 to load
-5. Use_Left_ and _Right_ Arrow Keys scale up or down the distances between particles
+5. Use _Left_ and _Right_ Arrow Keys scale up or down the distances between particles
 
 ## Particle Information Screen:
-1. Use the left and right arrow keys to cycle between particles
-2. Use 2 to exit program to main menu
-3. Up arrow to cycle through states
-4. Down arrow to reset to original state
+1. Use the _Left_ and _Right_ Arrow Keys to cycle between particles
+2. Use _2_ to exit program to main menu
+3. Use _Up_ Arrow to cycle through states
+4. Use _Down_ Arrow to reset to original state
 
 ## Installation
 Only been tested on Ubuntu at the moment. Should be compatible with cygwin
@@ -55,8 +55,28 @@ Download the latest [release](https://github.com/Afrostie/Mopviewer/releases/tag
 3. E.G to use the 10000 particles file simply enter 10000 when prompted
 4. MopFiles too large for github can be downloaded from [here](https://www.dropbox.com/sh/9mq6s7wrj2i3udk/AABcujcJOI9ZtQ-YM0H6_1sRa?dl=0)
 
+## Modification's
+This project is in it's very early stages and the code is extremely messy and latest version will often be unstable. Most of the important part happens in [mopViewer/viewer/gameWindow.cpp](mopViewer/viewer/gameWindow.cpp)
+
+If you want to check the screen size currently you need to modify these values:
+```c++
+GLint WIDTH = 1920;
+GLint HEIGHT = 1080;
+```
+
+To change model used for particles modify:
+```c++
+Model newModel("Resources/Model/sphere/sphere.obj");
+```
+
+For loading large files it can be useful to see how many particles are loaded. In this case uncomment this line found in [mopLoader/mopfile/MopFileLight/MopFile.h](mopLoader/mopfile/MopFileLight/MopFile.h)
+```c++
+std::cout << "Loaded Object: " << x << " Out of: " << numParticles << std::endl;
+```
+
 # TODO:
 1. Improve loading times for large particle counts. Can be upwards of 5 minutes for 100,000 particles
 2. Use instanced rendering to improve performance for large amounts of particles
 3. Make improvements to skipping to allow for finer control over the amount of particles loading
+3. Add optional debug mode that will enable/disable output to the console
 4. Add more features!
