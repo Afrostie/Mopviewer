@@ -15,13 +15,13 @@
 	{
 		GLfloat velocity = this->MovementSpeed * deltaTime;
 		if (direction == FORWARD)
-			this->Position += this->Front * (velocity * 500);
+			this->Position += this->Front * (velocity * cameraMultiplier);
 		if (direction == BACKWARD)
-			this->Position -= this->Front * (velocity * 500);
+			this->Position -= this->Front * (velocity * cameraMultiplier);
 		if (direction == LEFT)
-			this->Position -= this->Right * (velocity * 500);
+			this->Position -= this->Right * (velocity * cameraMultiplier);
 		if (direction == RIGHT)
-			this->Position += this->Right * (velocity * 500);
+			this->Position += this->Right * (velocity * cameraMultiplier);
 	}
 
 void Camera::ProcessMouseMovement(GLfloat xoffset, GLfloat yoffset, GLboolean constrainPitch)
@@ -68,4 +68,11 @@ void Camera::ProcessMouseMovement(GLfloat xoffset, GLfloat yoffset, GLboolean co
 		// Also re-calculate the Right and Up vector
 		this->Right = glm::normalize(glm::cross(this->Front, this->WorldUp));  // Normalize the vectors, because their length gets closer to 0 the more you look up or down which results in slower movement.
 		this->Up = glm::normalize(glm::cross(this->Right, this->Front));
+	}
+
+	void Camera::increaseSpeed(){
+		cameraMultiplier = cameraMultiplier * 2;
+	}
+		void Camera::decreaseSpeed(){
+		cameraMultiplier = cameraMultiplier / 2;
 	}

@@ -64,6 +64,12 @@ void gameWindow::key_callback(GLFWwindow* window, int key, int scancode, int act
                 std::cout << "> Current Scaler Value: " << scaler << std::endl;
                 scaler *= 10;
         }
+        if(key == GLFW_KEY_MINUS && action == GLFW_PRESS){
+            camera.decreaseSpeed();
+        }
+        if(key == GLFW_KEY_EQUAL && action == GLFW_PRESS){
+            camera.increaseSpeed();
+        }
 
 
 };
