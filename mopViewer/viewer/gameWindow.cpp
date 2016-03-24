@@ -11,8 +11,8 @@ gameWindow::~gameWindow(void) {
 }
 
 GLfloat mixValue = 0.2f;
-GLint WIDTH = 1920;
-GLint HEIGHT = 1080;
+GLint WIDTH = 800;
+GLint HEIGHT = 600;
 float skips = 0;
 Camera camera(glm::vec3(0.0f, 0.0f, 3.0f));
 

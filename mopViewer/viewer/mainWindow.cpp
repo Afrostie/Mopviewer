@@ -73,7 +73,12 @@ void mainWindow::showStats(std::string fileName, float skipCount) {
         nCurse.drawBox(window2, ACS_VLINE, ACS_HLINE);
 
         wattron(stdscr, A_BOLD);
-        mvwprintw(stdscr, 1, (y / 2) - 10, "Welcome to mainWindow");
+      //  mvwprintw(stdscr, 1, (y / 2) - 10, "Welcome to mainWindow");
+         mvwprintw(stdscr, 1, (y / 2) - 10, "_ __ ___   ___  _ __/\\   /(_) _____      _____ _ __");
+         mvwprintw(stdscr, 2, (y / 2) - 10, "| '_ ` _ \\ / _ \\| '_ \\ \\ / / |/ _ \\ \\ /\\ / / _ \\ '__|");
+         mvwprintw(stdscr, 3, (y / 2) - 10, "| | | | | | (_) | |_) \\ V /| |  __/\\ V  V /  __/ |   ");
+         mvwprintw(stdscr, 4, (y / 2) - 10, "|_| |_| |_|\\___/| .__/ \\_/ |_|\\___| \\_/\\_/ \\___|_|   ");
+         mvwprintw(stdscr, 5, (y / 2) - 10, "                |_|                                  ");
 
         getmaxyx(window1, x2, y2);
         getmaxyx(window2, x3, y3);
@@ -278,7 +283,12 @@ void mainWindow::selectGame(std::string fileName, float skipCount) {
         wattron(myWindow2, COLOR_PAIR(2));
         wbkgd(myWindow2, COLOR_PAIR(2));
         // Add the title string to the main window
-        mvaddstr(1, (my2 / 2) - 10, "Welcome to the mainWindow!");
+        //mvaddstr(1, (my2 / 2) - 10, "Welcome to the mainWindow!");
+        mvaddstr(1, (my2 / 2) - 26, "_ __ ___   ___  _ __/\\   /(_) _____      _____ _ __");
+        mvaddstr(2, (my2 / 2) - 26, "| '_ ` _ \\ / _ \\| '_ \\ \\ / / |/ _ \\ \\ /\\ / / _ \\ '__|");
+        mvaddstr(3, (my2 / 2) - 26, "| | | | | | (_) | |_) \\ V /| |  __/\\ V  V /  __/ |   ");
+        mvaddstr(4, (my2 / 2) - 26, "|_| |_| |_|\\___/| .__/ \\_/ |_|\\___| \\_/\\_/ \\___|_|   ");
+        mvaddstr(5, (my2 / 2) - 26, "                |_|                                  ");
         // Print string to second window at the x,y co-ordinates specificed
         mvwprintw(myWindow2, mx2 / 2, ((my2 - std::strlen(welcome)) / 2), "%s",
                   welcome);
