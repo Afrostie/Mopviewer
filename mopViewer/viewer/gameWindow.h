@@ -27,7 +27,7 @@
 //Model Class
 #include "../Engine/model.h"
 
-#include "../../mopLoader/mopfile/MopFile.h"
+#include "../../Mopfile/MopFile.h"
 
 #include <thread>
 

@@ -4,7 +4,7 @@
 #include <string>
 #include <cstring>
 #include "gameWindow.h"
-#include "../../mopLoader/mopfile/MopFile.h"
+#include "../../Mopfile/MopFile.h"
 
 
 
