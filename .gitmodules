@@ -1,0 +1,3 @@
+[submodule "Mopfile"]
+	path = Mopfile
+	url = https://gitlab.com/carey.pridgeon/Mopfile.git
