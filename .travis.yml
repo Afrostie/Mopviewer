@@ -13,6 +13,9 @@ before_script:
   - make
   - sudo make install
   - cd ..
+  - wget https://github.com/nothings/stb/archive/master.zip
+  - unzip master.zip
+  - sudo cp stb-master/ /usr/include/stb -R
 
 install:
 - if [ "$CXX" = "g++" ]; then export CXX="g++-4.8" CC="gcc-4.8"; fi
@@ -31,6 +34,7 @@ addons:
     - unzip
     - xorg-dev
     - libglu1-mesa-dev
+    - libsoil-dev
 
 script:
  - git submodule update
