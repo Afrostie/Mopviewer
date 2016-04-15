@@ -5,6 +5,16 @@ compiler:
 - gcc
 os:
 - linux
+before_install:
+  - sudo apt-get install unzip
+  - wget https://github.com/glfw/glfw/releases/download/3.1.2/glfw-3.1.2.zip
+  - unzip glfw-3.1.2.zip
+  - cd glfw-3.1.2
+  - cmake .
+  - make
+  - sudo make install
+  - cd ..
+  
 install:
 - if [ "$CXX" = "g++" ]; then export CXX="g++-4.8" CC="gcc-4.8"; fi
 addons:
