@@ -9,4 +9,5 @@ script:
  - git submodule sync
  - cd Mopfile/
  - git pull origin
+ - cd ..
  - make
