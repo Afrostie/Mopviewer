@@ -1,0 +1,12 @@
+language: cpp
+dist: trusty
+compiler:
+- gcc
+os:
+- linux
+script:
+ - git submodule update
+ - git submodule sync
+ - cd Mopfile/
+ - git pull origin
+ - make
