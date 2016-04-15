@@ -14,10 +14,11 @@ addons:
     packages:
     - gcc-4.8
     - g++-4.8
-    - libglfw-dev
-    - libglfw2-dev
+    - libglfw3-dev
     - libglew-dev
     - libglm-dev
+    - libassimp-dev
+    - libncurses5-dev
 
 script:
  - git submodule update
@@ -25,4 +26,3 @@ script:
  - cd Mopfile/
  - git pull origin master
  - cd ..
- - make
