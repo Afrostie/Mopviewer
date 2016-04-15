@@ -14,7 +14,7 @@ addons:
     packages:
     - gcc-4.8
     - g++-4.8
-    - libglfw2-dev
+    - libglfw-dev
     - libglew-dev
     - libglm-dev
     - libassimp-dev
@@ -26,3 +26,4 @@ script:
  - cd Mopfile/
  - git pull origin master
  - cd ..
+ - make
