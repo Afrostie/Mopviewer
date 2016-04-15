@@ -8,6 +8,6 @@ script:
  - git submodule update
  - git submodule sync
  - cd Mopfile/
- - git pull origin
+ - git pull origin master
  - cd ..
  - make
