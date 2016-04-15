@@ -29,6 +29,8 @@ addons:
     - libassimp-dev
     - libncurses5-dev
     - unzip
+    - xorg-dev
+    - libglu1-mesa-dev
 
 script:
  - git submodule update
