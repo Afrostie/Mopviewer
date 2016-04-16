@@ -37,7 +37,7 @@ int mainWindow::printOutput(MopState *mopstate, int currentRow, int currentitem,
 }
 void mainWindow::showStats(std::string fileName, float skipCount) {
         mopfile = new MopFile();
-        mopfile->setFilename(fileName);
+        mopfile->setFilenameViewer(fileName);
         mopfile->openMopfileReader();
         mopstate = new MopState();
         mopstate = mopfile->readCyclingState(skipCount);

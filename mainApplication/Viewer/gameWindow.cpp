@@ -159,7 +159,7 @@ void gameWindow::init(std::string fileName, float skipCount) {
         //Create the Mopfile and MopState and load an inital state
         newWindow.mopstate = new MopState();
         newWindow.mopfile = new MopFile();
-        newWindow.mopfile->setFilename(fileName);
+        newWindow.mopfile->setFilenameViewer(fileName);
         newWindow.mopfile->openMopfileReader();
         newWindow.mopstate = newWindow.mopfile->readCyclingState(skips);
         std::cout << "Item Count: " << newWindow.mopstate->getItemCount() << std::endl;
