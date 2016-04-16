@@ -6,3 +6,4 @@ Mopviewer
 *.o
 Resources/100000.mop
 Resources/cluster.mop
+.vscode

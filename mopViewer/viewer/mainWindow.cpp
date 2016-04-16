@@ -5,10 +5,10 @@ mainWindow::mainWindow() {
 mainWindow::~mainWindow() {
 }
 
-void mainWindow::refreshAll(WINDOW *window1, WINDOW *window2) {
+void mainWindow::refreshAll(WINDOW *window1) {
         refresh();
         wrefresh(window1);
-        wrefresh(window2);
+
 }
 
 int mainWindow::printOutput(MopState *mopstate, int currentRow, int currentitem,
@@ -42,18 +42,10 @@ void mainWindow::showStats(std::string fileName, float skipCount) {
         mopstate = new MopState();
         mopstate = mopfile->readCyclingState(skipCount);
         std::cout << "Item Count: " << mopstate->getItemCount() << std::endl;
-        /* for (int i = 0; i < mopstate->getItemCount(); i++) {
-                 std::cout << "Particle "<< i << " X value: " <<
-           mopstate->getMopItem(i).x << std::endl;
-                 std::cout << "Particle "<< i << " Y value: " <<
-           mopstate->getMopItem(i).y << std::endl;
-                 std::cout << "Particle "<< i << " Z value: " <<
-           mopstate->getMopItem(i).z << std::endl;
-           }*/
+
         int x, y, x2, y2, x3, y3;
         nCurses nCurse;
-        // TODO: Switch to a single init function
-        // nCurse.start(true, true, true, false);
+
         initscr();
         raw();
         nCurse.startColour();
@@ -68,12 +60,12 @@ void mainWindow::showStats(std::string fileName, float skipCount) {
         wbkgd(window1, COLOR_PAIR(2));
         nCurse.drawBox(window1, ACS_VLINE, ACS_HLINE);
 
-        WINDOW *window2 = newwin(x - 4, (y / 2) - 5, 2, (y / 2) + 2);
+     /*   WINDOW *window2 = newwin(x - 4, (y / 2) - 5, 2, (y / 2) + 2);
         wbkgd(window2, COLOR_PAIR(2));
-        nCurse.drawBox(window2, ACS_VLINE, ACS_HLINE);
+        nCurse.drawBox(window2, ACS_VLINE, ACS_HLINE);*/
 
         wattron(stdscr, A_BOLD);
-      //  mvwprintw(stdscr, 1, (y / 2) - 10, "Welcome to mainWindow");
+
          mvwprintw(stdscr, 1, (y / 2) - 10, "_ __ ___   ___  _ __/\\   /(_) _____      _____ _ __");
          mvwprintw(stdscr, 2, (y / 2) - 10, "| '_ ` _ \\ / _ \\| '_ \\ \\ / / |/ _ \\ \\ /\\ / / _ \\ '__|");
          mvwprintw(stdscr, 3, (y / 2) - 10, "| | | | | | (_) | |_) \\ V /| |  __/\\ V  V /  __/ |   ");
@@ -81,7 +73,7 @@ void mainWindow::showStats(std::string fileName, float skipCount) {
          mvwprintw(stdscr, 5, (y / 2) - 10, "                |_|                                  ");
 
         getmaxyx(window1, x2, y2);
-        getmaxyx(window2, x3, y3);
+        getmaxyx(window1, x3, y3);
 
         // Get the output for sizes of windows, helps me understand the sizing
         std::cout << "Max X: " << x << std::endl;
@@ -110,7 +102,7 @@ void mainWindow::showStats(std::string fileName, float skipCount) {
                 // 2nd column
                 if ((currentRow >= (8 * maxitems))) {
                         currentRow2 =
-                                mainWindow::printOutput(mopstate, currentRow2, currentitem, window2);
+                                mainWindow::printOutput(mopstate, currentRow2, currentitem, window1);
                         currentitem++;
                 }
                 // Else print to 1st column
@@ -121,7 +113,7 @@ void mainWindow::showStats(std::string fileName, float skipCount) {
                 }
         }
         // Refresh all windows to update the display
-        mainWindow::refreshAll(window1, window2);
+        mainWindow::refreshAll(window1);
 
         // Pretty much copy and pasting the same chunk of code, small changes
         // According to which button is pressed, really horrible/long atm
@@ -135,7 +127,7 @@ void mainWindow::showStats(std::string fileName, float skipCount) {
                                 if ((currentRow >= (8 * maxitems)) &&
                                     (currentitem <= mopstate->getItemCount())) {
                                         currentRow2 = mainWindow::printOutput(mopstate, currentRow2,
-                                                                              currentitem, window2);
+                                                                              currentitem, window1);
                                         currentitem++;
 
                                 } else if (currentitem <= mopstate->getItemCount()) {
@@ -144,7 +136,7 @@ void mainWindow::showStats(std::string fileName, float skipCount) {
                                         currentitem++;
                                 }
                         }
-                        mainWindow::refreshAll(window1, window2);
+                        mainWindow::refreshAll(window1);
                         // std::cout << "Loaded Next Items" << std::endl;
                         break;
 
@@ -152,7 +144,7 @@ void mainWindow::showStats(std::string fileName, float skipCount) {
                         // Need to clear otherwise if the number is shorter than previous, ends
                         // will show
                         wclear(window1);
-                        wclear(window2);
+                       // wclear(window2);
                         currentRow = 1;
                         currentRow2 = 1;
                         // When going back, reduce the currentitem to make sure right ones are
@@ -162,7 +154,7 @@ void mainWindow::showStats(std::string fileName, float skipCount) {
                                 if ((currentRow >= (8 * maxitems)) &&
                                     (currentitem <= mopstate->getItemCount())) {
                                         currentRow2 = mainWindow::printOutput(mopstate, currentRow2,
-                                                                              currentitem, window2);
+                                                                              currentitem, window1);
                                         currentitem++;
                                 } else if (currentitem <= mopstate->getItemCount() &&
                                            (currentitem <= mopstate->getItemCount()) &&
@@ -182,9 +174,9 @@ void mainWindow::showStats(std::string fileName, float skipCount) {
                         // a different method of clearing
                         // Redraw boxes around windows as clear deletes them
                         nCurse.drawBox(window1, ACS_VLINE, ACS_HLINE);
-                        nCurse.drawBox(window2, ACS_VLINE, ACS_HLINE);
+                        nCurse.drawBox(window1, ACS_VLINE, ACS_HLINE);
 
-                        mainWindow::refreshAll(window1, window2);
+                        mainWindow::refreshAll(window1);
                         // std::cout << "Loaded Previous Items" << std::endl;
                         break;
 
@@ -197,7 +189,7 @@ void mainWindow::showStats(std::string fileName, float skipCount) {
                                 if ((currentRow >= (8 * maxitems)) &&
                                     (currentitem <= mopstate->getItemCount())) {
                                         currentRow2 = mainWindow::printOutput(mopstate, currentRow2,
-                                                                              currentitem, window2);
+                                                                              currentitem, window1);
                                         currentitem++;
 
                                 } else if (currentitem <= mopstate->getItemCount()) {
@@ -206,7 +198,7 @@ void mainWindow::showStats(std::string fileName, float skipCount) {
                                         currentitem++;
                                 }
                         }
-                        mainWindow::refreshAll(window1, window2);
+                        mainWindow::refreshAll(window1);
                         // std::cout << "Loaded Next State" << std::endl;
                         break;
 
@@ -221,7 +213,7 @@ void mainWindow::showStats(std::string fileName, float skipCount) {
                                 if ((currentRow >= (8 * maxitems)) &&
                                     (currentitem <= mopstate->getItemCount())) {
                                         currentRow2 = mainWindow::printOutput(mopstate, currentRow2,
-                                                                              currentitem, window2);
+                                                                              currentitem, window1);
                                         currentitem++;
 
                                 } else if (currentitem <= mopstate->getItemCount()) {
@@ -230,7 +222,7 @@ void mainWindow::showStats(std::string fileName, float skipCount) {
                                         currentitem++;
                                 }
                         }
-                        mainWindow::refreshAll(window1, window2);
+                        mainWindow::refreshAll(window1);
                         // std::cout << "Reset State" << std::endl;
                         break;
                 }
@@ -274,14 +266,14 @@ void mainWindow::selectGame(std::string fileName, float skipCount) {
         // Make a new window that is a sub window of
         // main window and add a border to it
         getmaxyx(myWindow, mx, my);
-        WINDOW *myWindow2 = subwin(myWindow, mx - 5, my - 5, 3, 3);
-        box(myWindow2, ACS_VLINE, ACS_HLINE);
+     //   WINDOW *myWindow2 = subwin(myWindow, mx - 5, my - 5, 3, 3);
+       // box(myWindow2, ACS_VLINE, ACS_HLINE);
         // Get the max size of both windows for use later on
         getmaxyx(myWindow, mx, my);
-        getmaxyx(myWindow2, mx2, my2);
+        getmaxyx(myWindow, mx2, my2);
         // Set background and colour shceme of child window
-        wattron(myWindow2, COLOR_PAIR(2));
-        wbkgd(myWindow2, COLOR_PAIR(2));
+       // wattron(myWindow2, COLOR_PAIR(2));
+       // wbkgd(myWindow2, COLOR_PAIR(2));
         // Add the title string to the main window
         //mvaddstr(1, (my2 / 2) - 10, "Welcome to the mainWindow!");
         mvaddstr(1, (my2 / 2) - 26, "_ __ ___   ___  _ __/\\   /(_) _____      _____ _ __");
@@ -290,16 +282,16 @@ void mainWindow::selectGame(std::string fileName, float skipCount) {
         mvaddstr(4, (my2 / 2) - 26, "|_| |_| |_|\\___/| .__/ \\_/ |_|\\___| \\_/\\_/ \\___|_|   ");
         mvaddstr(5, (my2 / 2) - 26, "                |_|                                  ");
         // Print string to second window at the x,y co-ordinates specificed
-        mvwprintw(myWindow2, mx2 / 2, ((my2 - std::strlen(welcome)) / 2), "%s",
+        mvwprintw(myWindow, mx2 / 2, ((my2 - std::strlen(welcome)) / 2), "%s",
                   welcome);
-        mvwprintw(myWindow2, (mx2 / 2) + 10, ((my2 - std::strlen(exitMessage)) / 2),
+        mvwprintw(myWindow, (mx2 / 2) + 10, ((my2 - std::strlen(exitMessage)) / 2),
                   "%s", exitMessage);
         wmove(myWindow, (mx2 / 2) + 5, ((my2 / 2) + std::strlen(welcome)));
         // Refresh main window otherwise background colour won't show for some reason
         wrefresh(myWindow);
         char inputString[1];
         // Get the input into inputString
-        wgetstr(myWindow2, inputString);
+        wgetstr(myWindow, inputString);
         mainWindow mainWindows;
         gameWindow newWindow;
         if (inputString[0] == '1') {

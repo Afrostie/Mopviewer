@@ -15,7 +15,7 @@ mainWindow(void);
 ~mainWindow(void);
 void showStats(std::string fileName, float skipCount);
 void selectGame(std::string fileName, float skipCount);
-void refreshAll(WINDOW * window1, WINDOW * window2);
+void refreshAll(WINDOW * window1);
 int printOutput(MopState * mopstate, int currentrow, int currentitem, WINDOW* window);
 MopFile * mopfile;
 MopState * mopstate;
