@@ -17,6 +17,13 @@ int main() {
         std::cout << "|_| |_| |_|\\___/| .__/ \\_/ |_|\\___| \\_/\\_/ \\___|_|   " << std::endl;
         std::cout << "                |_|                                  " << std::endl;
 
+
+        #ifdef MOPFILELIGHT
+        std::cout << "mopViewer was compiled for MopFileLight" << std::endl;
+        #endif
+        #ifdef MOPFILE
+        std::cout << "mopViewer was compiled for MopFileLight" << std::endl;
+        #endif
         std::cout << "Enter the MopFile Name (No need to use extension/location): ";
         std::cin >> fileName;
         std::cout << std::endl
