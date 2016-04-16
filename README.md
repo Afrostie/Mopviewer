@@ -37,28 +37,21 @@ Only been tested on Ubuntu at the moment. Should be compatible with cygwin
 
 ### Basic Steps:
 
-Install libraries
+All the libraries except for GLFW3 (unless on Ubuntu 15) or STB are available by apt-get.
 
-```shell
-git clone https://github.com/afrostie/mopViewer.git (or your own fork)
-cd mopViewer/
-git submodule init
-git submodule update
-make
-./mopViewer
-```
-
-Alternativly using recursive can shorten the Steps.
+GLFW3 you will need to download and build yourself, STB needs to be downloaded and moved to /usr/include or similar
 
 ```shell
 git clone https://github.com/afrostie/mopViewer.git --recursive
-
+cd mopViewer/
+make
+./mopViewer
 ```
 
 ### Required Libraries
 
 1.	OpenGL 3.3 or higher compatible GPU/drivers
-2.	[GLFW](http://www.glfw.org/)
+2.	[GLFW3](http://www.glfw.org/)
 3.	[GLEW](http://glew.sourceforge.net/)
 4.	nCurses *(libncurses-dev)*
 5.	[glm](http://glm.g-truc.net/0.9.7/index.html)
@@ -70,7 +63,15 @@ git clone https://github.com/afrostie/mopViewer.git --recursive
 
 The loading of .mop files has been moved to a seperate repository as it is code shared between mopViewer and Sulaco. It can be found here [Mopfile](http://gitlab.com/carey.pridgeon/Mopfile)
 
-Mopfile is included as a submodule in mopViewer, however when you clone it does not include the extra files so you must run (unless you use recursive)
+Mopfile is included as a submodule in mopViewer, this means there are two ways to download.
+
+##### Method 1: Clone the repository using the --recursive tag
+
+```bash
+  git clone https://github.com/afrostie/mopViewer.git --recursive
+```
+
+##### Method 2: Alternative method
 
 ```bash
 git submodule init

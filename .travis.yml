@@ -37,5 +37,9 @@ addons:
     - libsoil-dev
 
 script:
- - git clone https://github.com/afrostie/mopViewer.git --recursive
+ - git submodule update
+ - git submodule sync
+ - cd Mopfile/
+ - git pull origin master
+ - cd ..
  - make
