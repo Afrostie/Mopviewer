@@ -15,8 +15,6 @@ class mopViewer
 public:
 	GLFWwindow* currentWindow;
 	void init(const GLuint width, const GLuint height);
-	static void deleteBuffer(GLuint VAO, GLuint VBO, GLuint EBO);
-	void render();
 };
 
 

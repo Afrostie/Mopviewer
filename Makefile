@@ -72,11 +72,11 @@ LDFLAGS   =
 
 # The directories in which source files reside.
 # If not specified, only the current directory will be serached.
-SRCDIRS   = ./ mopViewer/viewer mopViewer/Engine
+SRCDIRS   = ./ mainApplication/Viewer mainApplication/Engine
 
 # The executable file name.
 # If not specified, current directory name or `a.out' will be used.
-PROGRAM   = Mopviewer
+PROGRAM   = mopViewer
 
 ## Implicit Section: change the following only when necessary.
 ##==========================================================================

@@ -1,6 +1,6 @@
 /**
- * This is code taken from an OpenGL tutorial http://www.opengl-tutorial.org/
- * Using this to learn OpenGL.
+ * Some sections of code are based on Tutorials from learnopengl.com
+ * This class manages everything related to the OpenGL viewer
  */
 
 #include "gameWindow.h"

@@ -1,4 +1,10 @@
-﻿#include "mopViewer.h"
+/**
+ * A utility class I created
+ * I plan to move more functionality to this
+ */
+
+
+#include "mopViewer.h"
 
 void mopViewer::init(const GLuint width, const GLuint height)
 {
@@ -29,18 +35,6 @@ void mopViewer::init(const GLuint width, const GLuint height)
 
 	glEnable(GL_DEPTH_TEST);
 	glfwWindowHint(GLFW_SAMPLES, 4);
-	glEnable(GL_STENCIL_TEST);  
-	glEnable(GL_CULL_FACE);  
-}
-
-void mopViewer::deleteBuffer(GLuint VAO, GLuint VBO, GLuint EBO)
-{
-	glDeleteVertexArrays(1, &VAO);
-	glDeleteBuffers(1, &VBO);
-	glDeleteBuffers(1, &EBO);
-}
-
-void mopViewer::render(){
-	    glfwPollEvents();
-    // Render
+	glEnable(GL_STENCIL_TEST);
+	glEnable(GL_CULL_FACE);
 }

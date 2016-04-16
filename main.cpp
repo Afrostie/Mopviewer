@@ -1,9 +1,12 @@
+/**
+ *       This file simply asks for the Mopfile and then loads mopViewer
+ */
+
+
 #include <curses.h>
 #include <iostream>
-#include "mopViewer/viewer/mainWindow.h"
+#include "mainApplication/Viewer/mainWindow.h"
 #include <string>
-
-
 
 int main() {
         mainWindow mainWindows;
