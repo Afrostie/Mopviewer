@@ -1,5 +1,5 @@
 /**
- * A utility class I created
+ * A utility class
  * I plan to move more functionality to this
  */
 
