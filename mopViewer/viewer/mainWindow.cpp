@@ -241,7 +241,7 @@ void mainWindow::showStats(std::string fileName, float skipCount) {
 
 void mainWindow::selectGame(std::string fileName, float skipCount) {
         clear();
-        int mx = 0, my = 0, mx2 = 0, my2 = 0;
+        int mx2 = 0, my2 = 0;
         char welcome[] = "Enter 1 to View Stats, 2 to Open mainWindow and 3 to change Mopfile: ";
         char exitMessage[] = "Enter anything else to exit";
         // Create inital screen. Better to replace
@@ -254,7 +254,7 @@ void mainWindow::selectGame(std::string fileName, float skipCount) {
         // Enable use of colour on screen
         start_color();
         // Create two colour pairs for the different screens
-        init_pair(1, COLOR_BLACK, COLOR_CYAN);
+        init_pair(1, COLOR_WHITE, COLOR_BLACK);
         init_pair(2, COLOR_BLACK, COLOR_RED);
         init_pair(3, COLOR_WHITE, COLOR_BLACK);
         // Set the colour scheme of window 1 to pair 1
@@ -265,11 +265,11 @@ void mainWindow::selectGame(std::string fileName, float skipCount) {
         box(myWindow, ACS_BULLET, ACS_BULLET);
         // Make a new window that is a sub window of
         // main window and add a border to it
-        getmaxyx(myWindow, mx, my);
+
      //   WINDOW *myWindow2 = subwin(myWindow, mx - 5, my - 5, 3, 3);
        // box(myWindow2, ACS_VLINE, ACS_HLINE);
         // Get the max size of both windows for use later on
-        getmaxyx(myWindow, mx, my);
+
         getmaxyx(myWindow, mx2, my2);
         // Set background and colour shceme of child window
        // wattron(myWindow2, COLOR_PAIR(2));

@@ -5,6 +5,8 @@
 // Std. Includes
 #include <vector>
 
+#define GLM_FORCE_RADIANS
+
 // GL Includes
 #include <GL/glew.h>
 #include <glm/glm.hpp>
