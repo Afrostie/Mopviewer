@@ -56,6 +56,8 @@
 ## Customizable Section: adapt those variables to suit your program.
 ##==========================================================================
 
+# -D MOPFILELIGHT for the small MopFile format
+# -D MOPFILE for the large MopFile format
 # The pre-processor and compiler options.
 MY_CFLAGS = -fopenmp -D MOPFILELIGHT
 
