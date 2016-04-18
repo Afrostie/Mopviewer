@@ -1,5 +1,6 @@
-/*
-	Based off of basic classes given in the tutorials at learnopengl.com
+/**
+	* Based off of basic classes given in the tutorials at learnopengl.com
+	* This class handles the moving of the camera
 */
 
 #include "Camera.h"

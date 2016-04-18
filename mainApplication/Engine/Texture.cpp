@@ -4,8 +4,9 @@
 
 #include "Texture.h"
 
-GLuint Texture::createTexture(const GLchar* path)
+GLuint Texture::createTexture(std::string path)
 {
+	ImageLoader imageLoader;
 	GLuint texture;
 	glGenTextures(1, &texture);
 	//Make sure all 2D texture calls use the right texture object
@@ -17,13 +18,15 @@ GLuint Texture::createTexture(const GLchar* path)
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 	//Load the image using stb
-	int width, height;
-	unsigned char* image = stbi_load(path, &width, &height, 0, STBI_rgb);
+	unsigned char* image = imageLoader.loadImage(path);
+	int width = imageLoader.returnWidth();
+	int height = imageLoader.returnHeight();
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, image);
 	//Make OpenGL create the mipmap versions of texture
 	glGenerateMipmap(GL_TEXTURE_2D);
 	//Image no longer required after textures are generated
-	stbi_image_free(image);
+	imageLoader.freeData(image);
+
 	glBindTexture(GL_TEXTURE_2D, 0);
 	return texture;
 }

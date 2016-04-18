@@ -19,7 +19,7 @@ using namespace std;
 #include <glm/gtc/matrix_transform.hpp>
 
 //STB for image loading
-#include "stb/stb_image.h"
+//#include "stb/stb_image.h"
 
 //Assimp for model loading
 #include <assimp/Importer.hpp>
@@ -27,6 +27,8 @@ using namespace std;
 #include <assimp/postprocess.h>
 
 #include "mesh.h"
+
+#include "ImageLoader.h"
 
 
 
@@ -47,16 +49,19 @@ public:
             this->meshes[i].Draw(shader);
     }
 
-    GLint TextureFromFile(const char* path, string directory)
+    GLint TextureFromFile(std::string path, string directory)
     {
+        ImageLoader imageLoader;
          //Generate texture ID and load texture data
-        string filename = string(path);
+       string filename = path;
         filename = directory + '/' + filename;
         GLuint textureID;
         glGenTextures(1, &textureID);
-        int width,height;
 
-        unsigned char* image = stbi_load(filename.c_str(), &width, &height, 0, STBI_rgb);
+        unsigned char* image = imageLoader.loadImage(filename.c_str());
+        int width = imageLoader.returnWidth();
+        int height = imageLoader.returnHeight();
+
         // Assign texture to ID
         glBindTexture(GL_TEXTURE_2D, textureID);
         glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, image);
@@ -68,7 +73,8 @@ public:
         glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR );
         glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
         glBindTexture(GL_TEXTURE_2D, 0);
-        stbi_image_free(image);
+        imageLoader.freeData(image);
+
         return textureID;
     }
 

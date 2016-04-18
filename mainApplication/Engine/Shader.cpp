@@ -1,5 +1,6 @@
-/*
-	Based off of basic classes given in the tutorials at learnopengl.com
+/**
+	* Based off of basic classes given in the tutorials at learnopengl.com
+  * Loads shaders from files
 */
 
 #include "Shader.h"
