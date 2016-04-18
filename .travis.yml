@@ -26,15 +26,14 @@ addons:
     packages:
     - gcc-4.8
     - g++-4.8
+    - unzip
     - libglfw-dev
     - libglew-dev
     - libglm-dev
     - libassimp-dev
     - libncurses5-dev
-    - unzip
     - xorg-dev
     - libglu1-mesa-dev
-    - libsoil-dev
 
 script:
  - git submodule update
