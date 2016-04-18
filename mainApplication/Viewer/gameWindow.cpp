@@ -207,7 +207,7 @@ void gameWindow::init(std::string fileName, float skipCount) {
 
 
                 //Place every object in the scene
-                for (GLuint i = 0; i < newWindow.mopstate->getItemCount(); i++)
+                for (int i = 0; i < newWindow.mopstate->getItemCount(); i++)
                 {
                         glm::mat4 model;
                         model = glm::translate(model, glm::vec3(newWindow.mopstate->getMopItem(i).x/scaler,newWindow.mopstate->getMopItem(i).y/scaler,newWindow.mopstate->getMopItem(i).z/scaler)); // Translate it down a bit so it's at the center of the scene

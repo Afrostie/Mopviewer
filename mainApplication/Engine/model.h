@@ -37,7 +37,7 @@ class Model
 public:
     /*  Functions   */
     // Constructor, expects a filepath to a 3D model.
-    Model(GLchar* path)
+    Model(string path)
     {
         this->loadModel(path);
     }
