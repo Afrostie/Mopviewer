@@ -33,7 +33,7 @@ Particle Information Screen:
 Installation
 ------------
 
-Only been tested on Ubuntu at the moment. Should be compatible with cygwin
+mopViewer was developed on Ubuntu but has also been tested on Windows 10 with Visual Studio Community 2015
 
 ### Basic Steps:
 
