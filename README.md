@@ -35,19 +35,6 @@ Installation
 
 mopViewer was developed on Ubuntu but has also been tested on Windows 10 with Visual Studio Community 2015
 
-### Basic Steps:
-
-All the libraries except for GLFW3 (unless on Ubuntu 15) or STB are available by apt-get.
-
-GLFW3 you will need to download and build yourself, STB needs to be downloaded and moved to /usr/include or similar
-
-```shell
-git clone https://github.com/afrostie/mopViewer.git --recursive
-cd mopViewer/
-make
-./mopViewer
-```
-
 ### Required Libraries
 
 1.	OpenGL 3.3 or higher compatible GPU/drivers
@@ -57,31 +44,14 @@ make
 5.	[glm](http://glm.g-truc.net/0.9.7/index.html)
 6.	[STB](https://github.com/nothings/stb) for image loading
 7.	[Assimp](https://github.com/assimp/assimp) for model loading (Use newer version off of github or it won't compile)
-8.	Not a library but there is some c++11 features in use
+8.	[zLib](http://www.zlib.net/) for compression in Mopfile (not in use currently)
 
 #### Important Note
 
 The loading of .mop files has been moved to a seperate repository as it is code shared between mopViewer and Sulaco. It can be found here [Mopfile](http://gitlab.com/carey.pridgeon/Mopfile)
 
-Mopfile is included as a submodule in mopViewer, this means there are two ways to download.
+##### See INSTALL to find detailed Installation instructions
 
-##### Method 1: Clone the repository using the --recursive tag
-
-```bash
-  git clone https://github.com/afrostie/mopViewer.git --recursive
-```
-
-##### Method 2: Alternative method
-
-```bash
-git submodule init
-git submodule update
-git pull origin master
-```
-
-Currently uses a Makefile to compile so make is required
-
-Download the latest [release](https://github.com/Afrostie/mopViewer/releases/tag/1.2), unpack it and run make
 
 MopFile's
 ---------
