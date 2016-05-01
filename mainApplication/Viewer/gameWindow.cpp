@@ -135,6 +135,7 @@ void gameWindow::threadFunc(MopState* mopstate1,   MopFile* mopfile1){
                 std::cout << "Loaded State: " << loadedStates << std::endl;
                 loadedStates++;
         }
+		exit(0);
 };
 
 
@@ -222,6 +223,7 @@ void gameWindow::init(std::string fileName, float skipCount) {
         // Properly de-allocate all resources once they've outlived their purpose
         loadStates = false;
         threadOne.detach();
+		
         // Terminate GLFW, clearing any resources allocated by GLFW.
         glfwTerminate();
 }

@@ -53,9 +53,6 @@
     <ClInclude Include="mainapplication\engine\model.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="mainapplication\engine\nCurses.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="mainapplication\engine\Shader.h">
       <Filter>Header Files</Filter>
     </ClInclude>

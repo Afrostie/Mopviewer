@@ -44,25 +44,20 @@ void mainWindow::showStats(std::string fileName, float skipCount) {
         std::cout << "Item Count: " << mopstate->getItemCount() << std::endl;
 
         int x, y, x2, y2, x3, y3;
-        nCurses nCurse;
 
         initscr();
         raw();
-        nCurse.startColour();
+		start_color();
         getmaxyx(stdscr, x, y);
         init_pair(1, COLOR_WHITE, COLOR_BLACK);
         init_pair(2, COLOR_BLACK, COLOR_WHITE);
         wbkgd(stdscr, COLOR_PAIR(1));
         wattron(stdscr, COLOR_PAIR(1));
-        nCurse.drawBox(stdscr, ACS_VLINE, ACS_HLINE);
+		box(stdscr, ACS_VLINE, ACS_HLINE);
 
         WINDOW *window1 = newwin(x - 4, (y / 2) - 5, 2, 2);
         wbkgd(window1, COLOR_PAIR(2));
-        nCurse.drawBox(window1, ACS_VLINE, ACS_HLINE);
-
-     /*   WINDOW *window2 = newwin(x - 4, (y / 2) - 5, 2, (y / 2) + 2);
-        wbkgd(window2, COLOR_PAIR(2));
-        nCurse.drawBox(window2, ACS_VLINE, ACS_HLINE);*/
+        box(window1, ACS_VLINE, ACS_HLINE);
 
         wattron(stdscr, A_BOLD);
 
@@ -173,8 +168,7 @@ void mainWindow::showStats(std::string fileName, float skipCount) {
                         // TODO: Need to either create a function tovredraw and refresh or find
                         // a different method of clearing
                         // Redraw boxes around windows as clear deletes them
-                        nCurse.drawBox(window1, ACS_VLINE, ACS_HLINE);
-                        nCurse.drawBox(window1, ACS_VLINE, ACS_HLINE);
+						box(window1, ACS_VLINE, ACS_HLINE);
 
                         mainWindow::refreshAll(window1);
                         // std::cout << "Loaded Previous Items" << std::endl;

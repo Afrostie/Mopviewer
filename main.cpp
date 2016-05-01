@@ -2,8 +2,11 @@
  *       This file simply asks for the Mopfile and then loads mopViewer
  */
 
-
+#ifdef _WIN32
+#include <nCurses\curses.h>
+#else
 #include <curses.h>
+#endif
 #include <iostream>
 #include "mainApplication/Viewer/mainWindow.h"
 #include <string>

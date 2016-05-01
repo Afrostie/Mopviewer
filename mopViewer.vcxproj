@@ -117,7 +117,6 @@
     <ClInclude Include="mainapplication\engine\ImageLoader.h" />
     <ClInclude Include="mainapplication\engine\mesh.h" />
     <ClInclude Include="mainapplication\engine\model.h" />
-    <ClInclude Include="mainapplication\engine\nCurses.h" />
     <ClInclude Include="mainapplication\engine\Shader.h" />
     <ClInclude Include="mainapplication\engine\Texture.h" />
     <ClInclude Include="mainapplication\viewer\gameWindow.h" />

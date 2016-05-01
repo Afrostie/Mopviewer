@@ -11,6 +11,7 @@
 #include <vector>
 using namespace std;
 // GL Includes
+#define GLEW_STATIC
 #include <GL/glew.h> // Contains all the necessery OpenGL includes
 
 #define GLM_FORCE_RADIANS

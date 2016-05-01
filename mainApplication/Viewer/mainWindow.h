@@ -1,6 +1,10 @@
+#ifdef _WIN32
+#include <nCurses\curses.h>
+#else
 #include <curses.h>
+#endif
 #include <iostream>
-#include "../Engine/nCurses.h"
+//#include "../Engine/nCurses.h"
 #include <string>
 #include <cstring>
 #include "gameWindow.h"
