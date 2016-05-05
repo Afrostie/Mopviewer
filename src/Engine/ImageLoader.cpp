@@ -4,7 +4,7 @@
 
 #include "ImageLoader.h"
 #define STB_IMAGE_IMPLEMENTATION
-#include <stb/stb_image.h>
+#include "../../libs/stb/stb_image.h"
 
 //Loads and return image data from given path
 unsigned char* ImageLoader::loadImage(std::string path){
