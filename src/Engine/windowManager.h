@@ -15,7 +15,7 @@ class windowManager
 public:
 	
 	void init();
-	void windowManager::getScreenSize();
+	void getScreenSize();
 	//Functions to return dimensions of window
 	int getWindowHeight();
 	int getWindowWidth();
