@@ -32,7 +32,7 @@ void Shader::compileShader(const GLchar* vertexPath,
   glGetShaderiv(vertex, GL_COMPILE_STATUS, &success);
   if (!success) {
     glGetShaderInfoLog(vertex, 512, NULL, errorLog);
-    std::cout << "> ERROR: Vertex Shader Did Not Compile" << std::endl;
+    std::cerr << "> ERROR: Vertex Shader Did Not Compile. Error is: " << errorLog << std::endl;
   }
 
   // Fragment Shader
@@ -43,7 +43,7 @@ void Shader::compileShader(const GLchar* vertexPath,
   glGetShaderiv(fragment, GL_COMPILE_STATUS, &success);
   if (!success) {
     glGetShaderInfoLog(vertex, 512, NULL, errorLog);
-    std::cout << "> ERROR: Fragment Shader Did Not Compile" << std::endl;
+    std::cerr << "> ERROR: Fragment Shader Did Not Compile. Error is: " << errorLog << std::endl;
   }
 
   // Shader Program
@@ -55,7 +55,7 @@ void Shader::compileShader(const GLchar* vertexPath,
   glGetProgramiv(this->Program, GL_LINK_STATUS, &success);
   if (!success) {
     glGetProgramInfoLog(this->Program, 512, NULL, errorLog);
-    std::cout << "> ERROR: Shader Did Not Link" << std::endl;
+    std::cerr << "> ERROR: Shader Did Not Link. Error is: " << errorLog << std::endl;
   }
 
   // Clear up memory
