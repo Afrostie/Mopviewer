@@ -104,24 +104,24 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="mainapplication\engine\Camera.cpp" />
-    <ClCompile Include="mainapplication\engine\ImageLoader.cpp" />
-    <ClCompile Include="mainapplication\engine\Shader.cpp" />
-    <ClCompile Include="mainapplication\engine\Texture.cpp" />
-    <ClCompile Include="mainapplication\viewer\gameWindow.cpp" />
-    <ClCompile Include="mainapplication\viewer\mainWindow.cpp" />
-    <ClCompile Include="mainapplication\viewer\mopViewer.cpp" />
+    <ClCompile Include="src\Engine\Camera.cpp" />
+    <ClCompile Include="src\Engine\ImageLoader.cpp" />
+    <ClCompile Include="src\Engine\Shader.cpp" />
+    <ClCompile Include="src\Engine\Texture.cpp" />
+    <ClCompile Include="src\Viewer\gameWindow.cpp" />
+    <ClCompile Include="src\Viewer\mainWindow.cpp" />
+    <ClCompile Include="src\Viewer\mopViewer.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="mainapplication\engine\Camera.h" />
-    <ClInclude Include="mainapplication\engine\ImageLoader.h" />
-    <ClInclude Include="mainapplication\engine\mesh.h" />
-    <ClInclude Include="mainapplication\engine\model.h" />
-    <ClInclude Include="mainapplication\engine\Shader.h" />
-    <ClInclude Include="mainapplication\engine\Texture.h" />
-    <ClInclude Include="mainapplication\viewer\gameWindow.h" />
-    <ClInclude Include="mainapplication\viewer\mainWindow.h" />
-    <ClInclude Include="mainapplication\viewer\mopViewer.h" />
+    <ClInclude Include="src\Engine\Camera.h" />
+    <ClInclude Include="src\Engine\ImageLoader.h" />
+    <ClInclude Include="src\Engine\mesh.h" />
+    <ClInclude Include="src\Engine\model.h" />
+    <ClInclude Include="src\Engine\Shader.h" />
+    <ClInclude Include="src\Engine\Texture.h" />
+    <ClInclude Include="src\Viewer\gameWindow.h" />
+    <ClInclude Include="src\Viewer\mainWindow.h" />
+    <ClInclude Include="src\Viewer\mopViewer.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

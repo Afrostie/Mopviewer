@@ -8,7 +8,7 @@
 #include <curses.h>
 #endif
 #include <iostream>
-#include "mainApplication/Viewer/mainWindow.h"
+#include "src/Viewer/mainWindow.h"
 #include <string>
 
 int main() {

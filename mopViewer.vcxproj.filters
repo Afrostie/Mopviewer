@@ -15,57 +15,57 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="mainapplication\engine\Camera.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="mainapplication\engine\ImageLoader.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="mainapplication\engine\Shader.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="mainapplication\engine\Texture.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="mainapplication\viewer\gameWindow.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="mainapplication\viewer\mainWindow.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="mainapplication\viewer\mopViewer.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Engine\Camera.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Engine\ImageLoader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Engine\Shader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Engine\Texture.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Viewer\gameWindow.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Viewer\mainWindow.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Viewer\mopViewer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="mainapplication\engine\Camera.h">
+    <ClInclude Include="src\Engine\Camera.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="mainapplication\engine\ImageLoader.h">
+    <ClInclude Include="src\Viewer\gameWindow.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="mainapplication\engine\mesh.h">
+    <ClInclude Include="src\Engine\ImageLoader.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="mainapplication\engine\model.h">
+    <ClInclude Include="src\Viewer\mainWindow.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="mainapplication\engine\Shader.h">
+    <ClInclude Include="src\Engine\mesh.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="mainapplication\engine\Texture.h">
+    <ClInclude Include="src\Engine\model.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="mainapplication\viewer\gameWindow.h">
+    <ClInclude Include="src\Viewer\mopViewer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="mainapplication\viewer\mainWindow.h">
+    <ClInclude Include="src\Engine\Shader.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="mainapplication\viewer\mopViewer.h">
+    <ClInclude Include="src\Engine\Texture.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
