@@ -11,8 +11,8 @@ gameWindow::~gameWindow(void) {
 }
 //Height and WIDTH of screen
 //TODO: Use glfw to return user's screen size
-GLint WIDTH = 1366;
-GLint HEIGHT = 768;
+GLint WIDTH = 800;
+GLint HEIGHT = 600;
 //Default skip value for particle loading
 float skips = 0;
 //Create the camera
