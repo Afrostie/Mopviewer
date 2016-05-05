@@ -20,7 +20,7 @@
 #include "../Engine/Camera.h"
 
 //viewer
-#include "mopViewer.h"
+#include "../Engine/windowManager.h"
 
 //Texture Class
 #include "../Engine/Texture.h"
@@ -52,5 +52,7 @@ class gameWindow {
 
   MopFile* mopfile;
   MopState* mopstate;
+
+
 
 };

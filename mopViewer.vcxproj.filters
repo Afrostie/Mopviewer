@@ -36,7 +36,7 @@
     <ClCompile Include="src\Viewer\mainWindow.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Viewer\mopViewer.cpp">
+    <ClCompile Include="src\Engine\windowManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -59,13 +59,13 @@
     <ClInclude Include="src\Engine\model.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Viewer\mopViewer.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="src\Engine\Shader.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\Engine\Texture.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Engine\windowManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

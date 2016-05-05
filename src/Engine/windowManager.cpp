@@ -4,9 +4,9 @@
  */
 
 
-#include "mopViewer.h"
+#include "windowManager.h"
 
-void mopViewer::init(const GLuint width, const GLuint height)
+void windowManager::init()
 {
 	std::cout << "Starting GLFW context, OpenGL 3.3" << std::endl;
 	// Init GLFW
@@ -20,7 +20,7 @@ void mopViewer::init(const GLuint width, const GLuint height)
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 	glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
 	glfwWindowHint(GLFW_SAMPLES, 4);
-
+	getScreenSize();
 
 	// Create a GLFWwindow object that we can use for GLFW's functions
 	currentWindow = glfwCreateWindow(width, height, "viewer", NULL, NULL);
@@ -43,4 +43,22 @@ void mopViewer::init(const GLuint width, const GLuint height)
 	glfwWindowHint(GLFW_SAMPLES, 4);
 	glEnable(GL_STENCIL_TEST);
 	glEnable(GL_CULL_FACE);
+}
+void windowManager::getScreenSize() {
+	GLFWmonitor* monitor = glfwGetPrimaryMonitor();
+	const GLFWvidmode* mode = glfwGetVideoMode(monitor);
+	width = mode->width;
+	height = mode->height;
+}
+
+int windowManager::getWindowHeight() {
+	return height;
+}
+
+int windowManager::getWindowWidth() {
+	return width;
+}
+
+GLFWwindow* windowManager::getWindow() {
+	return currentWindow;
 }

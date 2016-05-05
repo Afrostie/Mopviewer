@@ -6,13 +6,17 @@
 #include "gameWindow.h"
 
 gameWindow::gameWindow(void) {
+
 }
 gameWindow::~gameWindow(void) {
 }
-//Height and WIDTH of screen
-//TODO: Use glfw to return user's screen size
-GLint WIDTH = 800;
-GLint HEIGHT = 600;
+
+//mopViewer activeWindow;
+Texture activeTexture;
+gameWindow newWindow;
+windowManager activeWindow;
+
+
 //Default skip value for particle loading
 float skips = 0;
 //Create the camera
@@ -24,9 +28,10 @@ bool keys[1024];
 //These variables keep track of performance using time between frames
 GLfloat deltaTime = 0.0f; // Time between current frame and last frame
 GLfloat lastFrame = 0.0f;   // Time of last frame
+
 //Middle of screen, to move mouse to correct position
-GLfloat lastX = WIDTH / 2;
-GLfloat lastY = HEIGHT / 2;
+GLfloat lastX = activeWindow.getWindowWidth() / 2;
+GLfloat lastY = activeWindow.getWindowHeight() / 2;
 
 
 //Value that is used to scale all particles down
@@ -38,9 +43,7 @@ int loadedStates = 0;
 bool loadStates = true;
 
 
-mopViewer activeWindow;
-Texture activeTexture;
-gameWindow newWindow;
+
 void gameWindow::key_callback(GLFWwindow* window, int key, int scancode, int action, int mode)
 {
         if (key >= 0 && key < 1024) {
@@ -143,12 +146,12 @@ void gameWindow::threadFunc(MopState* mopstate1,   MopFile* mopfile1){
 void gameWindow::init(std::string fileName, float skipCount) {
         skips = skipCount;
         //Initalises some of the OpenGL contex and sets some settings
-        activeWindow.init(WIDTH, HEIGHT);
+        activeWindow.init();
 
         // Set the required callback functions
-        glfwSetCursorPosCallback(activeWindow.currentWindow, gameWindow::mouse_callback);
-        glfwSetKeyCallback(activeWindow.currentWindow, gameWindow::key_callback);
-        glfwSetScrollCallback(activeWindow.currentWindow, gameWindow::scroll_callback);
+        glfwSetCursorPosCallback(activeWindow.getWindow(), gameWindow::mouse_callback);
+        glfwSetKeyCallback(activeWindow.getWindow(), gameWindow::key_callback);
+        glfwSetScrollCallback(activeWindow.getWindow(), gameWindow::scroll_callback);
 
         //Compile the fragment and vertex shader
         Shader objectShader;
@@ -172,7 +175,7 @@ void gameWindow::init(std::string fileName, float skipCount) {
         std::thread threadOne(gameWindow::threadFunc, mopstate, mopfile);
 
         // Game loop
-        while (!glfwWindowShouldClose(activeWindow.currentWindow))
+        while (!glfwWindowShouldClose(activeWindow.getWindow()))
         {
                 //Calculate time since last frame
                 GLfloat currentFrame = glfwGetTime();
@@ -198,7 +201,7 @@ void gameWindow::init(std::string fileName, float skipCount) {
                 glm::mat4 projection;
 
                 //Setup projection matrix, high final value means you can see objects extremly far away
-                projection = glm::perspective(camera.Zoom, (float)WIDTH/(float)HEIGHT, 0.1f, 1000000000.0f);
+                projection = glm::perspective(camera.Zoom, (float)activeWindow.getWindowWidth()/(float)activeWindow.getWindowHeight(), 0.1f, 1000000000.0f);
                 view = camera.GetViewMatrix();
                 glUniformMatrix4fv(glGetUniformLocation(objectShader.Program, "projection"), 1, GL_FALSE, glm::value_ptr(projection));
                 glUniformMatrix4fv(glGetUniformLocation(objectShader.Program, "view"), 1, GL_FALSE, glm::value_ptr(view));
@@ -218,7 +221,7 @@ void gameWindow::init(std::string fileName, float skipCount) {
                 }
 
                 // Swap the screen buffers
-                glfwSwapBuffers(activeWindow.currentWindow);
+                glfwSwapBuffers(activeWindow.getWindow());
         }
         // Properly de-allocate all resources once they've outlived their purpose
         loadStates = false;
