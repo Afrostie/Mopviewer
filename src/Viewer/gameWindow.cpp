@@ -156,7 +156,7 @@ void gameWindow::init(std::string fileName, float skipCount) {
         //Compile the fragment and vertex shader
         Shader objectShader;
 #ifdef COMPATABILITY
-		objectShader.compileShader("Resources/Shaders/object.vert", "Resources/Shaders/object.frag");
+		objectShader.compileShader("Resources/Shaders/object_comp.vert", "Resources/Shaders/object_comp.frag");
 #else
 		objectShader.compileShader("Resources/Shaders/object.vert", "Resources/Shaders/object.frag");
 #endif
