@@ -42,7 +42,7 @@ mopViewer was developed on Ubuntu but has also been tested on Windows 10 with Vi
 3.	[GLEW](http://glew.sourceforge.net/)
 4.	nCurses *(libncurses-dev)*
 5.	[glm](http://glm.g-truc.net/0.9.7/index.html)
-6.	[STB](https://github.com/nothings/stb) for image loading
+6.	[STB](https://github.com/nothings/stb) for image loading (Included as a Submodule)
 7.	[Assimp](https://github.com/assimp/assimp) for model loading (Use newer version off of github or it won't compile)
 8.	[zLib](http://www.zlib.net/) for compression in Mopfile (not in use currently)
 
@@ -66,12 +66,7 @@ Modification's
 
 This project is in it's very early stages and the code is extremely messy and latest version will often be unstable. Most of the important part happens in [mainApplication/Viewer/gameWindow.cpp](mainApplication/Viewer/gameWindow.cpp)
 
-If you want to check the screen size currently you need to modify these values:
-
-```c++
-GLint WIDTH = 1920;
-GLint HEIGHT = 1080;
-```
+The Screen Size should default to the size of your screen
 
 To change model used for particles modify:
 

@@ -7,7 +7,7 @@ These required libraries are common across Windows and Linux
 3.	[GLEW](http://glew.sourceforge.net/)
 4.	nCurses *(libncurses-dev)* (or PDCurses if on Windows)
 5.	[glm](http://glm.g-truc.net/0.9.7/index.html)
-6.	[STB](https://github.com/nothings/stb) for image loading
+6.	[STB](https://github.com/nothings/stb) for image loading (included as Submodule, so not required to install before hand)
 7.	[Assimp](https://github.com/assimp/assimp) for model loading (Use newer version off of github or it won't compile)
 8.	[zLib](http://www.zlib.net/) for compression in Mopfile (not in use currently)
 
@@ -32,7 +32,7 @@ Download the latest [release](https://github.com/Afrostie/mopViewer/releases/tag
 ### Linux
 Make sure that all above Libraries are installed, most are available via apt-get, except for STB and GLFW3 I believe.
 
-GLFW3 you will need to download and build yourself, STB needs to be downloaded and moved to /usr/include or similar
+GLFW3 you will need to download and build yourself.
 
 ```shell
 git clone https://github.com/afrostie/mopViewer.git --recursive
