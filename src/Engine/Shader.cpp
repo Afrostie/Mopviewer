@@ -50,6 +50,13 @@ void Shader::compileShader(const GLchar* vertexPath,
   this->Program = glCreateProgram();
   glAttachShader(this->Program, vertex);
   glAttachShader(this->Program, fragment);
+
+#ifdef COMPATABILITY
+  glBindAttribLocation(this->Program, 0, "position");
+  glBindAttribLocation(this->Program, 1, "normal");
+  glBindAttribLocation(this->Program, 2, "texCoords");
+#endif
+
   glLinkProgram(this->Program);
   // Print any linking errors
   glGetProgramiv(this->Program, GL_LINK_STATUS, &success);

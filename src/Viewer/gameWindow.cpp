@@ -155,8 +155,11 @@ void gameWindow::init(std::string fileName, float skipCount) {
 
         //Compile the fragment and vertex shader
         Shader objectShader;
-        objectShader.compileShader("Resources/Shaders/object.vert", "Resources/Shaders/object.frag");
-
+#ifdef COMPATABILITY
+		objectShader.compileShader("Resources/Shaders/object.vert", "Resources/Shaders/object.frag");
+#else
+		objectShader.compileShader("Resources/Shaders/object.vert", "Resources/Shaders/object.frag");
+#endif
         //Load sphere model
         Model newModel("Resources/Model/sphere/sphere.obj");
 
