@@ -109,8 +109,8 @@
     <ClCompile Include="src\Engine\Shader.cpp" />
     <ClCompile Include="src\Engine\Texture.cpp" />
     <ClCompile Include="src\Engine\windowManager.cpp" />
-    <ClCompile Include="src\Viewer\gameWindow.cpp" />
-    <ClCompile Include="src\Viewer\mainWindow.cpp" />
+    <ClCompile Include="src\mopViewer\gameWindow.cpp" />
+    <ClCompile Include="src\mopViewer\mainWindow.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Engine\Camera.h" />
@@ -120,8 +120,8 @@
     <ClInclude Include="src\Engine\Shader.h" />
     <ClInclude Include="src\Engine\Texture.h" />
     <ClInclude Include="src\Engine\windowManager.h" />
-    <ClInclude Include="src\Viewer\gameWindow.h" />
-    <ClInclude Include="src\Viewer\mainWindow.h" />
+    <ClInclude Include="src\mopViewer\gameWindow.h" />
+    <ClInclude Include="src\mopViewer\mainWindow.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

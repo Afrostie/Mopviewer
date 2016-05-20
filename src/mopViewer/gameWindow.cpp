@@ -135,7 +135,7 @@ void gameWindow::threadFunc(MopState* mopstate1,   MopFile* mopfile1){
         std::cout << "Started thread" << std::endl;
         while(loadStates) {
                 newWindow.mopstate = newWindow.mopfile->readCyclingState(skips);
-                std::cout << "Loaded State: " << loadedStates << std::endl;
+             //   std::cout << "Loaded State: " << loadedStates << std::endl;
                 loadedStates++;
         }
 		exit(0);

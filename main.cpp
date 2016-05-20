@@ -8,7 +8,7 @@
 #include <curses.h>
 #endif
 #include <iostream>
-#include "src/Viewer/mainWindow.h"
+#include "src/mopViewer/mainWindow.h"
 #include <string>
 
 int main() {

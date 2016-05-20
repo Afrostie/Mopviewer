@@ -13,60 +13,78 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav</Extensions>
     </Filter>
+    <Filter Include="Header Files\src">
+      <UniqueIdentifier>{d91fbd3c-b315-419b-ad29-44a0b6cb8f58}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\src\mopViewer">
+      <UniqueIdentifier>{1f46cd7b-f96f-41a8-9e6e-5acc8457b14c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\src\Engine">
+      <UniqueIdentifier>{7b4fa5d9-26a2-494a-bb4e-9fbdba4a3484}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\src">
+      <UniqueIdentifier>{87b1ad83-b5e3-40b6-9114-6ef5863435d1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\src\mopViewer">
+      <UniqueIdentifier>{9a0e11d0-cc65-47de-a881-29b08dcd62ee}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\src\Engine">
+      <UniqueIdentifier>{1efb16ef-e725-4e0a-b0c3-0105c4717746}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\Engine\Camera.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\src\Engine</Filter>
     </ClCompile>
     <ClCompile Include="src\Engine\ImageLoader.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\src\Engine</Filter>
     </ClCompile>
     <ClCompile Include="src\Engine\Shader.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\src\Engine</Filter>
     </ClCompile>
     <ClCompile Include="src\Engine\Texture.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Viewer\gameWindow.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Viewer\mainWindow.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\src\Engine</Filter>
     </ClCompile>
     <ClCompile Include="src\Engine\windowManager.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\src\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="src\mopViewer\mainWindow.cpp">
+      <Filter>Source Files\src\mopViewer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\mopViewer\gameWindow.cpp">
+      <Filter>Source Files\src\mopViewer</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Engine\Camera.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Viewer\gameWindow.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\src\Engine</Filter>
     </ClInclude>
     <ClInclude Include="src\Engine\ImageLoader.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Viewer\mainWindow.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\src\Engine</Filter>
     </ClInclude>
     <ClInclude Include="src\Engine\mesh.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\src\Engine</Filter>
     </ClInclude>
     <ClInclude Include="src\Engine\model.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\src\Engine</Filter>
     </ClInclude>
     <ClInclude Include="src\Engine\Shader.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\src\Engine</Filter>
     </ClInclude>
     <ClInclude Include="src\Engine\Texture.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\src\Engine</Filter>
     </ClInclude>
     <ClInclude Include="src\Engine\windowManager.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\src\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="src\mopViewer\gameWindow.h">
+      <Filter>Header Files\src\mopViewer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\mopViewer\mainWindow.h">
+      <Filter>Header Files\src\mopViewer</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
