@@ -35,5 +35,6 @@ addons:
     - libglu1-mesa-dev
 
 script:
- - make
  - g++ -v
+ - make
+
