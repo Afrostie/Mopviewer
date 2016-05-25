@@ -13,8 +13,8 @@ before_script:
   - make
   - sudo make install
 
- before_install:
-  - git submodule update --init --recursive 
+before_install:
+ - git submodule update --init --recursive 
   
 install:
 - if [ "$CXX" = "g++" ]; then export CXX="g++-4.8" CC="gcc-4.8"; fi
@@ -36,3 +36,4 @@ addons:
 
 script:
  - make
+ - g++ -v
