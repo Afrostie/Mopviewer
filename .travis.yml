@@ -13,6 +13,9 @@ before_script:
   - make
   - sudo make install
 
+ before_install:
+  - git submodule update --init --recursive 
+  
 install:
 - if [ "$CXX" = "g++" ]; then export CXX="g++-4.8" CC="gcc-4.8"; fi
 addons:
@@ -32,13 +35,4 @@ addons:
     - libglu1-mesa-dev
 
 script:
- - git submodule update
- - git submodule sync
- - cd ../
- - cd Mopfile/
- - git pull origin master
- - cd ..
- - cd libs/stb
- - git pull origin master
- - cd ../../
  - make
