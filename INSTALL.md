@@ -3,12 +3,19 @@
 ## Required Libraries
 These required libraries are common across Windows and Linux
 1.	OpenGL 3.3 or higher compatible GPU/drivers
+
 2.	[GLFW3](http://www.glfw.org/)
+
 3.	[GLEW](http://glew.sourceforge.net/)
+
 4.	nCurses *(libncurses-dev)* (or PDCurses if on Windows)
+
 5.	[glm](http://glm.g-truc.net/0.9.7/index.html)
+
 6.	[STB](https://github.com/nothings/stb) for image loading (included as Submodule, so not required to install before hand)
+
 7.	[Assimp](https://github.com/assimp/assimp) for model loading (Use newer version off of github or it won't compile)
+
 8.	[zLib](http://www.zlib.net/) for compression in Mopfile (not in use currently)
 
 
