@@ -8,11 +8,11 @@
 #include <curses.h>
 #endif
 #include <iostream>
-#include "src/mopViewer/mainWindow.h"
+#include "src/mopViewer/gameWindow.h"
 #include <string>
 
-int main() {
-        mainWindow mainWindows;
+int main(int argc, char* argv[]) {
+		gameWindow newWindow;
         std::string fileName;
         float skipCount;
 
@@ -30,18 +30,35 @@ int main() {
         #ifdef MOPFILE
         std::cout << "mopViewer was compiled for MopFileLight" << std::endl;
         #endif
-        //Get the file name and skip count
-        std::cout << "Enter the MopFile Name (No need to use extension/location): ";
-        std::cin >> fileName;
-        std::cout << std::endl
-                  << "Enter Required Skip Count: ";
-        std::cin >> skipCount;
-        //Check the skipcount is in the required range
-        if((skipCount < 0) || (skipCount > 10)){
-                std::cout << "Skip Count must be between 0 and 10" << std::endl;
-                std::cout << "Exiting Now!" << std::endl;
-                return 0;
-        }
-        mainWindows.selectGame(fileName, skipCount);
+
+		if(argc == 3)
+		{
+			
+			fileName = std::string(argv[1]);
+			skipCount = atoi(argv[2]);
+			std::cout << "Filename was: " << fileName << std::endl;
+			std::cout << "Skipcount is: " << skipCount << std::endl;
+			newWindow.init(fileName, skipCount);
+		}
+		else
+		{
+			//Get the file name and skip count
+			std::cout << "Enter the MopFile Name (No need to use extension/location): ";
+			std::cin >> fileName;
+			std::cout << std::endl
+				<< "Enter Required Skip Count: ";
+			std::cin >> skipCount;
+			//Check the skipcount is in the required range
+			if ((skipCount < 0) || (skipCount > 10)) {
+				std::cout << "Skip Count must be between 0 and 10" << std::endl;
+				std::cout << "Exiting Now!" << std::endl;
+				return 0;
+			}
+			
+		}
+
+		newWindow.init(fileName, skipCount);
+      
+        
         return 0;
 }
