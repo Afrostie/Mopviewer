@@ -80,7 +80,7 @@ public:
     }
 
 
-private:
+
     /*  Model Data  */
     vector<Mesh> meshes;
     string directory;

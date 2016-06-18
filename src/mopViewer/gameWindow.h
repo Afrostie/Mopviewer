@@ -44,7 +44,7 @@ class gameWindow {
   static void mouse_callback(GLFWwindow* window, double xpos, double ypos);
   static void scroll_callback(GLFWwindow* window, double xoffset, double yoffset);
   //This thread will run the mopfile loading
-  static void threadFunc(MopState* mopstate1, MopFile* mopfile1);
+  static void threadFunc(MopState* mopstate1, MopFile* mopfile1, Model newModel);
   void doMovement();
   // Time between current frame and last frame
   GLfloat deltaTime;

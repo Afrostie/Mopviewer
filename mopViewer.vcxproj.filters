@@ -36,13 +36,7 @@
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Engine\Camera.cpp">
-      <Filter>Source Files\src\Engine</Filter>
-    </ClCompile>
     <ClCompile Include="src\Engine\ImageLoader.cpp">
-      <Filter>Source Files\src\Engine</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Engine\Shader.cpp">
       <Filter>Source Files\src\Engine</Filter>
     </ClCompile>
     <ClCompile Include="src\Engine\Texture.cpp">
@@ -51,11 +45,17 @@
     <ClCompile Include="src\Engine\windowManager.cpp">
       <Filter>Source Files\src\Engine</Filter>
     </ClCompile>
+    <ClCompile Include="src\mopViewer\gameWindow.cpp">
+      <Filter>Source Files\src\mopViewer</Filter>
+    </ClCompile>
     <ClCompile Include="src\mopViewer\mainWindow.cpp">
       <Filter>Source Files\src\mopViewer</Filter>
     </ClCompile>
-    <ClCompile Include="src\mopViewer\gameWindow.cpp">
-      <Filter>Source Files\src\mopViewer</Filter>
+    <ClCompile Include="src\Engine\Camera.cpp">
+      <Filter>Source Files\src\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Engine\Shader.cpp">
+      <Filter>Source Files\src\Engine</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

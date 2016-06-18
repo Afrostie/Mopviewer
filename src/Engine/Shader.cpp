@@ -38,7 +38,7 @@ void Shader::compileShader(const GLchar* vertexPath, const GLchar* fragmentPath)
 	
 	_vertexCode = vertexSource.c_str();
 	_fragmentCode = fragmentSource.c_str();
-
+	//std::cout << "Vertex Code: " << _vertexCode << std::endl;
 	//Compile the Vertex Shader
 	auto vertex = glCreateShader(GL_VERTEX_SHADER);
 	glShaderSource(vertex, 1, &_vertexCode, nullptr);
